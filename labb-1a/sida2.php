@@ -1,5 +1,7 @@
+
 <?php
-  	$stringtext = "Denna text är genererad med utskriftskommandot i PHP.";
+  	$stringtext = "Mata ut tre olika soters djur i fälten nedan och låt PHP <br>
+	utföra lite beräkningar genom att klicka på skicka knappen";
 	$strName = "";
 	if ($_GET['submit']){ 
 		if ($_GET['namn']){
@@ -8,13 +10,7 @@
 			$lowerCase = "Gemener: ". strtolower($_GET['namn']);
 			$UpperCase= "Versaler: ". strtoupper($_GET['namn']);
 			$strlength= "Antal tecken: ". strlen($_GET['namn']);
-		} elseif ($_GET['namn'] == ""){
-			$strName = "Namn: Hej Dag Fredriksson";
-			$backWords = "Baklänges: " . strrev(substr($strName, 10));
-			$lowerCase = "Gemener: ". strtolower(substr($strName, 10));
-			$UpperCase= "Versaler: ". strtoupper(substr($strName, 10));
-			$strlength= "Antal tecken: ". strlen(substr($strName, 10));
-		} 
+		}
 	}
 ?>
 
@@ -27,25 +23,42 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Labb 1a - PHP-sidor</h1>
+	<h1>Labb 1a - PHP-sidor</h1>
 	<a href="../index.php">Länksida</a>
 	<main>
 		<h2>Allmänt</h2>
-		<p>Här kommer det första Labbet, PHP-sida 1</p>
+		<p>Här kommer det första Labbet, PHP-sida 2</p>
 		<p>
-			Den innehåller HTML-sida med en inlänkad css-fil (style.css) för att
+			Den innehåller en HTML-sida med en inlänkad css-fil (style.css) för att
 			styla sidans markup.
 		</p>
-			Sidan utforskar Strängar. Texeter kommer via ett formulär, sparas och tas hand om 
-			för att sedan skrivs ut på ett skojsigt sätt :-)
+		</p>
+			Sidan utforskar Arrayer. Texeter hämtas via ett formulär och sparas till en 
+			array där band annat <br> PHP-funktioner behandlar datat.<br>
+			Datat skrivssedan på olika sätt eligt uppgiftens krav.
 		</p>
 		<p>
 			Sidan inkluderar även ett footer-element med matnyttig information.
 		</p>
-		<h2>Strängar</h2>
-		<p><?php echo $stringtext; ?></p>
+		<h2>Arrayer</h2>
+		<p class="info-txt"><?php echo $stringtext; ?></p>
 		<form action="sida1.php" method="get">
-			<input type="text" name="namn" id="namn" placeholder="Skriv in ditt namn här">
+			<div>
+				<label for="animal-1">Djur ett</label>
+				<input type="text" name="animal-1" id="animal-1" 
+				placeholder="Exempel: Ko">
+			</div>
+			<div>
+				<label for="animal-1">Djur två</label>
+				<input type="text" name="animal-1" id="animal-1" 
+				placeholder="Exempel: Gris">
+			</div>
+			<div>
+				<label for="animal-1">Djur tre</label>
+				<input type="text" name="animal-1" id="animal-1" 
+				placeholder="Exempel: Häst">
+			</div>
+			
 			<input type="submit" value="Skicka text" name="submit">
 			<p>
 				<?php echo $strName; ?>

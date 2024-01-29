@@ -38,7 +38,13 @@
   <li>
     <span class="material-symbols-outlined green">check_box</span>
     <a href="ltu-Webbutveckling-II/labb-1a/sida1.php">
-		Labb 1a: PHP-sidor
+		Labb 1a: PHP-sida Strängar
+    </a>
+  </li>
+  <li>
+    <span class="material-symbols-outlined">check_box</span>
+    <a href="ltu-Webbutveckling-II/labb-1a/sida2.php">
+		Labb 1a: PHP-sida Arrayer
     </a>
   </li>
   <!-- <li>

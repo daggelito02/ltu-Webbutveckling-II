@@ -18,3 +18,14 @@ footer {
     bottom: 1.5rem;
     text-align: center;
 }
+footer p {
+    max-width: max-content;
+    background: #efefef;
+    padding: 1rem;
+}
+.info-txt {
+    margin: 1rem 0;
+}
+label {
+    display: block;
+}
