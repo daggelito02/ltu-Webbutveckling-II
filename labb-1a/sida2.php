@@ -1,15 +1,22 @@
-
 <?php
   	$stringtext = "Mata ut tre olika soters djur i fälten nedan och låt PHP <br>
 	utföra lite beräkningar genom att klicka på skicka knappen";
-	$strName = "";
-	if ($_GET['submit']){ 
-		if ($_GET['namn']){
-			$strName = "Namn: Hej " . $_GET['namn'];
-			$backWords = "Baklänges: " . strrev($_GET['namn']);
-			$lowerCase = "Gemener: ". strtolower($_GET['namn']);
-			$UpperCase= "Versaler: ". strtoupper($_GET['namn']);
-			$strlength= "Antal tecken: ". strlen($_GET['namn']);
+	$farmAnimals = [];
+	if (isset($_GET['submit'])){ 
+		if ($_GET['animal-1'] != ""){ 
+			$farmAnimals[] = $_GET['animal-1'];
+		} else {
+			$farmAnimals[] = $_GET['animal-1-placeholder'];
+		}
+		if ($_GET['animal-2'] != ""){ 
+			$farmAnimals[] = $_GET['animal-2'];
+		} else {
+			$farmAnimals[] = $_GET['animal-2-placeholder'];
+		}
+		if ($_GET['animal-3'] != ""){ 
+			$farmAnimals[] = $_GET['animal-3'];
+		} else {
+			$farmAnimals[] = $_GET['animal-3-placeholder'];
 		}
 	}
 ?>
@@ -42,39 +49,118 @@
 		</p>
 		<h2>Arrayer</h2>
 		<p class="info-txt"><?php echo $stringtext; ?></p>
-		<form action="sida1.php" method="get">
+		<form action="sida2.php" method="get">
 			<div>
 				<label for="animal-1">Djur ett</label>
+				<input type="hidden" name="animal-1-placeholder" 
+				id="animal-1-placeholder" value="Ko">
 				<input type="text" name="animal-1" id="animal-1" 
 				placeholder="Exempel: Ko">
 			</div>
 			<div>
 				<label for="animal-1">Djur två</label>
-				<input type="text" name="animal-1" id="animal-1" 
+				<input type="hidden" name="animal-2-placeholder" 
+				id="animal-2-placeholder" value="Gris">
+				<input type="text" name="animal-2" id="animal-2" 
 				placeholder="Exempel: Gris">
 			</div>
 			<div>
 				<label for="animal-1">Djur tre</label>
-				<input type="text" name="animal-1" id="animal-1" 
+				<input type="hidden" name="animal-3-placeholder" 
+				id="animal-1-placeholder" value="Häst">
+				<input type="text" name="animal-3" id="animal-3" 
 				placeholder="Exempel: Häst">
 			</div>
 			
 			<input type="submit" value="Skicka text" name="submit">
-			<p>
-				<?php echo $strName; ?>
-			</p>
-			<p>
-				<?php echo $backWords; ?>
-			</p>
-			<p>
-				<?php echo $lowerCase;?>
-			</p>
-			<p>
-				<?php echo $UpperCase; ?>
-			</p>
-			<p>
-				<?php echo $strlength; ?>
-			</p>
+			<ol type="a">
+				<li>
+					<p>
+						Sparar djuren som är inmatade i formuläret till arrayen $farmAnimals, 
+						första djuret ska ligga på index 0 i arrayen, andra djuret på index 1 
+						och tredje djuret på index 2.
+					</p>
+					<?php
+						echo "<p> Svar på fråga a: <br>";
+						foreach($farmAnimals as $key => $value){
+							echo("index för $value är $key <br>");
+						}
+						echo "</p>";
+					?>
+				</li>
+				<li>
+					<p>
+						Skriver ut arrayen i råformat med funktionen print_r.
+					</p>
+					<?php
+						echo "<p> Svar på fråga b: <br>";
+						print_r($farmAnimals);
+						echo "</p>";
+					?>
+				</li>
+				<li>
+					<p>
+						Ersätter djuret på tredje platsen med djuret ”Struts”.
+					</p>
+					<?php
+						echo "<p> Svar på fråga c: <br>";
+						$count = 1;
+						$farmAnimals[2] = "Struts";
+						foreach ($farmAnimals as $key => $value ){
+							$place = $count++;
+							echo("$value är på plats: $place  <br>");
+						}
+						echo "</p>";
+					?>
+				</li>
+				<li>
+					<p>
+						Lägger till ett fjärde djur ”Alpacka” sist i arrayen.
+					</p>
+					<?php
+						echo "<p> Svar på fråga d: <br>";
+						array_push($farmAnimals, "Alpacka");
+						foreach($farmAnimals as $key => $value){
+							echo("$value <br>");
+						}
+						echo "</p>";
+					?>
+				</li>
+				<li>
+					<p>
+						Tar bort det första elementet helt från arrayen.
+					</p>
+					<?php
+						echo "<p> Svar på fråga e: <br>";
+						unset($farmAnimals[0]);
+						foreach($farmAnimals as $key => $value){
+							echo("$value <br>");
+						}
+						echo "</p>";
+					?>
+				</li>
+				<li>
+					<p>
+						Skriver ut arrayen i råformat med funktionen print_r.
+					</p>
+					<?php
+						echo "<p> Svar på fråga b: <br>";
+						print_r($farmAnimals);
+						echo "</p>";
+					?>
+				</li>
+				<li>
+					<p>
+						Skriver ut elementet som finns på andra platsen i arrayen,
+						vilket nu borde vara ”Struts” eftersom det första djuret är borttaget.
+					</p>
+					<?php
+						echo "<p> Svar på fråga f: <br>";
+						echo "Druret på andra plats är \"$farmAnimals[2]\"";
+						echo "</p>";
+					?>
+				</li>
+			</ol>  
 		</form>
 	</main>
     <?php
