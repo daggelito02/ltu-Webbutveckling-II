@@ -1,7 +1,7 @@
 <?php
   	$stringtext = "Denna text är genererad med utskriftskommandot i PHP.";
 	$strName = "";
-	if ($_GET['submit']){ 
+	if (isset($_GET['submit'])){ 
 		if ($_GET['namn']){
 			$strName = "Namn: Hej " . $_GET['namn'];
 			$backWords = "Baklänges: " . strrev($_GET['namn']);
@@ -27,26 +27,34 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Labb 1a - PHP-sidor</h1>
-	<a href="../index.php">Länksida</a>
+	<div class="grid top-container">
+		<h1>Labb 1a - PHP-sidor</h1>
+		<a href="../index.php">Länksida</a>
+	</div>
 	<main>
-		<h2>Allmänt</h2>
-		<p>Här kommer det första Labbet, PHP-sida 1</p>
-		<p>
-			Den innehåller HTML-sida med en inlänkad css-fil (style.css) för att
-			styla sidans markup.
-		</p>
-			Sidan utforskar Strängar. Texeter kommer via ett formulär, sparas och tas hand om 
-			för att sedan skrivs ut på ett skojsigt sätt :-)
-		</p>
-		<p>
-			Sidan inkluderar även ett footer-element med matnyttig information.
-		</p>
-		<h2>Strängar</h2>
-		<p><?php echo $stringtext; ?></p>
-		<form action="sida1.php" method="get">
-			<input type="text" name="namn" id="namn" placeholder="Skriv in ditt namn här">
-			<input type="submit" value="Skicka text" name="submit">
+		<div class="grid col-1">
+			<h2>Allmänt</h2>
+			<p>Här kommer det första Labbet, PHP-sida 1</p>
+			<p>
+				Den innehåller HTML-sida med en inlänkad css-fil (style.css) för att
+				styla sidans markup.
+			</p>
+				Sidan utforskar Strängar. Texeter kommer via ett formulär, sparas och tas hand om 
+				för att sedan skrivs ut på ett skojsigt sätt :-)
+			</p>
+			<p>
+				Sidan inkluderar även ett footer-element med matnyttig information.
+			</p>
+			<h2>Strängar</h2>
+			<p><?php echo $stringtext; ?></p>
+			<form action="sida1.php" method="get">
+				<input type="text" name="namn" id="namn" placeholder="Skriv in ditt namn här">
+				<input type="submit" value="Skicka namnet" name="submit">
+				
+			</form>
+		</div>
+		<div class="grid col-2">
+			<h2>Resultat:</h2>
 			<p>
 				<?php echo $strName; ?>
 			</p>
@@ -62,7 +70,7 @@
 			<p>
 				<?php echo $strlength; ?>
 			</p>
-		</form>
+		</div>
 	</main>
     <?php
         require_once 'footer.php';

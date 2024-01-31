@@ -1,7 +1,12 @@
 <?php
+	if (isset($_GET['reset'])){ 
+		header("Location: sida2.php");
+		echo "hej";
+	}
   	$stringtext = "Mata ut tre olika soters djur i fälten nedan och låt PHP <br>
 	utföra lite beräkningar genom att klicka på skicka knappen";
 	$farmAnimals = [];
+	$ifSubmit = false;
 	if (isset($_GET['submit'])){ 
 		if ($_GET['animal-1'] != ""){ 
 			$farmAnimals[] = $_GET['animal-1'];
@@ -18,6 +23,7 @@
 		} else {
 			$farmAnimals[] = $_GET['animal-3-placeholder'];
 		}
+		$ifSubmit = true;
 	}
 ?>
 
@@ -30,49 +36,59 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-	<h1>Labb 1a - PHP-sidor</h1>
-	<a href="../index.php">Länksida</a>
+	<div class="grid top-container">
+		<h1>Labb 1a - PHP-sidor</h1>
+		<a href="../index.php">Länksida</a>
+	</div>
 	<main>
-		<h2>Allmänt</h2>
-		<p>Här kommer det första Labbet, PHP-sida 2</p>
-		<p>
-			Den innehåller en HTML-sida med en inlänkad css-fil (style.css) för att
-			styla sidans markup.
-		</p>
-		</p>
-			Sidan utforskar Arrayer. Texeter hämtas via ett formulär och sparas till en 
-			array där band annat <br> PHP-funktioner behandlar datat.<br>
-			Datat skrivssedan på olika sätt eligt uppgiftens krav.
-		</p>
-		<p>
-			Sidan inkluderar även ett footer-element med matnyttig information.
-		</p>
-		<h2>Arrayer</h2>
-		<p class="info-txt"><?php echo $stringtext; ?></p>
-		<form action="sida2.php" method="get">
-			<div>
-				<label for="animal-1">Djur ett</label>
-				<input type="hidden" name="animal-1-placeholder" 
-				id="animal-1-placeholder" value="Ko">
-				<input type="text" name="animal-1" id="animal-1" 
-				placeholder="Exempel: Ko">
-			</div>
-			<div>
-				<label for="animal-1">Djur två</label>
-				<input type="hidden" name="animal-2-placeholder" 
-				id="animal-2-placeholder" value="Gris">
-				<input type="text" name="animal-2" id="animal-2" 
-				placeholder="Exempel: Gris">
-			</div>
-			<div>
-				<label for="animal-1">Djur tre</label>
-				<input type="hidden" name="animal-3-placeholder" 
-				id="animal-1-placeholder" value="Häst">
-				<input type="text" name="animal-3" id="animal-3" 
-				placeholder="Exempel: Häst">
-			</div>
-			
-			<input type="submit" value="Skicka text" name="submit">
+		<div class="grid col-1">
+			<h2>Allmänt</h2>
+			<p>Här kommer det första Labbet, PHP-sida 2</p>
+			<p>
+				Den innehåller en HTML-sida med en inlänkad css-fil (style.css) för att
+				styla sidans markup.
+			</p>
+			</p>
+				Sidan utforskar Arrayer. Texeter hämtas via ett formulär och sparas till en 
+				array där band annat PHP-funktioner behandlar datat.
+				Datat skrivssedan på olika sätt eligt uppgiftens krav.
+			</p>
+			<p>
+				Sidan inkluderar även ett footer-element med matnyttig information.
+			</p>
+			<h2>Arrayer</h2>
+			<p class="info-txt"><?php echo $stringtext; ?></p>
+			<form action="sida2.php" method="get">
+				<div>
+					<label for="animal-1">Djur ett</label>
+					<input type="hidden" name="animal-1-placeholder" 
+					id="animal-1-placeholder" value="Ko">
+					<input type="text" name="animal-1" id="animal-1" 
+					placeholder="Exempel: Ko">
+				</div>
+				<div>
+					<label for="animal-1">Djur två</label>
+					<input type="hidden" name="animal-2-placeholder" 
+					id="animal-2-placeholder" value="Gris">
+					<input type="text" name="animal-2" id="animal-2" 
+					placeholder="Exempel: Gris">
+				</div>
+				<div>
+					<label for="animal-1">Djur tre</label>
+					<input type="hidden" name="animal-3-placeholder" 
+					id="animal-1-placeholder" value="Häst">
+					<input type="text" name="animal-3" id="animal-3" 
+					placeholder="Exempel: Häst">
+				</div>	
+				<input type="submit" value="Skicka värden" name="submit">
+				<input type="submit" value="Reset" name="reset">
+			</form>
+		</div>
+		<div class="grid col-2">
+			<h2>Resultat:</h2>
+		<?php
+			if($ifSubmit == true) {
+			?>
 			<ol type="a">
 				<li>
 					<p>
@@ -160,8 +176,11 @@
 						echo "</p>";
 					?>
 				</li>
-			</ol>  
-		</form>
+			</ol>
+			<?php
+			}
+			?>
+		</div> 
 	</main>
     <?php
         require_once 'footer.php';
