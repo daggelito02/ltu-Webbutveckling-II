@@ -160,7 +160,7 @@
 						Skriver ut arrayen i råformat med funktionen print_r.
 					</p>
 					<?php
-						echo "<p> Svar på fråga b: <br>";
+						echo "<p> Svar på fråga f: <br>";
 						print_r($farmAnimals);
 						echo "</p>";
 					?>
@@ -171,7 +171,7 @@
 						vilket nu borde vara ”Struts” eftersom det första djuret är borttaget.
 					</p>
 					<?php
-						echo "<p> Svar på fråga f: <br>";
+						echo "<p> Svar på fråga g: <br>";
 						echo "Druret på andra plats är \"$farmAnimals[2]\"";
 						echo "</p>";
 					?>
