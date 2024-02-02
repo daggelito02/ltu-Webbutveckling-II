@@ -39,9 +39,9 @@
 				styla sidans markup.
 			</p>
 			</p>
-				Sidan utforskar oopar och villkorssatser. Texeter hämtas via ett formulär och sparas bland
+				Sidan utforskar loopar och villkorssatser. Texeter hämtas via ett formulär och sparas bland
 				annat till en array där band annat PHP-funktioner behandlar datat.
-				Datat skrivs sedan up på olika sätt eligt uppgiftens krav.
+				Datat skrivs sedan ut på olika sätt eligt uppgiftens krav.
 			</p>
 			<p>
 				Sidan inkluderar även ett footer-element med matnyttig information.
@@ -68,7 +68,7 @@
 			<h2>Resultat:</h2>
 		<?php
 			if($ifSubmit == true) {
-			?>
+		?>
 			<ol type="a">
 				<li>
 					<p>
@@ -149,7 +149,7 @@
 					?>
 				</li>
 			</ol>
-			<?php
+		<?php
 			}
 		?>
 		</div>

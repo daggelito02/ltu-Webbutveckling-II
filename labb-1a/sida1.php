@@ -30,7 +30,7 @@
 </head>
 <body>
 	<div class="grid top-container">
-		<h1>Labb 1a - PHP-sidor</h1>
+		<h1>Labb 1a - PHP-sidor (PHP-sida 1)</h1>
 		<a href="../index.php">Länksida</a>
 	</div>
 	<main>
