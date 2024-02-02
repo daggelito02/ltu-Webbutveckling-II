@@ -50,3 +50,12 @@ ol, ul {
 form div {
     margin-bottom: 1rem;
 }
+input {
+    padding: .5rem;
+}
+input#word-array {
+    width: 325px;
+}
+.answer {
+    font-weight: 600;
+}

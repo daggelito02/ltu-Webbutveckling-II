@@ -51,7 +51,7 @@
 			</p>
 				Sidan utforskar Arrayer. Texeter hämtas via ett formulär och sparas till en 
 				array där band annat PHP-funktioner behandlar datat.
-				Datat skrivssedan på olika sätt eligt uppgiftens krav.
+				Datat skrivs sedan up på olika sätt eligt uppgiftens krav.
 			</p>
 			<p>
 				Sidan inkluderar även ett footer-element med matnyttig information.
@@ -97,7 +97,7 @@
 						och tredje djuret på index 2.
 					</p>
 					<?php
-						echo "<p> Svar på fråga a: <br>";
+						echo "<p> <span class=\"answer\">Svar på fråga a:</span><br>";
 						foreach($farmAnimals as $key => $value){
 							echo("index för $value är $key <br>");
 						}
@@ -109,7 +109,7 @@
 						Skriver ut arrayen i råformat med funktionen print_r.
 					</p>
 					<?php
-						echo "<p> Svar på fråga b: <br>";
+						echo "<p> <span class=\"answer\">Svar på fråga b:</span><br>";
 						print_r($farmAnimals);
 						echo "</p>";
 					?>
@@ -119,7 +119,7 @@
 						Ersätter djuret på tredje platsen med djuret ”Struts”.
 					</p>
 					<?php
-						echo "<p> Svar på fråga c: <br>";
+						echo "<p><span class=\"answer\">Svar på fråga c:</span><br>";
 						$count = 1;
 						$farmAnimals[2] = "Struts";
 						foreach ($farmAnimals as $key => $value ){
@@ -134,7 +134,7 @@
 						Lägger till ett fjärde djur ”Alpacka” sist i arrayen.
 					</p>
 					<?php
-						echo "<p> Svar på fråga d: <br>";
+						echo "<p><span class=\"answer\">Svar på fråga d:</span><br>";
 						array_push($farmAnimals, "Alpacka");
 						foreach($farmAnimals as $key => $value){
 							echo("$value <br>");
@@ -147,7 +147,7 @@
 						Tar bort det första elementet helt från arrayen.
 					</p>
 					<?php
-						echo "<p> Svar på fråga e: <br>";
+						echo "<p><span class=\"answer\">Svar på fråga e:</span><br>";
 						unset($farmAnimals[0]);
 						foreach($farmAnimals as $key => $value){
 							echo("$value <br>");
@@ -160,7 +160,7 @@
 						Skriver ut arrayen i råformat med funktionen print_r.
 					</p>
 					<?php
-						echo "<p> Svar på fråga f: <br>";
+						echo "<p><span class=\"answer\">Svar på fråga f:</span><br>";
 						print_r($farmAnimals);
 						echo "</p>";
 					?>
@@ -171,7 +171,7 @@
 						vilket nu borde vara ”Struts” eftersom det första djuret är borttaget.
 					</p>
 					<?php
-						echo "<p> Svar på fråga g: <br>";
+						echo "<p><span class=\"answer\">Svar på fråga g:</span><br>";
 						echo "Druret på andra plats är \"$farmAnimals[2]\"";
 						echo "</p>";
 					?>
@@ -179,7 +179,7 @@
 			</ol>
 			<?php
 			}
-			?>
+		?>
 		</div> 
 	</main>
     <?php

@@ -33,68 +33,44 @@
 </head>
 <body>
   <h1>Uppgifter Webbutveckling II</h1>
-  <p>Länklista</p>
+  <p>Länklista för Labb 1a - PHP-sidor</p>
   <ul>
   <li>
     <span class="material-symbols-outlined green">check_box</span>
     <a href="ltu-Webbutveckling-II/labb-1a/sida1.php">
-		Labb 1a: PHP-sida Strängar
+		Strängar
     </a>
   </li>
   <li>
     <span class="material-symbols-outlined green">check_box</span>
     <a href="ltu-Webbutveckling-II/labb-1a/sida2.php">
-		Labb 1a: PHP-sida Arrayer
-    </a>
-  </li>
-  <!-- <li>
-    <span class="material-symbols-outlined">check_box</span>
-    <a href="tasks2.html">
-      Uppgift 2: Information från användaren
+		Arrayer
     </a>
   </li>
   <li>
     <span class="material-symbols-outlined">check_box</span>
-    <a href="tasks3.html">
-      Uppgift 3: Kodseparation
+    <a href="ltu-Webbutveckling-II/labb-1a/sida3.php">
+    Loopar och villkorssatser
     </a>
   </li>
   <li>
     <span class="material-symbols-outlined">check_box</span>
-    <a href="tasks4.html">
-      Uppgift 4: Sessionshantering
+    <a href="ltu-Webbutveckling-II/labb-1a/sida4.php">
+    Funktioner
     </a>
   </li>
   <li>
     <span class="material-symbols-outlined">check_box</span>
-    <a href="tasks5.html">
-      Uppgift 5: Meddelandehantering
+    <a href="ltu-Webbutveckling-II/labb-1a/sida5.php">
+    Servervariabler
     </a>
   </li>
   <li>
     <span class="material-symbols-outlined">check_box</span>
-    <a href="tasks6.html">
-      Uppgift 6: Databaser
+    <a href="ltu-Webbutveckling-II/labb-1a/sida6.php">
+      Meddelandehantering
     </a>
   </li>
-  <li>
-    <span class="material-symbols-outlined">check_box</span>
-    <a href="tasks7.html">
-      Uppgift 7: Innehållshantering
-    </a>
-  </li>
-  <li>
-    <span class="material-symbols-outlined">check_box</span>
-    <a href="tasks8.html">
-      Uppgift 8: Säkerhet
-    </a>
-  </li>
-  <li>
-    <span class="material-symbols-outlined">check_box</span>
-    <a href="tasks9.html">
-      Uppgift 9: Gesällprov
-    </a>
-  </li> -->
 </ul>
 </body>
 </html>
