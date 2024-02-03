@@ -67,7 +67,7 @@
   </li>
   <li>
     <span class="material-symbols-outlined">check_box</span>
-    <a href="ltu-Webbutveckling-II/labb-1a/sida6.php">
+    <a href="ltu-Webbutveckling-II/labb-1a/sida6.html">
       Meddelandehantering
     </a>
   </li>

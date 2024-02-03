@@ -1,0 +1,57 @@
+<?php
+  	
+?>
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Dag Fredriksson Luleå Universitet</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div class="grid top-container">
+		<h1>Labb 1a - PHP-sidor (HTML-sida 5)</h1>
+		<a href="../index.php">Länksida</a>&nbsp;>>
+	</div>
+	<main>
+		<div class="grid col-1">
+			<h2>Allmänt</h2>
+			<p>Här kommer det första Labbet, HTML-sida 6</p>
+			<p>
+				Den innehåller en HTML-sida med en inlänkad css-fil (style.css) för att
+				styla sidans markup.
+			</p>
+			</p>
+				Sidan utforskar att skicka och att ta emot 
+				data via de två olioka metoderna "post" och get.
+				Här kan användaren sända data via formulärens med de olika metoderna,
+				Plöva att skicka lite text och njut av resultatet ;-).
+			</p>
+			<p>
+				Sidan inkluderar även ett footer-element med matnyttig information.
+			</p>
+			<h2>Sända och ta emot data</h2>
+			<form action="sida6.php" method="get">
+				<p>Skicka via get metoden:</p>
+				<input type="text" name="namn" id="namn" placeholder="Skriv in ditt namn här">
+				<input type="text" name="phonenumber" id="phonenumber" placeholder="Skriv in ditt telefonnummer här">
+				<input type="submit" value="Skicka namnet" name="submit">
+			</form>
+			<form action="sida6.php" method="post">
+				<p>Skicka via post metoden:</p>
+				<input type="text" name="namn" id="namn" placeholder="Skriv in ditt namn här">
+				<input type="text" name="phonenumber" id="phonenumber" placeholder="Skriv in ditt telefonnummer här">
+				<input type="submit" value="Skicka namnet" name="submit">
+			</form>
+		</div>
+	</main>
+    <footer>
+		<p>
+			Luleå tekniska universitet | Webbutveckling II - Skriptspråk och databaser
+			| dagfre-3 | 2024
+		</p>
+	</footer>
+	
+</body>

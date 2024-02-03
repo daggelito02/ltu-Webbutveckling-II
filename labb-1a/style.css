@@ -47,6 +47,9 @@ li {
 ol, ul {
     padding-left: 1rem;
 }
+ul li {
+    margin-bottom: .5rem;
+}
 form div {
     margin-bottom: 1rem;
 }
@@ -64,4 +67,8 @@ input#word-array {
 .full-with li{
     width: 100%;
     max-width: 100%;
+}
+.result-send-data {
+    border: 1px solid #333;
+    padding: .5rem;
 }
