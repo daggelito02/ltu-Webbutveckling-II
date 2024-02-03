@@ -1,4 +1,7 @@
 <?php
+	if (isset($_GET['reset'])){ 
+		header("Location: sida1.php");
+	}
   	$stringtext = "Denna text är genererad med utskriftskommandot i PHP.";
 	$strName = "";
 	$ifSubmit = false;
@@ -31,7 +34,7 @@
 <body>
 	<div class="grid top-container">
 		<h1>Labb 1a - PHP-sidor (PHP-sida 1)</h1>
-		<a href="../index.php">Länksida</a>
+		<a href="../index.php">Länksida</a>&nbsp;>>
 	</div>
 	<main>
 		<div class="grid col-1">
@@ -52,31 +55,11 @@
 			<form action="sida1.php" method="get">
 				<input type="text" name="namn" id="namn" placeholder="Skriv in ditt namn här">
 				<input type="submit" value="Skicka namnet" name="submit">
-				
+				<input type="submit" value="Återställa" name="reset">
 			</form>
 		</div>
 		<div class="grid col-2">
 			<h2>Resultat:</h2>
-			<!-- <p>
-				<span class="answer">Svar på fråga a:</span><br>
-				<?php echo $strName; ?>
-			</p>
-			<p>
-				<span class="answer">Svar på fråga b:</span><br>
-				<?php echo $backWords; ?>
-			</p>
-			<p>
-				<span class="answer">Svar på fråga c:</span><br>
-				<?php echo $lowerCase;?>
-			</p>
-			<p>
-				<span class="answer">Svar på fråga d:</span><br>
-				<?php echo $UpperCase; ?>
-			</p>
-			<p>
-				<span class="answer">Svar på fråga e:</span><br>
-				<?php echo $strlength; ?>
-			</p> -->
 			<?php
 			if($ifSubmit == true) {
 			?>

@@ -13,7 +13,7 @@
 <body>
 	<div class="grid top-container">
 		<h1>Labb 1a - PHP-sidor</h1>
-		<a href="../index.php">Länksida</a>
+		<a href="../index.php">Länksida</a>&nbsp;>>
 	</div>
 	<main>
 		<div class="grid col-1">

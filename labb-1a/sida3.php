@@ -1,4 +1,7 @@
 <?php
+	if (isset($_GET['reset'])){ 
+		header("Location: sida3.php");
+	}
 	$ifSubmit = false;
   	if (isset($_GET['submit'])){ 
 		if ($_GET['word-array'] != ""){
@@ -28,7 +31,7 @@
 <body>
 	<div class="grid top-container">
 		<h1>Labb 1a - PHP-sidor (PHP-sida 3)</h1>
-		<a href="../index.php">Länksida</a>
+		<a href="../index.php">Länksida</a>&nbsp;>>
 	</div>
 	<main>
 		<div class="grid col-1">
@@ -47,7 +50,6 @@
 				Sidan inkluderar även ett footer-element med matnyttig information.
 			</p>			
 			<h2>Loopar och villkorssatser</h2>
-			<p><?php echo $stringtext; ?></p>
 			<form action="sida3.php" method="get">
 				<div>
 				<input type="text" name="word-array" id="word-array" placeholder="jag gillar faktiskt misstag jag tycker att de är mänskliga">
@@ -62,6 +64,7 @@
 					id="search-word-placeholder" value="Sökord">
 				</div>
 				<input type="submit" value="Skicka orden" name="submit">
+				<input type="submit" value="Återställa" name="reset">
 			</form>
 		</div>
 		<div class="grid col-2">

@@ -1,6 +1,7 @@
 <?php
-	//$ifSubmit = false;
-	
+	if (isset($_GET['reset'])){ 
+		header("Location: sida4.php");
+	}
   	if (isset($_GET['submit'])){ 
 		if ($_GET['length'] != ""){
 			$Length = $_GET['length'];
@@ -10,7 +11,6 @@
 		} 
 		$FormValuesCircumference = calculateCircumference ($Length, $Width);
 		$FormValuesArea = calculateArea ($Length, $Width);
-		//$ifSubmit = true;
 	}
 	if (isset($_GET['submitTwo'])){ 
 		if ($_GET['length'] != ""){
@@ -21,7 +21,6 @@
 		} 
 		$FormValuesCircumference = calculateCircumference ($Length, $Width);
 		$FormValuesArea = calculateArea ($Length, $Width);
-		//$ifSubmit = true;
 	}
 	function calculateCircumference ($Length = 0, $Width = 0)
 	{
@@ -36,7 +35,6 @@
 				" " . calculateArea ($Length, $Width);
 			}
 		}
-		
 		return $retval;
 	}
 
@@ -48,7 +46,6 @@
 		}
 		return $retval;
 	}
-
 ?>
 
 <!doctype html>
@@ -62,7 +59,7 @@
 <body>
 	<div class="grid top-container">
 		<h1>Labb 1a - PHP-sidor (PHP-sida 4)</h1>
-		<a href="../index.php">Länksida</a>
+		<a href="../index.php">Länksida</a>&nbsp;>>
 	</div>
 	<main>
 		<div class="grid col-1">
@@ -80,25 +77,23 @@
 				Sidan inkluderar även ett footer-element med matnyttig information.
 			</p>
 			<h2>Funktioner</h2>
-			<p><?php echo $stringtext; ?></p>
 			<form action="sida4.php" method="get">
-				<p>Räkna ut rektangelns omkräts:</p>
+				<p>Räkna ut rektangelns omkrets: (bäst för fråga 1-8)</p>
 				<input type="text" name="length" id="length" placeholder="Mata in längd">
 				<input type="text" name="width" id="width" placeholder="Mata in bredd">
 				<input type="submit" value="Beräkna" name="submit">
+				<input type="submit" value="Återställa" name="reset">
 			</form>
 			<form action="sida4.php" method="get">
-				<p>Räkna ut rektangelns omkräts och area:</p>
+				<p>Räkna ut rektangelns omkrets och area: (bäst för fråga 9)</p>
 				<input type="text" name="length" id="length" placeholder="Mata in längd">
 				<input type="text" name="width" id="width" placeholder="Mata in bredd">
 				<input type="submit" value="Beräkna" name="submitTwo">
+				<input type="submit" value="Återställa" name="reset">
 			</form>
 		</div>
 		<div class="grid col-2">
 			<h2>Resultat:</h2>
-			<?php
-			//if($ifSubmit == true) {
-		?>
 			<ol type="1">
 				<li>
 					<p>
@@ -172,9 +167,6 @@
 					?>
 				</li>
 			</ol>
-		<?php
-			//}
-		?>
 		</div>
 	</main>
     <?php

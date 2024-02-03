@@ -13,7 +13,7 @@
 <body>
 	<div class="grid top-container">
 		<h1>Labb 1a - PHP-sidor</h1>
-		<a href="../index.php">Länksida</a>
+		<a href="../index.php">Länksida</a>&nbsp;>>
 	</div>
 	<main>
 		<div class="grid col-1">
@@ -21,7 +21,6 @@
 			<p>Här kommer det första Labbet, PHP-sida 1</p>
 			
 			<h2>xxxx</h2>
-			<p><?php echo $stringtext; ?></p>
 			<form action="xxxx.php" method="get">
 				<input type="text" name="namn" id="namn" placeholder="Skriv in ditt namn här">
 				<input type="submit" value="Skicka namnet" name="submit">

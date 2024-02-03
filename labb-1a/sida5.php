@@ -1,5 +1,11 @@
 <?php
-  	
+	if (isset($_GET['server-variables'])){ 
+		foreach($_SERVER as $key => $value){
+			echo("Värdet för $key är : $value <br />");
+		}
+		echo "<p><a href=\"sida5.php\">Utan alla servervariabler</a>&nbsp;>></p>";
+	}
+	  
 ?>
 
 <!doctype html>
@@ -12,26 +18,79 @@
 </head>
 <body>
 	<div class="grid top-container">
-		<h1>Labb 1a - PHP-sidor</h1>
-		<a href="../index.php">Länksida</a>
+		<h1>Labb 1a - PHP-sidor (PHP-sida 5)</h1>
+		<a href="../index.php">Länksida</a>&nbsp;>>
 	</div>
 	<main>
-		<div class="grid col-1">
+		<div class="grid">
 			<h2>Allmänt</h2>
 			<p>Här kommer det första Labbet, PHP-sida 5</p>
-			
-			<h2>Servervariabler</h2>
-			<p><?php echo $stringtext; ?></p>
-			<form action="xxxx.php" method="get">
-				<input type="text" name="namn" id="namn" placeholder="Skriv in ditt namn här">
-				<input type="submit" value="Skicka namnet" name="submit">
-			</form>
-		</div>
-		<div class="grid col-2">
-			<h2>Resultat:</h2>
 			<p>
-				<?php echo $strName; ?>
+				Den innehåller en HTML-sida med en inlänkad css-fil (style.css) för att
+				styla sidans markup.
 			</p>
+			</p>
+				Sidan använder pressenter servervariabler med matnyttig information
+				som webbserven har hand om, IP-adress, sidnamn mm.
+			</p>
+			<p>
+				Sidan inkluderar även ett footer-element med matnyttig information.
+			</p>
+			<h2>Servervariabler</h2>
+			<p>Använd servervariabeln för att presentera följande i din php-sida:</p>
+			<ol type="a" class="full-with">
+				<li>
+					<p>
+						Namnet på den server som skriptet körs på.<br>
+						<span class="answer">Svar på fråga a:</span><br>
+						<?php
+						echo "$"."_SERVER['SERVER_NAME'] = " .$_SERVER['SERVER_NAME'] . ".";
+	  					?>
+					</p>
+				</li>
+				<li>
+					<p>
+						Användarens IP-adress.<br>
+						<span class="answer">Svar på fråga b:</span><br>
+						<?php
+							echo "$"."_SERVER['REMOTE_ADDR'] = " .$_SERVER['REMOTE_ADDR'] . ".";
+						?>
+					</p>
+				</li>
+				<li>
+					<p>
+						Filnamnet på PHP-sidan.<br>
+						<span class="answer">Svar på fråga c:</span><br>
+						<?php
+							echo "$"."_SERVER['SCRIPT_NAME'] = " .$_SERVER['SCRIPT_NAME'] . ".<br>";
+							$curPageName = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1);  
+							echo "Filnamnet på PHP-sidan: ".$curPageName;  
+							echo "<br>";
+						?>
+					</p>
+				</li>
+				<li>
+					<p>
+						Den port, på användarens dator, som används för att kommunicera med webbservern.<br>
+						<span class="answer">Svar på fråga d:</span><br>
+						<?php
+							echo "$"."_SERVER['SERVER_PORT'] = " .$_SERVER['SERVER_PORT'] . ".";
+						?>
+					</p>
+				</li>
+				<li>
+					<p>
+						Vilken metod som använts för att köra PHP-sidan<br>
+						<span class="answer">Svar på fråga e:</span><br>
+						<?php
+							echo "$"."_SERVER['REQUEST_METHOD'] = " .$_SERVER['REQUEST_METHOD'] . ".";
+						?>
+
+					</p>
+				</li>
+			</ol>
+
+			<p>Se alla servervariabler <a href="sida5.php?server-variables">$_SERVER </a>>></p>
 		</div>
 	</main>
     <?php

@@ -52,10 +52,16 @@ form div {
 }
 input {
     padding: .5rem;
+    margin-top: .5rem;
 }
+
 input#word-array {
     width: 325px;
 }
 .answer {
     font-weight: 600;
+}
+.full-with li{
+    width: 100%;
+    max-width: 100%;
 }

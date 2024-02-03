@@ -48,13 +48,13 @@
     </a>
   </li>
   <li>
-    <span class="material-symbols-outlined">check_box</span>
+    <span class="material-symbols-outlined green">check_box</span>
     <a href="ltu-Webbutveckling-II/labb-1a/sida3.php">
     Loopar och villkorssatser
     </a>
   </li>
   <li>
-    <span class="material-symbols-outlined">check_box</span>
+    <span class="material-symbols-outlined green">check_box</span>
     <a href="ltu-Webbutveckling-II/labb-1a/sida4.php">
     Funktioner
     </a>

@@ -1,10 +1,7 @@
 <?php
 	if (isset($_GET['reset'])){ 
 		header("Location: sida2.php");
-		echo "hej";
 	}
-  	$stringtext = "Mata ut tre olika soters djur i fälten nedan och låt PHP <br>
-	utföra lite beräkningar genom att klicka på skicka knappen";
 	$farmAnimals = [];
 	$ifSubmit = false;
 	if (isset($_GET['submit'])){ 
@@ -38,7 +35,7 @@
 <body>
 	<div class="grid top-container">
 		<h1>Labb 1a - PHP-sidor (PHP-sida 2)</h1>
-		<a href="../index.php">Länksida</a>
+		<a href="../index.php">Länksida</a>&nbsp;>>
 	</div>
 	<main>
 		<div class="grid col-1">
@@ -57,7 +54,10 @@
 				Sidan inkluderar även ett footer-element med matnyttig information.
 			</p>
 			<h2>Arrayer</h2>
-			<p class="info-txt"><?php echo $stringtext; ?></p>
+			<p class="info-txt">
+			Mata ut tre olika soters djur i fälten nedan och låt PHP <br>
+			utföra lite beräkningar genom att klicka på skicka knappen
+			</p>
 			<form action="sida2.php" method="get">
 				<div>
 					<label for="animal-1">Djur ett</label>
@@ -81,7 +81,7 @@
 					placeholder="Exempel: Häst">
 				</div>	
 				<input type="submit" value="Skicka värden" name="submit">
-				<input type="submit" value="Reset" name="reset">
+				<input type="submit" value="Återställa" name="reset">
 			</form>
 		</div>
 		<div class="grid col-2">
