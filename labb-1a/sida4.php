@@ -57,10 +57,13 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-	<div class="grid top-container">
-		<h1>Labb 1a - PHP-sidor (PHP-sida 4)</h1>
-		<a href="../index.php">Länksida</a>&nbsp;>>
+	<div class="top-container">
+		<a href="../index.php">&laquo; Länksida</a>
+		<h1>Labb 1a - PHP-sidor</h1>
 	</div>
+	<?php
+		require_once 'menu.php';
+	?>
 	<main>
 		<div class="grid col-1">
 			<h2>Allmänt</h2>

@@ -36,10 +36,13 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-	<div class="grid top-container">
-		<h1>Labb 1a - PHP-sidor (PHP-sida 6)</h1>
-		<a href="../index.php">Länksida</a>&nbsp;>>
+	<div class="top-container">
+		<a href="../index.php">&laquo; Länksida</a>
+		<h1>Labb 1a - PHP-sidor</h1>
 	</div>
+	<?php
+		require_once 'menu.php';
+	?>
 	<main>
 		<div class="grid col-1">
 			<h2>Sända och ta emot data</h2>
@@ -52,7 +55,7 @@
 					Telefonnummret är: <?php echo $phoneNumberGetMethod?>
 				</p>
 				<p>
-					<a href="sida6.html">Tillbaka till formuläret (sida6.html)</a> >>
+					<a href="sida6.html">&laquo; Tillbaka till formuläret (sida6.html)</a>
 				</p>
 			</div>
 			<h2>Uppgifterna för denna sida "Sända och ta emot data"</h2>

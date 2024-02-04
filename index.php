@@ -29,6 +29,14 @@
     .material-symbols-outlined.green {
       color:green;
     }
+    .material-symbols-outlined + a {
+        color: #333;
+        text-decoration: none;
+    }
+    .material-symbols-outlined + a:hover {
+        color: #333;
+        text-decoration: underline;
+    }
     </style>
 </head>
 <body>
@@ -38,37 +46,37 @@
   <li>
     <span class="material-symbols-outlined green">check_box</span>
     <a href="ltu-Webbutveckling-II/labb-1a/sida1.php">
-		Strängar
+		Strängar &raquo;
     </a>
   </li>
   <li>
     <span class="material-symbols-outlined green">check_box</span>
     <a href="ltu-Webbutveckling-II/labb-1a/sida2.php">
-		Arrayer
+		Arrayer &raquo;
     </a>
   </li>
   <li>
     <span class="material-symbols-outlined green">check_box</span>
     <a href="ltu-Webbutveckling-II/labb-1a/sida3.php">
-    Loopar och villkorssatser
+    Loopar och villkorssatser &raquo;
     </a>
   </li>
   <li>
     <span class="material-symbols-outlined green">check_box</span>
     <a href="ltu-Webbutveckling-II/labb-1a/sida4.php">
-    Funktioner
+    Funktioner &raquo;
     </a>
   </li>
   <li>
-    <span class="material-symbols-outlined">check_box</span>
+    <span class="material-symbols-outlined green">check_box</span>
     <a href="ltu-Webbutveckling-II/labb-1a/sida5.php">
-    Servervariabler
+    Servervariabler &raquo;
     </a>
   </li>
   <li>
-    <span class="material-symbols-outlined">check_box</span>
+    <span class="material-symbols-outlined green">check_box</span>
     <a href="ltu-Webbutveckling-II/labb-1a/sida6.html">
-      Meddelandehantering
+      Meddelandehantering &raquo;
     </a>
   </li>
 </ul>

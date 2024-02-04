@@ -22,7 +22,6 @@
 		$ifSubmit = true;
 	}
 ?>
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -32,12 +31,15 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-	<div class="grid top-container">
-		<h1>Labb 1a - PHP-sidor (PHP-sida 1)</h1>
-		<a href="../index.php">Länksida</a>&nbsp;>>
+	<div class="top-container">
+		<a href="../index.php">&laquo; Länksida</a>
+		<h1>Labb 1a - PHP-sidor</h1>
 	</div>
+	<?php
+		require_once 'menu.php';
+	?>
 	<main>
-		<div class="grid col-1">
+		<div class="col-1">
 			<h2>Allmänt</h2>
 			<p>Här kommer det första Labbet, PHP-sida 1</p>
 			<p>
@@ -58,7 +60,7 @@
 				<input type="submit" value="Återställa" name="reset">
 			</form>
 		</div>
-		<div class="grid col-2">
+		<div class="col-2">
 			<h2>Resultat:</h2>
 			<?php
 			if($ifSubmit == true) {
