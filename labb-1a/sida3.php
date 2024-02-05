@@ -53,6 +53,9 @@
 				Sidan inkluderar även ett footer-element med matnyttig information.
 			</p>			
 			<h2>Loopar och villkorssatser</h2>
+			<p>Skriv in en mening och ett sökort eller använd exempeltexten
+				 i formuläret för att behandla datat.
+			</p>
 			<form action="sida3.php" method="get">
 				<div>
 				<input type="text" name="word-array" id="word-array" placeholder="jag gillar faktiskt misstag jag tycker att de är mänskliga">

@@ -1,13 +1,3 @@
-<?php
-	if (isset($_GET['server-variables'])){ 
-		foreach($_SERVER as $key => $value){
-			echo("Värdet för $key är : $value <br />");
-		}
-		echo "<p><a href=\"sida5.php\">Utan alla servervariabler</a>&nbsp;>></p>";
-	}
-	  
-?>
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -25,7 +15,7 @@
 		require_once 'menu.php';
 	?>
 	<main>
-		<div class="grid">
+		<div class="grid col-1">
 			<h2>Allmänt</h2>
 			<p>Här kommer det första Labbet, PHP-sida 5</p>
 			<p>
@@ -41,7 +31,7 @@
 			</p>
 			<h2>Servervariabler</h2>
 			<p>Använd servervariabeln för att presentera följande i din php-sida:</p>
-			<ol type="a" class="full-with">
+			<ol type="a">
 				<li>
 					<p>
 						Namnet på den server som skriptet körs på.<br>
@@ -88,13 +78,30 @@
 						<?php
 							echo "$"."_SERVER['REQUEST_METHOD'] = " .$_SERVER['REQUEST_METHOD'] . ".";
 						?>
-
 					</p>
 				</li>
 			</ol>
-
-			<p>Se alla servervariabler <a href="sida5.php?server-variables">$_SERVER </a>>></p>
 		</div>
+		<div class="grid col-2">
+			<?php
+				echo "<h2>Se alla servervariabler ";
+				echo "$"."_SERVER: ";
+				echo "</h2>";
+				if (isset($_GET['server-variables'])){ 
+					echo "<p><a class=\"server-variables up\" href=\"sida5.php\">
+					<span>Dölj</span></a></p>";
+					echo "<div class=\"text-container\">";
+					foreach($_SERVER as $key => $value){
+						echo("Värdet för $key är : $value <br />");
+					}
+					echo "</div>";
+				} else {
+					echo "<p><a class=\"server-variables down\" href=\"sida5.php?server-variables\">";
+					echo "<span>Visa</span>";	
+					echo "</a></p>";
+				}
+			?>
+			</div>
 	</main>
     <?php
         require_once 'footer.php';

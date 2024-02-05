@@ -102,15 +102,41 @@ input#word-array {
 }
 .pagination a, 
 .pagination .grayd-out, 
-.top-container a {
+.top-container a,
+.grid a,
+.server-variables {
     text-decoration: none;
     padding: 8px 16px;
     background-color: #f1f1f1;
     color: #333;
     border-radius: 2px;
 }
+.server-variables {
+    display: inline-block;
+}
+.server-variables:after {
+    content: '«';
+    display: inline-block;
+}
+.server-variables.up:after {
+    transform: rotate(-90deg);
+}
+.server-variables.down:after {
+    transform: rotate(90deg);
+}
+.server-variables span {
+    padding-right: .5rem;
+}
+.server-variables.up span {
+    padding-right: .3rem;
+}
+.text-container {
+    word-break: break-word;
+}
 .pagination a:hover,
-.top-container a:hover {
+.top-container a:hover,
+.grid a:hover,
+.server-variables:hover {
     background-color: #ddd;
     color: black;
 }

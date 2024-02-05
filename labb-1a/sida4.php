@@ -2,6 +2,7 @@
 	if (isset($_GET['reset'])){ 
 		header("Location: sida4.php");
 	}
+	$ifSubmit = false;
   	if (isset($_GET['submit'])){ 
 		if ($_GET['length'] != ""){
 			$Length = $_GET['length'];
@@ -11,6 +12,7 @@
 		} 
 		$FormValuesCircumference = calculateCircumference ($Length, $Width);
 		$FormValuesArea = calculateArea ($Length, $Width);
+		$ifSubmit = true;
 	}
 	if (isset($_GET['submitTwo'])){ 
 		if ($_GET['length'] != ""){
@@ -21,6 +23,7 @@
 		} 
 		$FormValuesCircumference = calculateCircumference ($Length, $Width);
 		$FormValuesArea = calculateArea ($Length, $Width);
+		$ifSubmit = true;
 	}
 	function calculateCircumference ($Length = 0, $Width = 0)
 	{
@@ -97,6 +100,9 @@
 		</div>
 		<div class="grid col-2">
 			<h2>Resultat:</h2>
+			<?php
+				if($ifSubmit == true) {
+			?>
 			<ol type="1">
 				<li>
 					<p>
@@ -170,6 +176,9 @@
 					?>
 				</li>
 			</ol>
+			<?php
+				}
+			?>
 		</div>
 	</main>
     <?php
