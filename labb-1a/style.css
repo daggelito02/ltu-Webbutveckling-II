@@ -89,7 +89,7 @@ input#word-array {
     text-decoration: none;
 }
 .result-send-data a:hover {
-    text-decoration: underline;
+    text-decoration: none;
 }
 .pagination, footer {
     border-top: 1px solid #aaa;

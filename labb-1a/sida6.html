@@ -1,64 +1,61 @@
-<?php
-  	
-?>
-
 <!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Dag Fredriksson Luleå Universitet</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-	<div class="top-container">
-		<a href="../index.php">&laquo; Länksida</a>
-		<h1>Labb 1a - PHP-sidor</h1>
-	</div>
-	<nav class="pagination">
-		<ul class="panination__list">
-			<li><a class="previous" href="sida5.php">&laquo; Föregående</a></li>
-			<li><span>sida6.html</span></li>
-			<li><span class="grayd-out">Nästa &raquo;</span></li>
-		</ul>
-	</nav>
-	<main>
-		<div class="grid col-1">
-			<h2>Allmänt</h2>
-			<p>Här kommer det första Labbet, HTML-sida 6</p>
-			<p>
-				Den innehåller en HTML-sida med en inlänkad css-fil (style.css) för att
-				styla sidans markup.
-			</p>
-			</p>
-				Sidan utforskar att skicka och att ta emot 
-				data via de två olioka metoderna "post" och get.
-				Här kan användaren sända data via formulärens med de olika metoderna,
-				Plöva att skicka lite text och njut av resultatet ;-).
-			</p>
-			<p>
-				Sidan inkluderar även ett footer-element med matnyttig information.
-			</p>
-			<h2>Sända och ta emot data</h2>
-			<form action="sida6.php" method="get">
-				<p>Skicka via get metoden:</p>
-				<input type="text" name="namn" id="namn" placeholder="Skriv in ditt namn här">
-				<input type="text" name="phonenumber" id="phonenumber" placeholder="Skriv in ditt telefonnummer här">
-				<input type="submit" value="Skicka namnet" name="submit">
-			</form>
-			<form action="sida6.php" method="post">
-				<p>Skicka via post metoden:</p>
-				<input type="text" name="namn" id="namn" placeholder="Skriv in ditt namn här">
-				<input type="text" name="phonenumber" id="phonenumber" placeholder="Skriv in ditt telefonnummer här">
-				<input type="submit" value="Skicka namnet" name="submit">
-			</form>
+<html lang="sv">
+	<head>
+	<meta charset="utf-8">
+	<title>Dag Fredriksson Luleå Universitet</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="style.css">
+	</head>
+	<body>
+		<div class="top-container">
+			<a href="../index.php">&laquo; Länksida</a>
+			<h1>Labb 1a - PHP-sidor</h1>
 		</div>
-	</main>
-    <footer>
-		<p>
-			Luleå tekniska universitet | Webbutveckling II - Skriptspråk och databaser
-			| dagfre-3 | 2024
-		</p>
-	</footer>
-	
-</body>
+		<nav class="pagination">
+			<ul class="panination__list">
+				<li><a class="previous" href="sida5.php">&laquo; Föregående</a></li>
+				<li><span>sida6.html</span></li>
+				<li><span class="grayd-out">Nästa &raquo;</span></li>
+			</ul>
+		</nav>
+		<main>
+			<div class="grid col-1">
+				<h2>Allmänt</h2>
+				<p>Här kommer det första Labbet, HTML-sida 6</p>
+				<p>
+					Den innehåller en HTML-sida med en inlänkad css-fil &#40;style.css&#41; för att
+					styla sidans markup.
+				</p>
+				<p>
+					Sidan utforskar att skicka och att ta emot 
+					data via de två olioka metoderna "post" och get.
+					Här kan användaren sända data via formulärens med de olika metoderna,
+					Plöva att skicka lite text och njut av resultatet ;-&#41;.
+				</p>
+				<p>
+					Sidan inkluderar även ett footer-element med matnyttig information.
+				</p>
+				<h2>Sända och ta emot data</h2>
+				<form action="sida6.php" method="get">
+					<p>Skicka via get metoden:</p>
+					<input type="text" name="namn" placeholder="Skriv in ditt namn här">
+					<input type="text" name="phonenumber" id="phonenumber" placeholder="Skriv in ditt telefonnummer här">
+					<input type="submit" value="Skicka namnet" name="submit">
+				</form>
+				<form action="sida6.php" method="post">
+					<p>Skicka via post metoden:</p>
+					<input type="text" name="namn" placeholder="Skriv in ditt namn här">
+					<input type="text" name="phonenumber" id="phonenumber" placeholder="Skriv in ditt telefonnummer här">
+					<input type="submit" value="Skicka namnet" name="submit">
+				</form>
+			</div>
+		</main>
+		<footer>
+			<p>
+				Luleå tekniska universitet | Webbutveckling II - Skriptspråk och databaser
+				| dagfre-3 | 2024
+			</p>
+		</footer>
+		
+	</body>
+</html>

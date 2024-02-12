@@ -2,7 +2,7 @@
     $firstPage = "1";
     $lastPage = "6";
     $htmlPage = "5";
-    $curentPage = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1);  
+    $curentPage = substr($_SERVER["PHP_SELF"],strrpos($_SERVER["PHP_SELF"],"/")+1);  
     $curentPageNumber = substr($curentPage, 4, -4);
     $previus = "sida" . $curentPageNumber -1 . ".php";
     $next = "sida" . $curentPageNumber + 1 . ".php";
