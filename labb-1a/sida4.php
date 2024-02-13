@@ -6,10 +6,16 @@
   	if (isset($_GET['submit'])){ 
 		if ($_GET['length'] != ""){
 			$Length = $_GET['length'];
-		} 
+		} else {
+			$Length = 0;
+		}
 		if ($_GET['width'] != ""){
 			$Width = $_GET['width'];
-		} 
+		} else {
+			$Width = 0;
+		}
+		$Length;
+		$Width;
 		$FormValuesCircumference = calculateCircumference ($Length, $Width);
 		$FormValuesArea = calculateArea ($Length, $Width);
 		$ifSubmit = true;
@@ -17,31 +23,37 @@
 	if (isset($_GET['submitTwo'])){ 
 		if ($_GET['length'] != ""){
 			$Length = $_GET['length'];
-		} 
+		} else {
+			$Length = 0;
+		}
 		if ($_GET['width'] != ""){
 			$Width = $_GET['width'];
-		} 
+		} else {
+			$Width = 0;
+		}
 		$FormValuesCircumference = calculateCircumference ($Length, $Width);
 		$FormValuesArea = calculateArea ($Length, $Width);
 		$ifSubmit = true;
 	}
-	function calculateCircumference ($Length = 0, $Width = 0)
+	function calculateCircumference ($Length, $Width)
 	{
 		if ($Length == 0 || $Width == 0) {
 			$retval = "Ett eller fler värden saknas!";
 		} else {
 			if (isset($_GET['submit'])){ 
-				$retval = "Rektangelns omkrets är: " . $Length * 2 + $Width * 2;
+				$sumNumbers = strval($Length) * 2 + strval($Width) * 2;
+				$retval = "Rektangelns omkrets är: " . $sumNumbers;
 			}
 			elseif (isset($_GET['submitTwo'])) {
-				$retval = "Rektangelns omkrets är: " . $Length * 2 + $Width * 2 . 
+				$sumNumbers = strval($Length) * 2 + strval($Width) * 2;
+				$retval = "Rektangelns omkrets är: " . $sumNumbers . 
 				" " . calculateArea ($Length, $Width);
 			}
 		}
 		return $retval;
 	}
 
-	function calculateArea ($Length = 0, $Width = 0) {
+	function calculateArea ($Length, $Width) {
 		if ($Length == 0 || $Width == 0) {
 			$retval = "Ett eller fler värden saknas!";
 		} else {

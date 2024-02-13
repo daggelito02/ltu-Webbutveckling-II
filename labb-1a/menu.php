@@ -4,10 +4,12 @@
     $htmlPage = "5";
     $curentPage = substr($_SERVER["PHP_SELF"],strrpos($_SERVER["PHP_SELF"],"/")+1);  
     $curentPageNumber = substr($curentPage, 4, -4);
-    $previus = "sida" . $curentPageNumber -1 . ".php";
-    $next = "sida" . $curentPageNumber + 1 . ".php";
+    $previusNumber = strval($curentPageNumber) - 1;
+    $nextNumber = strval($curentPageNumber) + 1;
+    $previus = "sida" . $previusNumber . ".php";
+    $next = "sida" . $nextNumber . ".php";
     if ($curentPageNumber == $htmlPage) {
-        $next = "sida" . $curentPageNumber + 1 . ".html";
+        $next = "sida" . $nextNumber . ".html";
     }
 ?>
 
