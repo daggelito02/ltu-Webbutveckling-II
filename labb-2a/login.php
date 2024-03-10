@@ -1,28 +1,23 @@
 <?php
 	session_start();
-	if($_SESSION['logedIn'] == true) { // Kollar om användaren är inlogged eller ej
-		if (isset($_POST['logout'])){ 
+	if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] != true){ // För att sätta ett värde till session-index(logedIn)
+		$_SESSION['logedIn'] = false;
+	} elseif (isset($_SESSION['logedIn']) || $_SESSION['logedIn'] == true) { // Kollar om användaren är inlogged eller ej
+		if (isset($_POST['logout'])){  // När användare är utloggad
 			$userName = 'Användaren "' . $_POST['userName'] . '" är nu utloggad!';
 			$_SESSION['viewInfo'] = true;
 			session_destroy();
-		} else  {
+		} else  { // Inloggad användare
 			header("Location: index.php");
 		}
 	} 
-
-	include 'includes/show_errors.php';
-	include 'includes/handel_login.php';
-	include 'includes/handel_newUser.php';
+	include 'includes/show_errors.php'; // inkludera vid utveckling för att få feedback på eventuella fel i koden
+	include 'includes/handel_login.php'; // funktion för att hantera login
+	include 'includes/handel_newUser.php'; // funktion för att hantera ny anvävdare
 	
 	if (isset($_POST['login'])){
-		// echo "Logga in namn: " . $_POST['logInNamn'];
-		// echo '<br>';
-		// echo "Lösen: " . $_POST['logInPassword'];
 		handelLogIn($_POST['logInNamn'], $_POST['logInPassword']);
 	} elseif (isset($_POST['saveNewUser'])){
-		echo "Nytt användar namn: " . $_POST['saveNewUserNamn'];
-		echo '<br>';
-		echo "Nytt lösen: " . $_POST['saveNewUserPassword'];
 		handelNewUser($_POST['saveNewUserNamn'], $_POST['saveNewUserPassword']);
 	}
 ?>
@@ -32,7 +27,7 @@
 	<meta charset="utf-8">
 	<title>Dag Fredriksson Luleå Universitet</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-  	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+  	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0">
 	<link rel="stylesheet" href="style.css">
 	</head>
 	<body>
@@ -42,7 +37,7 @@
 		</div>
 		<main>
 			<?php
-				if (isset($_SESSION['viewInfo'])) {
+				if (isset($_SESSION['viewInfo'])) { // Visar info-ruta för användar-feedback vid ligin & nyanvändare
 			?>
 				<div class="info-box">
 					<?php 
@@ -93,7 +88,7 @@
 					"Spara ny användare". Använd ett lösenordsfält så att lösenordet blir dolt vid inmatning. 
 				</p>
 				<div>
-					<img src="images/password.png" alt="Login picture" width="auto" height="auto">
+					<img src="images/password.png" alt="Login picture" width="269" height="43">
 				</div>
 				<p>
 					Knappen "Logga in" kontrollerar om användarnamn och lösenord matchar ett tidigare sparat 

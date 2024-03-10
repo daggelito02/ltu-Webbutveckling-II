@@ -1,9 +1,9 @@
 <?php
 	session_start();
-	if($_SESSION['logedIn'] != true) {
+	if($_SESSION['logedIn'] != true) { // Användare utloggad och behöver logga in igen
 		header("Location: login.php");
 	}
-	if( isset( $_SESSION['userName'] ) ) {
+	if( isset( $_SESSION['userName'] ) ) { // Användare inloggad
 		$loggedInUser = 'Välkommen ' . $_SESSION['userName'];
 		$userName = $_SESSION['userName'];
 	 }
