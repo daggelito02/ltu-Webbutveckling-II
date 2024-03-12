@@ -1,5 +1,5 @@
 <?php
-    function handelLogIn ($logInName = '', $logInPassword = '') {
+    function handelLogIn ($logInName = '', $logInPassword = '') { // Hanterar ny login
         $user = '';
         $userExists = false;
         $password = '';
@@ -12,7 +12,7 @@
         
         switch (true):
             case $logInName == "" || $logInPassword == "": // Om lösen eller lösenord saknas
-                $_SESSION['logInInfo'] = "Namn eller lösenord saknas!";
+                $_SESSION['logInInfo'] = "Namn eller lösenord saknas!"; // sparar data i sessionen
                 $_SESSION['viewInfo'] = true;
                 session_destroy();
                 break;
@@ -25,7 +25,7 @@
                 }
                 break;
             default: // Alla övriga fall
-                $_SESSION['logInInfo'] = "Användarnamnet eller lösenordet är ogiltigt!";
+                $_SESSION['logInInfo'] = "Användarnamnet eller lösenordet är ogiltigt!"; // sparar data i sessionen
                 $_SESSION['viewInfo']  = true;
                 session_destroy();
         endswitch;

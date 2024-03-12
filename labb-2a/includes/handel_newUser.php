@@ -1,5 +1,5 @@
 <?php
-    function handelNewUser ($NewUserName = '', $NewPassword = '') {
+    function handelNewUser ($NewUserName = '', $NewPassword = '') { // Hanterar ny användare
         $user = '';
         $userExists = false;
         $logInName = $NewUserName;
@@ -14,7 +14,7 @@
                 session_destroy();
                 break;
             case $userExists; // Ny användare finns redan
-                $_SESSION['logInInfo'] = "Användarnamnet finns redan, pröva med ett annat.";
+                $_SESSION['logInInfo'] = "Användarnamnet finns redan, pröva med ett annat."; // sparar data i sessionen
                 $_SESSION['viewInfo']  = true;
                 session_destroy();
                 break;
@@ -32,7 +32,7 @@
                 $userLoggInText = $addLineBreak .'user='. $NewUserName . '&password=' . $hashPassword; // skapar en användarrad med namn och lösen.
                 fwrite($loginFile, $userLoggInText);
                 fclose($loginFile);
-                $_SESSION['logInInfo'] = "Ditt användarnamn och lösenord är nu skapat.";
+                $_SESSION['logInInfo'] = "Ditt användarnamn och lösenord är nu skapat."; // sparar data i sessionen
                 $_SESSION['viewInfo']  = true;
                 session_destroy();
 

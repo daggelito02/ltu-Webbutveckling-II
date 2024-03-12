@@ -46,11 +46,7 @@
 					<input type="hidden" name="userName" value="<?=$userName?>">
 					<input type="submit" value="Logga ut" name="logout">
 				</form>
-			
 			</div>
-			<div class="grid col-2">
-				Col 2
-			</div> 
 		</main>
 		<?php
 			require_once 'footer.php';

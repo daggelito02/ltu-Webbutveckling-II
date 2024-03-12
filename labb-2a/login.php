@@ -1,23 +1,23 @@
 <?php
 	session_start();
-	if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] != true){ // För att sätta ett värde till session-index(logedIn)
+	if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] != true){ // För att sätta ett värde till session-index(logedIn) om ej satt
 		$_SESSION['logedIn'] = false;
 	} elseif (isset($_SESSION['logedIn']) || $_SESSION['logedIn'] == true) { // Kollar om användaren är inlogged eller ej
 		if (isset($_POST['logout'])){  // När användare är utloggad
 			$userName = 'Användaren "' . $_POST['userName'] . '" är nu utloggad!';
 			$_SESSION['viewInfo'] = true;
-			session_destroy();
+			session_destroy(); 
 		} else  { // Inloggad användare
 			header("Location: index.php");
 		}
 	} 
-	include 'includes/show_errors.php'; // inkludera vid utveckling för att få feedback på eventuella fel i koden
+	// include 'includes/show_errors.php'; // inkludera vid utveckling för att få feedback på eventuella fel i koden
 	include 'includes/handel_login.php'; // funktion för att hantera login
 	include 'includes/handel_newUser.php'; // funktion för att hantera ny anvävdare
 	
-	if (isset($_POST['login'])){
+	if (isset($_POST['login'])){ // Användare loggar in
 		handelLogIn($_POST['logInNamn'], $_POST['logInPassword']);
-	} elseif (isset($_POST['saveNewUser'])){
+	} elseif (isset($_POST['saveNewUser'])){ //Sparar nytt lösen till användare
 		handelNewUser($_POST['saveNewUserNamn'], $_POST['saveNewUserPassword']);
 	}
 ?>
@@ -37,7 +37,7 @@
 		</div>
 		<main>
 			<?php
-				if (isset($_SESSION['viewInfo'])) { // Visar info-ruta för användar-feedback vid ligin & nyanvändare
+				if (isset($_SESSION['viewInfo'])) { // Visar info-ruta för användar-feedback vid login & nyanvändare
 			?>
 				<div class="info-box">
 					<?php 
