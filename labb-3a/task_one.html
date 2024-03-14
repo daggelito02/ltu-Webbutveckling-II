@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="sv">
+	<head>
+	<meta charset="utf-8">
+	<title>Dag Fredriksson Luleå Universitet</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="style.css">
+	</head>
+	<body>
+		<div class="top-container">
+			<a href="../index.php">&laquo; Länksida</a>
+			<h1>Labb 3a - Koduppgift ett</h1>
+		</div>
+        <nav class="pagination">
+            <ul class="panination__list">
+                <li>
+                    <span class="grayd-out previous">&laquo; Föregående</span>
+                </li>
+                <li>
+                    <span class="curent-page">Koduppgift ett</span>
+                <li>
+                        <a class="next" href="task_two.html">Nästa &raquo;</a>
+                </li>
+            </ul>
+        </nav>
+		<main>
+			<div class="grid col-1">
+				<h2>
+					Javascript
+				</h2>
+				<script language="JavaScript">
+                    // var integer = new Array(10);
+                    // integer[0] = "10";
+                    // integer[1] = "20";
+                    // integer[2] = "30";
+                    // integer[3] = "40";
+                    // integer[4] = "50";
+                    // integer[5] = "60";
+                    // integer[6] = "70";
+                    // integer[7] = "80";
+                    // integer[8] = "90";
+                    // integer[9] = "100";
+                    // // Tar fram ett slumpvärde mellan 0-6
+                    // const nr = Math.floor(Math.random() * 10);
+                    // document.writeln("<p>" + integer[nr] + "</p>");
+                    // document.writeln("Uppdatera sidan för ett nytt tal!");
+                    // console.log(integer);
+
+                    
+                    // let rangeArray = [];
+                    // const range = function(nr = null) {
+                    //     console.log('nr:', nr);
+                        
+                        
+                    //         rangeArray.push(nr);
+                        
+                    //     return rangeArray;
+                    // }
+                    // var testArray = range(integer[nr]);
+                    // console.log('Uppgift 2: testArray =', testArray);
+
+                    // function randomArray(length, min, max) {
+                    //     return Array.apply(null, Array(length)).map(function() {
+                    //         return Math.round(Math.random() * (min - max) + max);
+                    //     });
+                    // }
+
+                    // var test = randomArray(10, 1, 100);
+                    //console.log('test: ', test)
+                    //const sorted = test.sort((a,b)=>a-b);
+                    //console.log('sorted:', sorted);
+
+                    //console.log(Math.round(0));
+
+
+                    function randomArray(length, min, max) { //
+                        var array = [];
+                        while(array.length < length){
+                            let aRandomNumber = Math.round(Math.random() * (min - max) + max);
+                            if(array.indexOf(aRandomNumber) === -1) array.push(aRandomNumber);
+                        }
+                        return array;
+                    }
+
+                    const test2 = randomArray(10, 1, 100);
+                    console.log('test2: ', test2)
+                    const sorted2 = test2.sort((a,b)=>a-b);
+                    console.log('sorted2:', sorted2);
+
+                    for (let i = 0; i < 9; i++) {
+                        document.writeln("<p>" + sorted2[i] + "</p>");
+                    }
+
+                    // var arr = [];
+                    // while(arr.length < 8){
+                    //     var r = Math.round(Math.random() * (1 -100) + 100);
+                    //     if(arr.indexOf(r) === -1) arr.push(r);
+                    // }
+                    //console.log('arr: ', arr);
+                  </script>
+			</div>
+		</main>
+	</body>
+</html>
