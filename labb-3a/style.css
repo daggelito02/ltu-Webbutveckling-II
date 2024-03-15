@@ -68,29 +68,11 @@ input {
     margin-top: .5rem;
 }
 
-input#word-array {
-    width: 325px;
-}
-.answer {
-    font-weight: 600;
-}
 .full-with li{
     width: 100%;
     max-width: 100%;
 }
-.result-send-data {
-    border: 1px solid #333;
-    padding: .5rem;
-}
-.result-send-data a {
-    margin-top: .5rem;
-    display: inline-block;
-    color: #333;
-    text-decoration: none;
-}
-.result-send-data a:hover {
-    text-decoration: none;
-}
+
 .pagination, footer {
     border-top: 1px solid #aaa;
     border-bottom: 1px solid #aaa;
@@ -103,32 +85,13 @@ input#word-array {
 .pagination a, 
 .pagination .grayd-out, 
 .top-container a,
-.grid a,
-.server-variables {
+.grid 
+a {
     text-decoration: none;
     padding: 8px 16px;
     background-color: #f1f1f1;
     color: #333;
     border-radius: 2px;
-}
-.server-variables {
-    display: inline-block;
-}
-.server-variables:after {
-    content: '«';
-    display: inline-block;
-}
-.server-variables.up:after {
-    transform: rotate(-90deg);
-}
-.server-variables.down:after {
-    transform: rotate(90deg);
-}
-.server-variables span {
-    padding-right: .5rem;
-}
-.server-variables.up span {
-    padding-right: .3rem;
 }
 .text-container {
     word-break: break-word;
@@ -144,4 +107,17 @@ input#word-array {
     background-color: #f1f1f1;
     font-style: italic;
     color: #999;
+}
+.array-list {
+    margin: 0;
+    padding: 0;
+}
+.array-list__row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+}
+.array-list p {
+    min-width: 150px;
+    margin: 0.5rem 0;
 }
