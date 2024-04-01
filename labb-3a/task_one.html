@@ -53,7 +53,9 @@
                             var array = [];
                             while(array.length < length){
                                 let aRandomNumber = Math.round(Math.random() * (min - max) + max);
-                                if(array.indexOf(aRandomNumber) === -1) array.push(aRandomNumber);
+                                if(array.indexOf(aRandomNumber) === -1) { // only puch a number with index -1 to be unique
+                                    array.push(aRandomNumber)
+                                };
                             }
                             return array;
                         }
@@ -63,17 +65,14 @@
                         const maxInterval = 100;
 
                         const unSortedArray = randomArray(arrayLength, minInterval, maxInterval);
-                        //console.log('unSortedArray: ', unSortedArray);
                         const sortedArray  = [...unSortedArray];
                         const sortedArrayList = sortedArray.sort((a,b)=>a-b);
-                        //console.log('sortedArrayList:', sortedArrayList);
                         for (let i = 0; i < arrayLength; i++) {
                             document.writeln("<li class=\"array-list__row\">");
                             document.writeln("<p>" + unSortedArray[i] + "</p>");
                             document.writeln("<p>" + sortedArrayList[i] + "</p>");
                             document.writeln("</li>");
                         }
-
                     </script>
                   </li>
                 </ul>

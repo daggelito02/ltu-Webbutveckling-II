@@ -108,6 +108,10 @@ a {
     font-style: italic;
     color: #999;
 }
+.errorMessage {
+    display: block;
+    color: #f00;
+}
 .array-list {
     margin: 0;
     padding: 0;
@@ -120,4 +124,38 @@ a {
 .array-list p {
     min-width: 150px;
     margin: 0.5rem 0;
+}
+.back {
+    margin-top: 1rem;
+    display: inline-block;
+}
+label {
+    margin-top: .5rem;
+}
+input {
+    display: block;
+}
+
+/* HTML5 validation */
+
+#registerHTML input:focus:invalid {
+    -moz-box-shadow: none;
+    box-shadow: none;
+    border: solid 1px red;
+}
+#registerHTML span  {
+    display: none;
+}
+#registerHTML #userName:focus:invalid + #nameError,
+#registerHTML #email:focus:invalid + #emailError,
+#registerHTML #password:focus:invalid + #passwordError,
+#registerHTML #termsOfUse:focus:invalid + #termsOfUseError {
+    display: block;
+}
+#registerHTML input:valid {
+    border: solid 1px green;
+}
+#registerHTML input:focus { outline: none; } 
+input:invalid {
+    box-shadow: none;
 }

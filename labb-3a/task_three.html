@@ -4,6 +4,10 @@
 	<meta charset="utf-8">
 	<title>Dag Fredriksson Luleå Universitet</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Här har jag använt pseudo-klasserna :invalid och :valid för att visa feedback-text 
+        (se style.css under kommentaren /* HTML5 validation */)
+        Tyvärr kan man inte dölja browserns egna feedback som visas olika i olika webläsare.
+    -->
 	<link rel="stylesheet" href="style.css">
 	</head>
 	<body>
@@ -26,9 +30,49 @@
 		<main>
 			<div class="grid col-1">
 				<h2>
-					Javascript
+					Koduppgift
 				</h2>
-				
+                <p>
+                    Gör ett till formulär som fungerar på samma sätt som tidigare men använd nu HTML5 validering
+                    istället (låt dock formuläret ovan med Javascript finnas kvar för bedömning). 
+                    Man kan inte enkelt kolla om två fält innehåller matchande data med enbart HTML5, därför räcker
+                    det med ett lösenordsfält i detta formulär (alternativt lägger du till lite javascriptkod
+                    för att lösa detta).
+                </p>
+                <h3>Registrera dig</h3>
+
+                <form action="registerHTML5.html" method="post" id="registerHTML">
+                    <label for="userName">Användarnamn</label>
+                    <input required type="text" id="userName" name="userName" placeholder="Användarnamn">
+                    <span id="nameError" class="errorMessage">Fyll i ett användarnamn</span>
+                    <label for="email">E-postadress</label>
+                    <!-- https://www.freeformatter.com/regex-tester.html 
+                        Här har jag labbbat för att få mer förståelse med Regular Expression
+                        och använt mig av denna online testare (url ovan). 
+                        Kraven för att få en giltig epost med mitt reguljära uttryck här nedan i inputfältet är:
+                        
+                        ^(?!\.) = får inte börja med punkt(.).
+                        [a-zA-Z]{0,}[^@ ] = alla bokstäver, @ får ej förekomma, {0,} betyder minst en bokstav.
+                        +@+ = matcha snabel a (@).
+                        [a-zA-Z]{0,}[^@ ] = alla bokstäver, @ får ej förekomma, {0,} betyder minst en bokstav.
+                        +\.+ = matcha metatecken punkt (.).
+                        [a-zA-Z]{1,}[^@ ] = alla bokstäver, @ får ej förekomma, {1,} betyder minst två bokstäver.
+                        
+                        Sammanfattning: epostaddressen får bara börja med bokstäver men får innehålla punkt 
+                        och måste ha ett @-tecken mellan bokstäverna som sedan kräver en punkt följt av 
+                        minst två bokstäver.
+                    --> 
+                    <input required type="email" id="email" name="email" placeholder="example@test.com" 
+                    pattern="^(?!\.)[a-zA-Z]{0,}[^@ ]+@+[a-zA-Z]{0,}[^@ ]+\.+[a-zA-Z]{1,}[^@ ]">
+                    <span id="emailError" class="errorMessage">Fyll i en korrekt epost address. Se exemple i inputfältet</span>
+                    <label for="password">Lösenord</label>
+                    <input required type="password" id="password" name="password" placeholder="Minst 6 tecken" pattern=".{6,}">
+                    <span id="passwordError" class="errorMessage">Minst 6 tecken!</span>
+                    <label for="termsOfUse">Användarvilkor</label>
+                    <input required type="checkbox" id="termsOfUse" name="termsOfUse">
+                    <span id="termsOfUseError" class="errorMessage">Checka i boxen!</span>
+                    <input type="submit" value="Registrera">
+                  </form>
 			</div>
 		</main>
 	</body>

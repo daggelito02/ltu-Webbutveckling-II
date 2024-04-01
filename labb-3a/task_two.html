@@ -26,10 +26,45 @@
 		<main>
 			<div class="grid col-1">
 				<h2>
-					Javascript
+					Koduppgift
 				</h2>
-				
+                <p>
+                    Skapa ett formulär där användaren ska kunna registrera sig som användare. 
+                    Användaren matar in ett önskat användarnamn, ett lösenord (minst 6 tecken), 
+                    lösenordet igen (som ska matcha det först inmatade lösenordet), en giltig 
+                    e-postadress* samt så ska användaren även ha bockat i en kryssruta för att 
+                    bekräfta att man läst villkoren. 
+                </p>
+                <p>
+                    Verifiera inmatningen med Javascript 
+                    (alltså inte med HTML5 validering). När formuläret är rätt ifyllt ska man 
+                    skickas till en ny sida som tackar för registreringen. 
+                    Om det inte är rätt ifyllt ska användaren inte skickas till någon ny sida 
+                    utan meddelas om vad som är fel ifyllt på lämpligt sätt och därmed få en ny 
+                    chans att fylla i uppgifterna. Notera att vid nytt försök så ska alla ifyllda 
+                    formulärfält finnas kvar.
+                </p>
+				<h3>Registrera dig</h3>
+                <form action="register.html" method="post" id="register">
+                    <label for="userName">Användarnamn</label>
+                    <input type="text" id="userName" name="userName" placeholder="Användarnamn">
+                    <span id="nameError" class="errorMessage"></span>
+                    <label for="email">E-postadress</label>
+                    <input type="text" id="email" name="email" placeholder="example@test.com">
+                    <span id="emailError" class="errorMessage"></span>
+                    <label for="password">Lösenord</label>
+                    <input type="password" id="password" name="password" placeholder="Minst 6 tecken">
+                    <span id="passwordError" class="errorMessage"></span>
+                    <label for="password">Verifiera lösenord</label>
+                    <input type="password" id="verifyPassword" name="verifyPassword" placeholder="Verifiera lösenord">
+                    <span id="verifyPasswordError" class="errorMessage"></span>
+                    <label for="termsOfUse">Användarvilkor</label>
+                    <input type="checkbox" id="termsOfUse" name="termsOfUse">
+                    <span id="termsOfUseError" class="errorMessage"></span>
+                    <input type="submit" value="Registrera">
+                  </form>
 			</div>
 		</main>
+        <script src="script.js"></script>
 	</body>
 </html>
