@@ -80,5 +80,41 @@
         </a>
       </li>
     </ul>
+    <p>Länklista för Labb 2a - PHP-sidor</p>
+    <ul>
+      <li>
+        <span class="material-symbols-outlined green">check_box</span>
+        <a href="ltu-Webbutveckling-II/labb-2a/login.php">
+        login &raquo;
+        </a>
+      </li>
+      <li>
+        <span class="material-symbols-outlined green">check_box</span>
+        <a href="ltu-Webbutveckling-II/labb-2a/index.php">
+        index &raquo;
+        </a>
+      </li>
+    </ul>
+    <p>Länklista för Labb 3a - Enkla Javascript-sidor</p>
+    <ul>
+      <li>
+        <span class="material-symbols-outlined green">check_box</span>
+        <a href="ltu-Webbutveckling-II/labb-3a/task_one.html">
+          Koduppgift ett &raquo;
+        </a>
+      </li>
+      <li>
+        <span class="material-symbols-outlined green">check_box</span>
+        <a href="ltu-Webbutveckling-II/labb-3a/task_two.html">
+          Koduppgift två &raquo;
+        </a>
+      </li>
+      <li>
+        <span class="material-symbols-outlined green">check_box</span>
+        <a href="ltu-Webbutveckling-II/labb-3a/task_three.html">
+          Koduppgift tre &raquo;
+        </a>
+      </li>
+    </ul>
   </body>
 </html>

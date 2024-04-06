@@ -64,7 +64,7 @@ form.addEventListener("submit", function(event) {
     function validateEmail(email) {
         var regularExpression = /\S+@\S+\.\S+/; // \S+ matchar tecken utan blanksteg 
         return regularExpression.test(email);
-      }
+    }
     if (isValid == true) {
         event.target.submit();
     }

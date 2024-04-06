@@ -1,0 +1,36 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+  
+<head> 
+    <title> 
+        Using :after pseudo-element 
+        on an input field 
+    </title> 
+  
+    <style> 
+        p::after, 
+        input::after { 
+            content: "My after element"; 
+            border: 2px solid red; 
+            padding: 2px; 
+            margin-left: 10px; 
+        } 
+    </style> 
+</head> 
+  
+<body style="font-family:sans-serif"> 
+    <h1 style="color:green;"> 
+        GeeksforGeeks 
+    </h1> 
+      
+    <h3> 
+        Can I use :after pseudo-element 
+        on an input field? 
+    </h3> 
+      
+    <p>This is a container element</p> 
+      
+    <input type="text" placeholder="Enter your email"> 
+</body> 
+  
+</html> 
