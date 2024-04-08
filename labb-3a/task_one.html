@@ -45,15 +45,15 @@
                         <p>Sorterad</p>
                     <script>
 
-                        function reload() {
+                        function reload() { //Funktion för att ladda om sidan
                             location.reload();
                         }
 
-                        function randomArray(length, min, max) { 
-                            var array = [];
-                            while(array.length < length){
+                        function randomArray(length, min, max) {    // Funktion för att skapa en slumpmässig lista (array) med nummer
+                            var array = [];                         // Funktionen tar tre parametrar, arrayens längd (length) 
+                            while(array.length < length){           // och två för att ange intervallet med som nummren ska finnas i (min & max)
                                 let aRandomNumber = Math.round(Math.random() * (min - max) + max);
-                                if(array.indexOf(aRandomNumber) === -1) { // only push a number with index -1 to be unique
+                                if(array.indexOf(aRandomNumber) === -1) { // index måste vara -1 för att bli unik
                                     array.push(aRandomNumber)
                                 };
                             }
@@ -66,8 +66,8 @@
 
                         const unSortedArray = randomArray(arrayLength, minInterval, maxInterval);
                         const sortedArray  = [...unSortedArray];
-                        const sortedArrayList = sortedArray.sort((a,b)=>a-b);
-                        for (let i = 0; i < arrayLength; i++) {
+                        const sortedArrayList = sortedArray.sort((a,b)=>a-b);   // Javascripts sorterings funktion sort.
+                        for (let i = 0; i < arrayLength; i++) {                 // Ser till att nästa värde måste vara större än föregående värde
                             document.writeln("<li class=\"array-list__row\">");
                             document.writeln("<p>" + unSortedArray[i] + "</p>");
                             document.writeln("<p>" + sortedArrayList[i] + "</p>");

@@ -1,10 +1,10 @@
 var form = document.getElementById("register");
 
-form.addEventListener("submit", function(event) {
+form.addEventListener("submit", function(event) { //lyssnar på submit
 
-    event.preventDefault();
+    event.preventDefault(); // förhindrar inbygda html submit för att javascript ska validera koden innan
 
-    let validateFeedback = "passed";
+    // Hämtar de värdena från forumäret och sätter till variabler
     const userName = this.elements.userName.value;
     const email = this.elements.email.value;
     const password = this.elements.password.value;
@@ -12,10 +12,10 @@ form.addEventListener("submit", function(event) {
     const termsOfUse = this.elements.termsOfUse.checked;
     isValid = true;
 
-    validateRegisterForm(userName, email, password, verifyPassword, termsOfUse);
-
-    function validateRegisterForm(userName, email, password, verifyPassword, termsOfUse ){
-        if (userName == "") {
+    validateRegisterForm(userName, email, password, verifyPassword, termsOfUse); // skickar med all formulär-data
+                                                                                 // till funktionen validateRegisterForm()
+    function validateRegisterForm(userName, email, password, verifyPassword, termsOfUse ){  // Validerar alla formulär inputs för sig
+        if (userName == "") {                                                               // med oliga regler och ger feedback om behövs
             nameError.innerHTML = "Namnet saknas.";
             document.getElementById("userName").value = userName;
             isValid = false;
@@ -61,11 +61,11 @@ form.addEventListener("submit", function(event) {
         }
     }; 
 
-    function validateEmail(email) {
-        var regularExpression = /\S+@\S+\.\S+/; // \S+ matchar tecken utan blanksteg 
-        return regularExpression.test(email);
-    }
-    if (isValid == true) {
+    function validateEmail(email) { // funktion för att validera emailaddress
+        var regularExpression = /\S+@\S+\.\S+/; // kollar om det finns minst ett snabel a tecken med,
+        return regularExpression.test(email);   // en punkt mellan tecken och tecken som inte är blanksteg.
+    }                                           // Exempel: s@s.se
+    if (isValid == true) { // om formuläret fyller alla kriterier så submittas det
         event.target.submit();
     }
 });
