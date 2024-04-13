@@ -1,0 +1,45 @@
+body {
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+}
+
+header,
+nav,
+main,
+aside,
+footer {
+    border: solid 1px #333;
+    box-sizing: border-box;
+}
+header, footer {
+    flex: 1 1 100%;
+    text-align: center;
+    position: relative;
+}
+nav,
+aside {
+    flex: 1 1 25%;
+}
+main {
+    flex: 1 1 50%;
+}
+.course-nav-link-to-menu{
+    position: absolute;
+    top: 1rem;
+}
+.button-link {
+    text-decoration: none;
+    padding: 8px 16px;
+    background-color: #f1f1f1;
+    color: #333;
+    border-radius: 2px;
+}
+.user-info {
+    margin: 0 auto;
+    max-width: 50%;
+}
+.user-info p {
+    text-align: left;
+    padding: 0 1rem;
+}
