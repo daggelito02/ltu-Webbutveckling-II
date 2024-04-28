@@ -5,7 +5,6 @@
         $password = '';
         $validUser = false;
         $_SESSION['logInInfo'] = '';
-        $filename = 'login.txt'; 
         require_once 'check_user.php'; // Funktion som kollar om användare finns eller har rätt användarnamn och lösenord
 
         $isCorrectPassword = password_verify($logInPassword, $password); // Kollar det krypterade/hachade lösenordet om sant (true).
@@ -18,8 +17,12 @@
                 break;
             case $userExists && $isCorrectPassword: // Om användare finns och har rätt lösenord
                 $validUser = true;
-                if ($validUser){ 
-                    $_SESSION['userName'] = $user;
+                if ($validUser){    
+                    // echo "<pre>";
+                    // print_r($theUser);
+                    // echo "</pre>";
+                    // echo "<br>Datatyp: " . gettype($theUser) . "<br>";
+                    $_SESSION['userName'] = $theUser;
                     $_SESSION['logedIn'] = $validUser;
                     header("Location: ../../index.php");
                 }

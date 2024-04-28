@@ -1,9 +1,7 @@
 <?php
     function handelNewUser ($NewUserName = '', $NewPassword = '') { // Hanterar ny användare
-        $user = '';
         $userExists = false;
         $logInName = $NewUserName;
-        $filename = 'login.txt'; 
 
         require_once 'check_user.php'; // Funktion som kollar om användare finns eller har rätt användarnamn och lösenord
 
@@ -18,22 +16,23 @@
                 $_SESSION['viewInfo']  = true;
                 session_destroy();
                 break;
-            default: // Ny användare skapas i login.txt filen om den finns annars skapas både fil & ny användare
-                $addLineBreak = '';
-                if (file_exists($filename)) {
+            default: // Ny användare skapas och läggs in i databasen om den inte finns, annars skapas både fil & ny användare
+                // $addLineBreak = '';
+                // if (file_exists($filename)) {
                     
-                    $lines = count(file($filename)); // kollar on det finns linjer i filen...
-                    if($lines !== 0 ) { // ... om inte det finns linje så lägg till.
-                        $addLineBreak = "\n";
-                    }
-                } 
+                //     $lines = count(file($filename)); // kollar on det finns linjer i filen...
+                //     if($lines !== 0 ) { // ... om inte det finns linje så lägg till.
+                //         $addLineBreak = "\n";
+                //     }
+                // } 
+
                 $hashPassword = password_hash($NewPassword, PASSWORD_DEFAULT); // krypterar/hash:ar lösenordet
-                $loginFile = fopen($filename, "a") or die("Unable to open file!");
-                $userLoggInText = $addLineBreak .'user='. $NewUserName . '&password=' . $hashPassword; // skapar en användarrad med namn och lösen.
-                fwrite($loginFile, $userLoggInText);
-                fclose($loginFile);
-                $_SESSION['logInInfo'] = "Ditt användarnamn och lösenord är nu skapat."; // sparar data i sessionen
+                add_user($NewUserName, $hashPassword);
+                $_SESSION['logInInfo'] = "<p>Ditt användarnamn och lösenord är nu skapat.</p>
+                <p>Logga nu in med ditt nya nvändarnamn :-)"; // sparar data i sessionen
                 $_SESSION['viewInfo']  = true;
+                
+                
                 session_destroy();
 
         endswitch;

@@ -17,6 +17,7 @@
 	// include 'includes/show_errors.php'; // inkludera vid utveckling för att få feedback på eventuella fel i koden
 	include 'includes/handel_login.php'; // funktion för att hantera login
 	include 'includes/handel_newUser.php'; // funktion för att hantera ny anvävdare
+	require_once('../db.php');
 	
 	if (isset($_POST['login'])){ // Användare loggar in
 		handelLogIn($_POST['logInNamn'], $_POST['logInPassword']);
@@ -40,15 +41,15 @@
 			?>
 				<div class="info-box">
 					<?php 
-						echo $_SESSION['logInInfo'];
-						if (isset($userName)) {
-								echo '<p>';
-								echo $userName;
-								echo '</p>';
-						}
-						if ($_SESSION['logedIn']) {
-							echo '<a class="button-link" href="../../index.php">&laquo; Tillbaka till startsidan </a>';
-						}
+						echo $_SESSION['logInInfo']; //
+						// if (isset($userName)) { 
+						// 		echo '<p>';
+						// 		echo $userName;
+						// 		echo '</p>';
+						// }
+						// if ($_SESSION['logedIn']) {
+						// 	echo '<a class="button-link" href="../../index.php">&laquo; Tillbaka till startsidan </a>';
+						// }
 						?>
 					<!-- <form action="../../index.php" method="post">
 						<div>
@@ -78,7 +79,7 @@
 			</div>
 		</main>
 		<?php
-			require_once 'footer.php';
+			require_once '../../layout/footer.php';
 		?>
 	</body>
 </html>

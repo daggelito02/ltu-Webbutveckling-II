@@ -1,12 +1,12 @@
 <?php
-    include 'login/includes/show_errors.php'; // inkludera vid utveckling för att få feedback på eventuella fel i koden
+    include '../includes/show_errors.php'; // inkludera vid utveckling för att få feedback på eventuella fel i koden
 	require_once('db.php');
-    $username = 'Carroline';
-    $password = 'testpass';
+    $username = 'Selma';
+    $password = 'semlan';
     //add_user($username, $password);
     echo "Add user"; 
     echo "<br>";
-    $theUser = get_users($username);
+    //$theUser = get_users($username);
     //var_dump($theUser);
     // echo $statment = "SELECT * FROM user";
     // $stmt = mysqli_prepare($connection, "SELECT * FROM user");
@@ -36,6 +36,7 @@
     //     return $rows;
     // }
 
+
     echo "<br>";
     $rows = get_users();
     foreach($rows as $user)
@@ -47,8 +48,28 @@
 
     echo "<br>";
 
+    //echo $addUser = add_user($username, $password);
+
+
     // function myMessage() {
     //     echo "<br>Hello world!<br>";
     // }
-    // myMessage();
+    // echo "<br>Users:<br>";
+     $logInName = "dag fredriksson";
+    if ($logInName != "") { // kollar om namn finns
+        $rows = get_users();
+        foreach($rows as $user) { // stegar igenom alla rader i db:n för att matcha eventuell användare
+            $name = $user['username']; // Save as string
+            $pass = $user['password']; // Save as string
+            if(strcasecmp($logInName, $name) == 0) { //strcasecmp case-insensitive string comparison 
+                $user = $name; // // sparar data i sessionen
+                echo gettype($user);
+
+                $password = $pass;
+                $userExists = true;       
+            }
+        }
+    } else {
+        $userExists = false;
+    }
 ?>
