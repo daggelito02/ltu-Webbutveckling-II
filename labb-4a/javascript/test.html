@@ -1,0 +1,21 @@
+<form id="myForm">
+  <input type="submit" name="submitButton1" value="Submit Button 1">
+  <input type="submit" name="submitButton2" value="Submit Button 2">
+</form>
+
+<script>
+document.getElementById("myForm").addEventListener("submit", function(event) {
+  // Prevent the form from submitting
+  event.preventDefault();
+  console.log('event: ', event.target.id)
+  
+  // Check which submit button was clicked
+  if (event.target.name === "submitButton1") {
+    // Submit Button 1 was clicked
+    console.log("Submit Button 1 clicked");
+  } else if (event.target.name === "submitButton2") {
+    // Submit Button 2 was clicked
+    console.log("Submit Button 2 clicked");
+  }
+});
+</script>

@@ -1,8 +1,17 @@
+<?php 
+	$loggedInStatus = "Logga ut";
+	$loggedInStayusName = "logout";
+	if($_SESSION['logedIn'] != true) { 
+		$loggedInStatus = "Logga in";
+		$loggedInStayusName = "resetLogin";
+	}
+?>
+
 <div class="course-nav-link-to-menu">
 	<div class="button-link">
-	<span class="material-symbols-outlined double-arrow">
-		double_arrow
-	</span> 
+		<span class="material-symbols-outlined double-arrow">
+			double_arrow
+		</span> 
 		<a href="../index.php">Länksida</a> 
 	</div>
 </div>
@@ -23,7 +32,7 @@
 <form class="logout" action="admin/login/login.php" method="post">
 	<input type="hidden" name="userName" value="<?=$userName?>">
 	<div class="button-link">
-		<input type="submit" value="Logga ut" name="logout">
+		<input type="submit" value="<?=$loggedInStatus?>" name="<?=$loggedInStayusName?>">
 		<span class="material-symbols-outlined double-arrow">
 			double_arrow
 		</span> 

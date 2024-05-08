@@ -33,6 +33,9 @@ aside {
 main {
     flex: 1 1 50%;
 }
+a {
+    color: #333;
+}
 /* Google material styles start */
 .material-symbols-outlined {
   font-variation-settings:
@@ -54,11 +57,13 @@ main {
     margin-top: 2px;
 }
 /* Google material styles end */
-.course-nav-link-to-menu{
+
+.course-nav-link-to-menu, .nav-link-to-start-page {
     position: absolute;
     top: 0;
 }
-.course-nav-link-to-menu .button-link {
+.course-nav-link-to-menu .button-link, 
+.nav-link-to-start-page .button-link {
     display: flex;
 }
 .button-link a {
@@ -71,7 +76,8 @@ main {
 .button-link a:visited {
     color: #333;
 }
-.course-nav-link-to-menu .double-arrow {
+.course-nav-link-to-menu .double-arrow,
+.nav-link-to-start-page .double-arrow {
     position: static;
     transform: rotate(180deg);
     display: block;
@@ -82,12 +88,15 @@ main {
 .welcome-heading {
     margin-top: -.5rem;
 }
-.button-link {
+.button-link, .button-login {
     text-decoration: none;
     padding: 8px 16px;
     background-color: #f1f1f1;
     color: #333;
     border-radius: 2px;
+}
+.button-login {
+    min-width: 100px;
 }
 .blogg-info-border {
     border-top: #f1f1f1 solid 1px;
@@ -151,7 +160,7 @@ main {
     top: 0;
     right: 0rem;
 }
-.logout input {  
+.logout input, .login-form .button-login {  
     border: none;
     color: #333;
 }
@@ -163,4 +172,36 @@ main {
 }
 .logout .button-link .double-arrow {
     position: static;
+}
+.errorMessage {
+    display: block;
+    color: #f00;
+}
+.login-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.login-form {
+    border: #333 1px solid;
+    border-radius: 6px;
+    padding: 1rem;
+}
+.login-container h1 {
+    width: 100%;
+    font-size: 1.5rem;
+}
+.form-container {
+    display: flex;
+}
+.form-container div {
+    margin-right: .5rem;    
+}
+.form-container p {
+    margin-bottom: .5rem;    
+}
+input[type="text"], input[type="password"] {
+    padding: .3rem;
+    font-size: 1rem;
+    min-width: 180px;
 }

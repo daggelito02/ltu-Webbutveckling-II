@@ -7,13 +7,14 @@
 
         switch (true):
             case $NewUserName == "" || $NewPassword == "": // Ny användare saknar namn eller lösenord
-                $_SESSION['logInInfo'] = "Nytt Namn eller nytt lösenord saknas!";
-                $_SESSION['viewInfo'] = true;
+                // $_SESSION['logInInfo'] = "Nytt Namn eller nytt lösenord saknas!";
+                // $_SESSION['viewInfo'] = true;
+                header("Location: ../login/login.php?logInInfoName=Fel fel fel&userName=$logInName");
                 session_destroy();
                 break;
             case $userExists; // Ny användare finns redan
-                $_SESSION['logInInfo'] = "Användarnamnet finns redan, pröva med ett annat."; // sparar data i sessionen
-                $_SESSION['viewInfo']  = true;
+                // $_SESSION['logInInfo'] = "Användarnamnet finns redan, pröva med ett annat."; // sparar data i sessionen
+                // $_SESSION['viewInfo']  = true;
                 session_destroy();
                 break;
             default: // Ny användare skapas och läggs in i databasen om den inte finns, annars skapas både fil & ny användare
