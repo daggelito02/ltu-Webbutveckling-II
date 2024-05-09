@@ -1,6 +1,6 @@
 <?php
 	// echo "Method:" .$_SERVER['REQUEST_METHOD']."<br>";
-	// print_r($_POST['login']); 
+	//print_r($_POST['login']); 
 	
 	// if($_SERVER['REQUEST_METHOD'] == 'POST') {
 	// 	echo "Post<br>";
@@ -35,8 +35,7 @@
 	if (isset($_POST['login'])){ // Användare loggar in
 		handelLogIn($_POST['logInNamn'], $_POST['logInPassword']);
 	} elseif (isset($_POST['saveNewUser'])){ //Sparar nytt lösen till användare
-		//handelNewUser($_POST['saveNewUserNamn'], $_POST['saveNewUserPassword']);
-		echo "handelNewUser";
+		handelNewUser($_POST['saveNewUserNamn'], $_POST['saveNewUserPassword']);
 	}
 ?>
 <!doctype html>
@@ -64,7 +63,7 @@
 				
 				<form action="login.php" method="post" class="login-form" id="userLogin" >
 					<h1>Logga in till Bloggen</h1>
-					<span id="loginError" class="errorMessage"></span>
+					<span id="loginMessage" class="errorMessage"></span>
 					<p>Logga in</p>
 					<div class="form-container">
 						<div>
@@ -82,11 +81,11 @@
 					<p>Spara ny användare</p>
 					<div class="form-container">
 						<div>
-							<input type="text" name="saveNewUserNamn" placeholder="Skriv in nytt namn här">
+							<input type="text" id="saveNewUserNamn" name="saveNewUserNamn" placeholder="Skriv in nytt namn här">
 							<span id="newUserNamnError" class="errorMessage"></span>
 						</div>
 						<div>
-							<input type="password" name="saveNewUserPassword" placeholder="Skriv in nytt lösenord här">
+							<input type="password" id="saveNewUserPassword" name="saveNewUserPassword" placeholder="Skriv in nytt lösenord här">
 							<span id="newUserPasswordError" class="errorMessage"></span>
 						</div>
 						<div>

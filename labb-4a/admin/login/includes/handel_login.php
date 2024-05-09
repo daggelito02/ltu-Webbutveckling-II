@@ -1,6 +1,7 @@
 <?php
-//echo "I handle log in";
+//echo "Inne i login";
     function handelLogIn ($logInName = '', $logInPassword = '') { // Hanterar ny login
+        //echo "handelLogIn körs";
         $user = '';
         $userExists = false;
         $password = '';
@@ -35,7 +36,7 @@
             default: // Alla övriga fall
                 // $_SESSION['logInInfoElse'] = "Något fungerar inte! Kontakta admin admin@admin.se"; // sparar data i sessionen
                 // $_SESSION['viewInfo']  = true;
-                header("Location: ../login/login.php?logInInfoError=Något fungerar inte! Kontakta admin admin@admin.se&userName=$logInName");
+                header("Location: ../login/login.php?logInInfoMessage=Något fungerar inte! Kontakta admin admin@admin.se&userName=$logInName");
                 session_destroy();
         endswitch;
 	}

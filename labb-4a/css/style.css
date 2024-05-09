@@ -3,6 +3,7 @@ body {
     flex-wrap: wrap;
     box-sizing: border-box;
     padding: 0.5rem;
+    font-family: Arial, Helvetica, sans-serif;
 }
 body > * {
     padding: 1rem;
@@ -34,7 +35,7 @@ main {
     flex: 1 1 50%;
 }
 a {
-    color: #333;
+    color: #444;
 }
 /* Google material styles start */
 .material-symbols-outlined {
@@ -68,13 +69,14 @@ a {
 }
 .button-link a {
     text-decoration: none;
+    font-size: 1rem;
     
 }
 .button-link a:hover {
     text-decoration: underline;
 }
 .button-link a:visited {
-    color: #333;
+    color: #444;
 }
 .course-nav-link-to-menu .double-arrow,
 .nav-link-to-start-page .double-arrow {
@@ -92,12 +94,24 @@ a {
     text-decoration: none;
     padding: 8px 16px;
     background-color: #f1f1f1;
-    color: #333;
+    color: #444;
     border-radius: 2px;
 }
 .button-login {
     min-width: 100px;
+    height: 31px;
+    cursor: pointer;
+    box-shadow: 1px 1px 1px 0px rgba(0,0,0,0.55);
 }
+.button-login:hover {
+    background-color: #ddd;
+}
+.button-login:active {
+    background-color: #ddd;
+    transform: translateY(1px);
+  }
+
+
 .blogg-info-border {
     border-top: #f1f1f1 solid 1px;
     border-bottom: #f1f1f1 solid 1px;
@@ -138,7 +152,7 @@ a {
     display: inline-block;
     margin-bottom: .5rem;
     text-decoration: none;
-    color: #333;
+    color: #444;
     font-size: 1rem;
     padding-left: 1.2rem;
     padding-right: .4rem;
@@ -148,7 +162,7 @@ a {
     text-decoration: underline;
 }
 .menu-link:visited, .info-link {
-    color: #333;
+    color: #444;
 }
 .info-link {
     display: inline-block;
@@ -162,7 +176,8 @@ a {
 }
 .logout input, .login-form .button-login {  
     border: none;
-    color: #333;
+    color: #444;
+    font-size: 1rem;
 }
 .logout input:hover {  
     text-decoration: underline;
@@ -181,6 +196,7 @@ a {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    margin: 10vh 0 15vh;
 }
 .login-form {
     border: #333 1px solid;

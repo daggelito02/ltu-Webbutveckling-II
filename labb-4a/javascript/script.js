@@ -1,20 +1,24 @@
-
-var loginButton = document.getElementById("submit-login");
 const loginParams = new URLSearchParams(window.location.search);
 if(loginParams.has('userName')){
     const logInInfoName = loginParams.get('logInInfoName');
+    const newUserNamnExists = loginParams.get('newUserNamnExists');
+    const newUserNamn = loginParams.get('newUserNamn');
     const logInInfoPass = loginParams.get('logInInfoPass');
-    const logInInfoError = loginParams.get('logInInfoError');
+    const logInInfoMessage = loginParams.get('logInInfoMessage');
     const userName = loginParams.get('userName');
     nameError.innerHTML = logInInfoName;
     passwordError.innerHTML = logInInfoPass;
-    loginError.innerHTML = logInInfoError;
+    loginMessage.innerHTML = logInInfoMessage;
+
+    newUserNamnError.innerHTML = newUserNamnExists;
     document.getElementById("logInNamn").value = userName;
+    document.getElementById("saveNewUserNamn").value = newUserNamn;
 }
 
+//Inloggad användare
+var loginButton = document.getElementById("submit-login");
 loginButton.addEventListener("click", function() {
     var form = document.getElementById("userLogin");
-    // This function will be executed when the button is clicked
     form.addEventListener("submit", function(event) { //lyssnar på submit
         //console.log('test: ', event.target.elements )
         event.preventDefault(); // förhindrar inbygda html submit för att javascript ska validera koden innan
@@ -28,20 +32,24 @@ loginButton.addEventListener("click", function() {
         validateRegisterForm(logInNamn, logInPassword); // skickar med all formulär-data
                                                         // till funktionen validateRegisterForm()
         function validateRegisterForm(logInNamn, logInPassword){  // Validerar alla formulär inputs för sig
-            if (logInNamn == "") {                        // med oliga regler och ger feedback om behövs
+            if (logInNamn == "") {                        // med olika regler och ger feedback om behövs
                 nameError.innerHTML = "Namnet saknas.";
                 document.getElementById("logInNamn").value = logInNamn;
                 isValid = false;
+                newUserNamnError.innerHTML = "";
             } else {
                 nameError.innerHTML = "";
                 document.getElementById("logInNamn").value = logInNamn;
+                newUserNamnError.innerHTML = "";
             }
             if (logInPassword.length < 6) {
                 passwordError.innerHTML = "Minst 6 tecken!";
                 isValid = false;
+                newUserPasswordError.innerHTML = "";
             } else {
                 passwordError.innerHTML = "";
                 document.getElementById("logInPassword").value = logInPassword;
+                newUserPasswordError.innerHTML = "";
             }
         }
         //console.log('isValid: ', isValid);
@@ -56,114 +64,55 @@ loginButton.addEventListener("click", function() {
     });
 });
 
-//
 
-
+// Ny användare
 var saveNewUser = document.getElementById("save-new-user");
-
 saveNewUser.addEventListener("click", function() {
-    console.log("new user");
+    var form = document.getElementById("userLogin");
+    form.addEventListener("submit", function(event) { //lyssnar på submit
+        event.preventDefault(); // förhindrar inbygda html submit för att javascript ska validera koden innan
+
+        //console.log("new user i form");
+        
+        // Hämtar de värdena från forumäret och sätter till variabler
+        const saveNewUserNamn = this.elements.saveNewUserNamn.value;
+        const saveNewUserPassword = this.elements.saveNewUserPassword.value;
+        isValid = true;
+    
+        validateRegisterForm(saveNewUserNamn, saveNewUserPassword); // skickar med all formulär-data
+                                                        // till funktionen validateRegisterForm()
+        function validateRegisterForm(saveNewUserNamn, saveNewUserPassword){  // Validerar alla formulär inputs för sig
+            if (saveNewUserNamn == "") {                        // med olika regler och ger feedback om behövs
+                newUserNamnError.innerHTML = "Namnet saknas.";
+                document.getElementById("saveNewUserNamn").value = saveNewUserNamn;
+                isValid = false;
+                nameError.innerHTML = "";
+            } else {
+                newUserNamnError.innerHTML = "";
+                document.getElementById("saveNewUserNamn").value = saveNewUserNamn;
+                nameError.innerHTML = "";
+            }
+            if (saveNewUserPassword.length < 6) {
+                newUserPasswordError.innerHTML = "Minst 6 tecken!";
+                isValid = false;
+                passwordError.innerHTML = "";
+            } else {
+                newUserPasswordError.innerHTML = "";
+                document.getElementById("saveNewUserPassword").value = saveNewUserPassword;
+                passwordError.innerHTML = "";
+            }
+        }
+        //console.log('isValid: ', isValid);
+        if (isValid == true) { // om formuläret fyller alla kriterier så submittas det
+            passwordError.innerHTML = "<input type='hidden' name='saveNewUser'>";
+            event.target.submit();
+            //console.log(event.target);
+        
+            // console.log(document.getElementById("userLogin"));
+            // console.log("test");
+        }
+    });
 });
 
 
-    // form.addEventListener("submit", function(event) { //lyssnar på submit
-    //     console.log('test: ', event.target.elements )
-    //     event.preventDefault(); // förhindrar inbygda html submit för att javascript ska validera koden innan
-
-    //     // const login = this.elements.login;
-    //     // console.log('test: ', login);
-    //     // const saveNewUser = this.elements.saveNewUser;
-    //     // login.addEventListener("click",test());
-    //     // saveNewUser.addEventListener("click",test2());
-    //     // function test() {
-    //     //     console.log('login: ', login);
-    //     // };
-    //     // function test2() {
-    //     //     console.log('saveNewUser: ', saveNewUser);
-    //     // };
-    //     // if (event.target.login.name  === "login") {
-    //     //     // Hämtar de värdena från forumäret och sätter till variabler
-    //     //     const logInNamn = this.elements.logInNamn.value;
-    //     //     const logInPassword = this.elements.logInPassword.value;
-    //     //     isValid = true;
-        
-    //     //     validateRegisterForm(logInNamn, logInPassword); // skickar med all formulär-data
-    //     //                                                     // till funktionen validateRegisterForm()
-    //     //     function validateRegisterForm(logInNamn, logInPassword){  // Validerar alla formulär inputs för sig
-    //     //         if (logInNamn == "") {                                // med oliga regler och ger feedback om behövs
-    //     //             nameError.innerHTML = "Namnet saknas.";
-    //     //             document.getElementById("logInNamn").value = logInNamn;
-    //     //             isValid = false;
-    //     //         } else {
-    //     //             nameError.innerHTML = "";
-    //     //             document.getElementById("logInNamn").value = logInNamn;
-    //     //         }
-    //     //         if (logInPassword.length < 6) {
-    //     //             passwordError.innerHTML = "Minst 6 tecken!";
-    //     //             isValid = false;
-    //     //         } else {
-    //     //             passwordError.innerHTML = "";
-    //     //             document.getElementById("logInPassword").value = logInPassword;
-    //     //         }
-    //     // }; 
-
-        
-        
-    //     // } else if (event.target.saveNewUser.name=== "saveNewUserNamn") {
-    //     //     // Submit Button 2 was clicked
-    //     //     console.log("Submit Button 2 clicked");
-    //     // }
-
-    //     // console.log('isValid: ', isValid);
-    //     // if (isValid == true) { // om formuläret fyller alla kriterier så submittas det
-    //     //     //event.target.submit();
-    //     // }
-    // });
-  //else if (newUserCase) {
-
-//     form.addEventListener("submit", function(event) { //lyssnar på submit
-
-//         event.preventDefault(); // förhindrar inbygda html submit för att javascript ska validera koden innan
     
-//         // Hämtar de värdena från forumäret och sätter till variabler
-//         const logInNamn = this.elements.logInNamn.value;
-//         const logInPassword = this.elements.logInPassword.value;
-//         const verifyPassword = this.elements.verifyPassword.value;
-//         const termsOfUse = this.elements.termsOfUse.checked;
-//         isValid = true;
-    
-//         validateRegisterForm(logInNamn, logInPassword, verifyPassword, termsOfUse); // skickar med all formulär-data
-//                                                                                      // till funktionen validateRegisterForm()
-//         function validateRegisterForm(userName, email, password, verifyPassword, termsOfUse ){  // Validerar alla formulär inputs för sig
-
-    
-    
-    
-    
-//             if (logInPassword !== verifyPassword) {
-//                 verifyPasswordError.innerHTML = "Lösenordet matchar inte!";
-//                 isValid = false;
-//             } else {
-//                 verifyPasswordError.innerHTML = "";
-//                 document.getElementById("password").value = verifyPassword;
-//             }
-//             if (password !== verifyPassword) {
-//                 verifyPasswordError.innerHTML = "Lösenordet matchar inte!";
-//                 isValid = false;
-//             } else {
-//                 verifyPasswordError.innerHTML = "";
-//                 document.getElementById("password").value = verifyPassword;
-//             }
-//             if (termsOfUse == false) {
-//                 termsOfUseError.innerHTML = "Checka i boxen!";
-//                 isValid = false;
-//             } else {
-//                 termsOfUseError.innerHTML = "";
-//             }
-//         }; 
-    
-//         if (isValid == true) { // om formuläret fyller alla kriterier så submittas det
-//             event.target.submit();
-//         }
-//     });
-// }
