@@ -1,9 +1,9 @@
 <?php 
 	$loggedInStatus = "Logga ut";
-	$loggedInStayusName = "logout";
+	$loggedInStatusName = "logout";
 	if($_SESSION['logedIn'] != true) { 
 		$loggedInStatus = "Logga in";
-		$loggedInStayusName = "resetLogin";
+		$loggedInStatusName = "resetLogin";
 	}
 ?>
 
@@ -32,7 +32,7 @@
 <form class="logout" action="admin/login/login.php" method="post">
 	<input type="hidden" name="userName" value="<?=$userName?>">
 	<div class="button-link">
-		<input type="submit" value="<?=$loggedInStatus?>" name="<?=$loggedInStayusName?>">
+		<input type="submit" value="<?=$loggedInStatus?>" name="<?=$loggedInStatusName?>">
 		<span class="material-symbols-outlined double-arrow">
 			double_arrow
 		</span> 

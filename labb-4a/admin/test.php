@@ -72,4 +72,20 @@
     } else {
         $userExists = false;
     }
+
+    $title = 'Bloggare';
+    $presentation = 'Jag är en student';
+    $id = 32;
+
+    handle_user_profil($title, $presentation, $id);
+
+
+    $username = 'Dag Fredriksson';
+
+    $username = get_user($username);
+    echo "<pre>";
+    print_r($username);
+    echo $username['0']['title'];
+    echo $username['0']['presentation'];
+    echo "</pre>";
 ?>

@@ -90,28 +90,42 @@ a {
 .welcome-heading {
     margin-top: -.5rem;
 }
-.button-link, .button-login {
+.button-upload {
+    display: inline-block;
+    height: unset;
+}
+.button-link,
+.button-login,
+.button-admin,
+.button-upload {
     text-decoration: none;
     padding: 8px 16px;
     background-color: #f1f1f1;
     color: #444;
     border-radius: 2px;
 }
-.button-login {
+.button-login,
+.button-admin,
+.button-upload {
     min-width: 100px;
     height: 31px;
     cursor: pointer;
     box-shadow: 1px 1px 1px 0px rgba(0,0,0,0.55);
 }
-.button-login:hover {
+.button-login:hover,
+.button-admin:hover,
+.button-upload:hover {
     background-color: #ddd;
 }
-.button-login:active {
+.button-login:active,
+.button-admin:active,
+.button-upload:active {
     background-color: #ddd;
     transform: translateY(1px);
-  }
-
-
+}
+.button-upload {
+    height: auto;
+}
 .blogg-info-border {
     border-top: #f1f1f1 solid 1px;
     border-bottom: #f1f1f1 solid 1px;
@@ -174,7 +188,9 @@ a {
     top: 0;
     right: 0rem;
 }
-.logout input, .login-form .button-login {  
+.logout input, 
+.login-form .button-login,
+.user-profile-form .button-admin {  
     border: none;
     color: #444;
     font-size: 1rem;
@@ -198,7 +214,7 @@ a {
     flex-wrap: wrap;
     margin: 10vh 0 15vh;
 }
-.login-form {
+.login-form, .user-profile-form {
     border: #333 1px solid;
     border-radius: 6px;
     padding: 1rem;
@@ -206,6 +222,9 @@ a {
 .login-container h1 {
     width: 100%;
     font-size: 1.5rem;
+}
+.full-width {
+    width: 100%;
 }
 .form-container {
     display: flex;
@@ -216,8 +235,31 @@ a {
 .form-container p {
     margin-bottom: .5rem;    
 }
+.form-container-user div {
+    margin-bottom: 1rem;
+
+}
 input[type="text"], input[type="password"] {
     padding: .3rem;
     font-size: 1rem;
     min-width: 180px;
+    box-sizing: border-box;
+}
+textarea {
+    box-sizing: border-box;
+}
+aside .button-link {
+    background-color: #fff;
+    max-width: max-content;
+    padding-right: 2rem;
+}
+.user-admin-conatiner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+}
+.user-admin-conatiner .admin-container {
+    flex: 1;
+    max-width: 40%;
 }

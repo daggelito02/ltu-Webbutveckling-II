@@ -7,7 +7,8 @@
 	// 	$userName = $_SESSION['userName'];
 	// 	$loggedInUser = 'Välkommen ' . $_SESSION['userName'];
 	// 	$userName = $_SESSION['userName'];
-	//  } 
+	//  }
+    $userData = get_user($_SESSION['userName']); 
 ?>
 <h2 class="secondary-heading">Din blogg-profil</h2>
 
@@ -22,11 +23,16 @@
         
 <?php } else { ?>
     <p>Användarnamn: <?php echo $_SESSION['userName'];?></p>
-    
-    <!-- <form action="admin/login/login.php" method="post">
-        <input type="hidden" name="userName" value="<?=$userName?>">
-        <input type="submit" value="Logga ut" name="logout">
-    </form> -->
+    <p>Titel: <?=$userData['0']['title']?></p>
+    <p>Om mig: <?=$userData['0']['presentation']?></p>
+    <p>Skapa en egen blogg eller redigera ditt konto
+    <div class="button-link">
+        <a href="admin/cms/user_admin.php">Mitt admin</a> 
+		<span class="material-symbols-outlined double-arrow">
+			double_arrow
+		</span> 
+		
+	</div></p>
 <?php } ?>
 
 <h2 class="secondary-heading">Veckans bloggare!</h2>
@@ -36,9 +42,9 @@
     och skrivit om allt mellan himmel och jord. 
 </p>
 Se alla Dag Fredrikssons inlägg klicka 
-<a class="info-link" href="index.php">här</a>
-<span class="material-symbols-outlined double-arrow">
-    double_arrow
-</span>  
-
+<a class="info-link" href="index.php">här
+<span class='material-symbols-outlined read-more'>
+    read_more
+</span> 
+</a>
 

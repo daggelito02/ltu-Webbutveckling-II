@@ -23,6 +23,33 @@ function add_user($username, $password)
     mysqli_stmt_close($statment);
 }
 
+function handle_user_profil($title, $presentation, $id)
+{
+    global $connection; // Så vi kommer åt den globala variabeln
+
+
+    $sql = 'UPDATE user SET title=?, presentation=? WHERE id=?';
+    $statment = mysqli_prepare($connection, $sql);
+    mysqli_stmt_bind_param($statment, "ssi", $title, $presentation, $id);
+    $result = mysqli_stmt_execute($statment);
+    mysqli_stmt_close($statment);
+    return $result;
+
+    // Skapa SQL-frågan
+    $sql = 'INSERT INTO user (username, password) VALUES (?,?)';
+    // Förbered frågan
+    $statment = mysqli_prepare($connection, $sql);
+
+    // Bind ihop variablerna med statement användarnamn och läsenord är strängar (s)
+    mysqli_stmt_bind_param($statment, "ss", $username, $password);
+
+    // Utför frågan
+    mysqli_stmt_execute($statment);
+   
+    // Stäng statementet när vi är klara
+    mysqli_stmt_close($statment);
+}
+
 /**
  * Tar in ett statement som har körts, hämtar resultatet och lägger
  * resultatet i en array med rader där varje rad innehåller en array med fält
