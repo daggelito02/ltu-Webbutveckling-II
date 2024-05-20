@@ -4,8 +4,29 @@
 		$_SESSION['logedIn'] = false;
         header("Location: ../../index.php");
 		exit();
-	} 
-	include 'includes/show_errors.php'; // inkludera vid utveckling för att få feedback på eventuella fel i koden
+	}
+    require_once('../db.php');
+    
+    if (isset($_POST['updateProfile'])) { //
+        $user = get_user($_SESSION['userName']);
+        echo $id = $user['0']['id'];
+        echo "<br>";
+        echo $title = $_POST['profile'];
+        if (empty($title)) {
+            echo 'titel tom';
+            $title = $user['0']['title'];
+        }
+        
+        echo "<br>";
+        echo $presentation = $_POST['presentation'];
+        if (empty($presentation)) {
+            echo 'presentation tom';
+            $presentation = $user['0']['presentation'];
+        }
+
+        handle_user_profil($title, $presentation, $id);
+    }
+	include '../../includes/show_errors.php'; // inkludera vid utveckling för att få feedback på eventuella fel i koden
 	// include 'includes/handel_login.php'; // funktion för att hantera login
 	// include 'includes/handel_newUser.php'; // funktion för att hantera ny anvävdare
 	// require_once('../db.php');
@@ -44,25 +65,25 @@
 		</header>
 		<main class=user-admin-conatiner>
             <div class="user-profile admin-container">
-                <form action="user-profile.php" method="post" class="user-profile-form" id="userProfile" >
+                <form action="user_admin.php" method="post" class="user-profile-form" id="userProfile" >
 					<h1>Hantera din frofil</h1>
 					<div class="form-container-user">
-						<div class="form-container-user__raw">
-							<input class="full-width" type="text" name="logInNamn" id="logInNamn" placeholder="Lägg till eller ändra titel">
+						<div class="form-container-user__row">
+							<input class="full-width" type="text" name="profile" id="profile" placeholder="Lägg till eller ändra titel">
 							<span id="nameError" class="errorMessage"></span>
 						</div>
-						<div class="form-container-user__raw">
+						<div class="form-container-user__row">
                         <textarea class="full-width" id="presentation" name="presentation" rows="4" 
                                   placeholder="Skriv en pressentation om dig själv"></textarea>
 							<span id="passwordError" class="errorMessage"></span>
 						</div>
-                        <div class="form-container-user__raw">
+                        <div class="form-container-user__row">
                             <input type="hidden" name="MAX_FILE_SIZE" value="1000000" />
                             <label class="button-upload" for="upload">Ladda upp en avatar-bild</label>
                             <input disabled id="upload" type="file" name="file_upload" value="test" accept="image/*" hidden/>
                         </div>
-						<div class="form-container-user__raw">
-							<input class="button-admin" type="submit" value="Updatera" name="login" id="submit-login">
+						<div class="form-container-user__row">
+							<input class="button-admin" type="submit" value="Spara profil" name="updateProfile" id="submit-login">
 						</div>
 					</div>
 				</form>

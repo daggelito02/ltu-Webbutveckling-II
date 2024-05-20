@@ -53,6 +53,22 @@ a {
 .read-more{
     font-size: 1.3rem;
 }
+.info-icon {
+    position: absolute;
+    right: 0;
+}
+.info-icon:hover {
+    cursor: pointer;
+}
+.info-icon:hover + .presentation-info {
+    display: block;
+}
+.presentation-info {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: -50px;
+}
 .double-arrow {
     font-size: 1rem;
     margin-top: 2px;
@@ -159,9 +175,9 @@ a {
     list-style-type: none;
     position: relative;
 }
-/* .menu-list-item {
-
-} */
+.menu-list-item {
+    position: relative;
+}
 .menu-link {
     display: inline-block;
     margin-bottom: .5rem;

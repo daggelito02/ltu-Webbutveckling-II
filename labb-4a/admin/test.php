@@ -77,7 +77,7 @@
     $presentation = 'Jag är en student';
     $id = 32;
 
-    handle_user_profil($title, $presentation, $id);
+    //handle_user_profil($title, $presentation, $id);
 
 
     $username = 'Dag Fredriksson';
@@ -87,5 +87,6 @@
     print_r($username);
     echo $username['0']['title'];
     echo $username['0']['presentation'];
+    echo $username['0']['id'];
     echo "</pre>";
 ?>

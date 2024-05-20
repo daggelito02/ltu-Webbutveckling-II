@@ -6,7 +6,19 @@
     foreach($rows as $user)
     {
         $name = $user['username']; // username är namnet på kolumnen i databastabellen
-        //$pass = $user['password']; // password är namnet på kolumnen i databastabellen
+        $presentation = $user['presentation']; // XXXXXXXXXXX
+        
+        $print_presentation = "";
+        if (!empty($presentation)) {
+            $print_presentation = "
+                    <span class='material-symbols-outlined info-icon'>
+                        info
+                    </span>
+                    <div class='presentation-info'>
+                        $presentation 
+                    <div>";
+        }
+
         echo ("<li class='menu-list-item'>
                     <span class='material-symbols-outlined list-bulleted'>
                         format_list_bulleted
@@ -15,6 +27,7 @@
                     <span class='material-symbols-outlined read-more'>
                         read_more
                     </span>
+                    $print_presentation
                 </li>");
     }
 ?>

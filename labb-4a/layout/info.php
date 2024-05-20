@@ -8,7 +8,10 @@
 	// 	$loggedInUser = 'Välkommen ' . $_SESSION['userName'];
 	// 	$userName = $_SESSION['userName'];
 	//  }
-    $userData = get_user($_SESSION['userName']); 
+    if (isset($_SESSION['userName'])) {
+        $userData = get_user($_SESSION['userName']); 
+    }
+    
 ?>
 <h2 class="secondary-heading">Din blogg-profil</h2>
 
