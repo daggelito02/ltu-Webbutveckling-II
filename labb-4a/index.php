@@ -23,19 +23,19 @@
 	</head>
 	<body>
 		<header>
-			<?php require_once 'layout/header.php'; ?>
+			<?php include_once 'layout/header.php'; ?>
 		</header>
 		<nav class="menu">
-			<?php require_once 'layout/menu.php'; ?>
+			<?php include_once 'layout/menu.php'; ?>
 		</nav>
 		<main>
-			<?php require_once 'layout/content.php'; ?>
+			<?php include_once 'layout/content.php'; ?>
 		</main>
 		<aside class="info">
-			<?php require_once 'layout/info.php'; ?>
+			<?php include_once 'layout/info.php'; ?>
 		</aside>
 		<footer>
-			<?php require_once 'layout/footer.php'; ?>
+			<?php include_once 'layout/footer.php'; ?>
 		</footer>
 	</body>
 </html>

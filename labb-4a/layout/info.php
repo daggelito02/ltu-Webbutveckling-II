@@ -15,7 +15,7 @@
 ?>
 <h2 class="secondary-heading">Din blogg-profil</h2>
 
-<?php if($_SESSION['logedIn'] != true) { ?>
+<?php if ($_SESSION['logedIn'] != true) { ?>
     <p>När en bloggare är inloggad kommer profilinformationen synas här.</p> 
     <p>Bli en ny blobbare eller logga in?
         <a class="info-link" href="admin/login/login.php">Skapa konto eller logga in</a>
@@ -27,7 +27,9 @@
 <?php } else { ?>
     <p>Användarnamn: <?php echo $_SESSION['userName'];?></p>
     <p>Titel: <?=$userData['0']['title']?></p>
-    <p>Om mig: <?=$userData['0']['presentation']?></p>
+    <?php if (!empty($presentation)) { ?>
+        <p>Om mig: <?=$userData['0']['presentation']?></p>
+    <?php } ?>
     <p>Skapa en egen blogg eller redigera ditt konto
     <div class="button-link">
         <a href="admin/cms/user_admin.php">Mitt admin</a> 

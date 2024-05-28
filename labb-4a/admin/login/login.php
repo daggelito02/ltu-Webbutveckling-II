@@ -57,12 +57,20 @@
 					<a href="../../index.php">Startsidan</a> 
 				</div>
 			</div>
+			<h1 class="heading">Logga in eller spara en ny anvädare</h1>
+			<div class="blogg-info-border">
+                <div class="blogg-info">
+                        <P>
+							Om du inte har redan har ett konto så kan du skapa ett genom att 
+							spara ett nytt. Hitta på ett bra användarnamn, lösenord ska ha minst 6 tecken.
+						</p>
+                </div>
+            </div>
 		</header>
 		<main>
 			<div class="login-container">
 				
 				<form action="login.php" method="post" class="login-form" id="userLogin" >
-					<h1>Logga in till Bloggen</h1>
 					<span id="loginMessage" class="errorMessage"></span>
 					<p>Logga in</p>
 					<div class="form-container">

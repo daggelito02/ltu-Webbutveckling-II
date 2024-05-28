@@ -15,6 +15,8 @@
                         info
                     </span>
                     <div class='presentation-info'>
+                        <h2>Pressentation</h2>
+                        <p>Lite om mig: $name</p>
                         $presentation 
                     <div>";
         }

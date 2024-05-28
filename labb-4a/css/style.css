@@ -37,6 +37,10 @@ main {
 a {
     color: #444;
 }
+textarea {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+}
 /* Google material styles start */
 .material-symbols-outlined {
   font-variation-settings:
@@ -55,7 +59,8 @@ a {
 }
 .info-icon {
     position: absolute;
-    right: 0;
+    top: 5px;
+    right: 4px;
 }
 .info-icon:hover {
     cursor: pointer;
@@ -66,8 +71,28 @@ a {
 .presentation-info {
     display: none;
     position: absolute;
+    top: -125px;
     right: 0;
-    top: -50px;
+    left: 55px;
+    z-index: 1;
+    min-height: 100px;
+    background-color: #fff;
+    width: 250px;
+    border: solid 1px #333;
+    border-radius: 3px;
+    box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.55);
+    padding: 1rem;
+}
+.presentation-info h2 {
+    font-size: 1.2rem;
+    margin: .1rem 0 .5rem;
+    padding: 0;
+}
+.presentation-info p {
+    margin: .5rem 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 .double-arrow {
     font-size: 1rem;
@@ -103,7 +128,7 @@ a {
     top: -1px;
     left: -4px;
 }
-.welcome-heading {
+.heading {
     margin-top: -.5rem;
 }
 .button-upload {
@@ -177,6 +202,17 @@ a {
 }
 .menu-list-item {
     position: relative;
+
+}
+.menu-list-item {
+    margin-top: .3rem;
+    padding: .5rem .3rem 0;
+}
+.menu-list-item:nth-child(odd) {
+    background-color: #fff; /* Ljus grå färg för udda element */
+}
+.menu-list-item:nth-child(even) {
+background-color: #f1f1f1; /* Lite mörkare grå färg för jämna element */
 }
 .menu-link {
     display: inline-block;
@@ -228,7 +264,7 @@ a {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    margin: 10vh 0 15vh;
+    margin: 3vh 0 15vh;
 }
 .login-form, .user-profile-form {
     border: #333 1px solid;
@@ -251,7 +287,7 @@ a {
 .form-container p {
     margin-bottom: .5rem;    
 }
-.form-container-user div {
+.form-container__row {
     margin-bottom: 1rem;
 
 }
@@ -268,6 +304,7 @@ aside .button-link {
     background-color: #fff;
     max-width: max-content;
     padding-right: 2rem;
+    border: #333 solid 1px;
 }
 .user-admin-conatiner {
     display: flex;

@@ -15,7 +15,7 @@
 		<a href="../index.php">Länksida</a> 
 	</div>
 </div>
-<h1 class="welcome-heading">Välkommen <?php If($_SESSION['logedIn'] == true) { echo $_SESSION['userName']; } ?> till bloggen!</h1>
+<h1 class="heading">Välkommen <?php If($_SESSION['logedIn'] == true) { echo $_SESSION['userName']; } ?> till bloggen!</h1>
 <div class="blogg-info-border">
 	<div class="blogg-info">
 		<?php 
@@ -30,9 +30,11 @@
 	</div>
 </div>
 <form class="logout" action="admin/login/login.php" method="post">
-	<input type="hidden" name="userName" value="<?=$userName?>">
+	<?php if($_SESSION['logedIn'] == true) { ?> 
+		<input type="hidden" name="userName" value="<?=$userName?>">
+	<?php } ?>
 	<div class="button-link">
-		<input type="submit" value="<?=$loggedInStatus?>" name="<?=$loggedInStatusName?>">
+		<input role="link" type="submit" value="<?=$loggedInStatus?>" name="<?=$loggedInStatusName?>">
 		<span class="material-symbols-outlined double-arrow">
 			double_arrow
 		</span> 

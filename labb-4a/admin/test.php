@@ -48,6 +48,20 @@
 
     echo "<br>";
 
+    echo "<br>";
+    // $userid = "32";
+    // //$rows = get_users();
+    // $rows = get_post($userid)
+    // foreach($rows as $posts)
+    // {
+    //     $title = $posts['username']; // username är namnet på kolumnen i databastabellen
+    //     $content = $posts['password']; // password är namnet på kolumnen i databastabellen
+    //     echo ("<p>$title</p>");
+    //     echo ("<p>$content</p>");
+    // }
+
+    // echo "<br>";
+
     //echo $addUser = add_user($username, $password);
 
 

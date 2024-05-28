@@ -1,6 +1,8 @@
 <?php
 require_once('db_credentials.php');
 
+//include './login/includes/show_errors.php';
+
 // Koppla upp mot databasen, detta gör vi en gång när skriptet startar (sidan laddas in)
 $connection = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
 
@@ -17,16 +19,16 @@ function add_user($username, $password)
     mysqli_stmt_bind_param($statment, "ss", $username, $password);
 
     // Utför frågan
-    mysqli_stmt_execute($statment);
+    $result = mysqli_stmt_execute($statment);
    
     // Stäng statementet när vi är klara
     mysqli_stmt_close($statment);
+    return $result;
 }
 
 function handle_user_profil($title, $presentation, $id)
 {
     global $connection; // Så vi kommer åt den globala variabeln
-
 
     $sql = 'UPDATE user SET title=?, presentation=? WHERE id=?';
     $statment = mysqli_prepare($connection, $sql);
@@ -34,20 +36,30 @@ function handle_user_profil($title, $presentation, $id)
     $result = mysqli_stmt_execute($statment);
     mysqli_stmt_close($statment);
     return $result;
+}
 
-    // Skapa SQL-frågan
-    $sql = 'INSERT INTO user (username, password) VALUES (?,?)';
-    // Förbered frågan
+function add_post($title, $content, $userId)
+{
+    global $connection; // Så vi kommer åt den globala variabeln
+
+    $sql = 'INSERT INTO post (title, content, userId) VALUES (?,?,?)';
     $statment = mysqli_prepare($connection, $sql);
-
-    // Bind ihop variablerna med statement användarnamn och läsenord är strängar (s)
-    mysqli_stmt_bind_param($statment, "ss", $username, $password);
-
-    // Utför frågan
-    mysqli_stmt_execute($statment);
-   
-    // Stäng statementet när vi är klara
+    mysqli_stmt_bind_param($statment, "ssi", $title, $content, $userId);
+    $result = mysqli_stmt_execute($statment);
     mysqli_stmt_close($statment);
+    return $result;
+}
+
+function get_post($userid)
+{
+    global $connection;
+    $sql = 'SELECT * FROM post WHERE userid=?';
+    $statment = mysqli_prepare($connection, $sql);
+    mysqli_stmt_bind_param($statment, "i", $userid);
+    mysqli_stmt_execute($statment);
+    $result = get_result($statment);
+    mysqli_stmt_close($statment);
+    return $result;
 }
 
 /**
@@ -68,6 +80,8 @@ function get_result($statment)
     }
     return $rows;
 }
+
+
 
 function get_users()
 {
