@@ -51,7 +51,7 @@
     echo "<br>";
     // $userid = "32";
     // //$rows = get_users();
-    // $rows = get_post($userid)
+    // $rows = get_posts($userid)
     // foreach($rows as $posts)
     // {
     //     $title = $posts['username']; // username är namnet på kolumnen i databastabellen
@@ -100,7 +100,16 @@
     echo "<pre>";
     print_r($username);
     echo $username['0']['title'];
+    echo "<br>";
     echo $username['0']['presentation'];
-    echo $username['0']['id'];
+    echo "<br>";
+    echo "The id" . $username['0']['id'];
     echo "</pre>";
+
+     echo "<br><br>Post med id: ";
+     $thePost = get_posts($username['0']['id']);
+                echo "<pre>";
+                print_r($thePost);
+                echo "</pre>";
+                echo "här";
 ?>

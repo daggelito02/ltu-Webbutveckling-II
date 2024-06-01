@@ -43,11 +43,11 @@
 <h2 class="secondary-heading">Veckans bloggare!</h2>
 <p>Dag Fredriksson. Grattis!</p>
 <p>
-    Denna veckas bloggare (v:23) har varit mecket aktiv 
+    Denna veckas bloggare (v:23) har varit mycket aktiv 
     och skrivit om allt mellan himmel och jord. 
 </p>
 Se alla Dag Fredrikssons inlägg klicka 
-<a class="info-link" href="index.php">här
+<a class="info-link" href="index.php?getUserPost=Dag%20Fredriksson&userId=32">här
 <span class='material-symbols-outlined read-more'>
     read_more
 </span> 

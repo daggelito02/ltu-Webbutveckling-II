@@ -5,10 +5,36 @@
         header("Location: ../../index.php");
 		exit();
 	} 
+    require_once('../db.php');
+
+    $user = get_user($_SESSION['userName']);
+    $userId = $user['0']['id'];
+    $title = "";
+    $content = "";
+    $Id = "";
+
+    if (isset($_POST['selectPost'])) { 
+
+        if (isset($_POST['choose-post'])) { 
+            $selectedValue = (int)$_POST['choose-post'];
+        }
+        
+        if (get_post($selectedValue)) {
+            // echo "<pre>";
+            // print_r(get_post($Id));
+            // // var_dump($thePost);
+            // echo "</pre>";
+            $thePost = get_post($selectedValue);
+            $title = $thePost['0']['title'];
+            $content = $thePost['0']['content'];
+        }
+    }
 
     $adminInfo = "";
     $adminInfoPost = "";
     $error = "";
+    $errorUpdate = "";
+    $adminInfoPostUpdate = "";
 
     if (isset($_GET['adminInfo'])) { 
         $adminInfo = $_GET['adminInfo'];
@@ -18,9 +44,18 @@
         $adminInfoPost = $_GET['adminInfoPost'];
     }
 
+    if (isset($_GET['adminInfoPostUpdate'])) { 
+       echo $adminInfoPostUpdate = $_GET['adminInfoPostUpdate'];
+    }
+
     if (isset($_GET['error'])) { 
         $error = $_GET['error'];
     }
+
+    if (isset($_GET['errorUpdate'])) { 
+        $errorUpdate = $_GET['errorUpdate'];
+    }
+    
 
 
 	include '../../includes/show_errors.php'; 
@@ -47,15 +82,14 @@
             <h1 class="heading">Väkommen <?php  echo $_SESSION['userName']; ?> till din adminsida :-)</h1>
             <div class="blogg-info-border">
                 <div class="blogg-info">
-                        <P>Här kan du redigera din profil eller skriva blogginkägg. Lycka till!</p>
+                        <P>Här kan du redigera din profil eller skriva/ändra blogginkägg. Lycka till!</p>
                 </div>
             </div>
 		</header>
 		<main class=user-admin-conatiner>
-            <p class="admin-info"><?=$error?></p>
             <div class="user-profile admin-container">
-                <form action="handle_admin_data.php" method="post" class="user-profile-form" id="userProfile" >
-					<h1>Hantera din profil</h1>
+                <form action="handle_admin_data.php" method="post" class="user-profile-form" id="user-profile" >
+					<h2>Hantera din profil</h2>
 					<div class="form-container-user">
                         <p class="admin-info"><?=$adminInfo?></p>
 						<div class="form-container__row">
@@ -77,9 +111,10 @@
 				</form>
             </div>
             <div class="user-posts admin-container">
-            <form action="handle_admin_data.php" method="post" class="user-profile-form" id="userPost" >
-                <h1>Skapa ett inlägg</h1>
+                <form action="handle_admin_data.php" method="post" class="user-profile-form" id="user-post" >
+                <h2>Skapa ett inlägg</h2>
                 <p class="admin-info"><?=$adminInfoPost?></p>
+                <p class="errorMessage"><?=$error?></p>
                 <div class="form-container-add-post">
                     <div class="form-container__row">
                         <input class="full-width" maxlength="60" type="text" name="postTitle" id="postTitle" placeholder="Title (max 60 tecken)">
@@ -89,11 +124,68 @@
                                   placeholder="Skriv en bra post"></textarea>
                     </div>
                     <div class="form-container__row">
-                        <input class="button-admin" type="submit" value="Logga in" name="addUserPost" id="add-user-post">
+                        <input class="button-admin" type="submit" value="Spara inlägget" name="addUserPost" id="add-user-post">
                     </div>
                 </div>
-            </form>
+                </form>
+            </div>
+            <div class="user-edit-posts admin-container">
+                <div class="user-profile-form">
+                    <form action="user_admin.php" method="post" class="" id="choose-form" >
+                        <h2>Redigera ett inlägg</h2>
+                        <p class="admin-info"><?=$adminInfoPostUpdate?></p>
+                        <p class="errorMessage"><?=$errorUpdate?></p>
+                        <div class="form-container__row choose-post__row">
+                            <label class="form-label" for="choose-post">Välj ett inlägg:</label>
+                            <select class="choose-post" name="choose-post" id="choose-post" form="choose-form">
+                                <option value='choosePost'>Välj inlägg</option>
+                                <?php
+                                    if (get_posts($userId)) {
+                                        $rows = get_posts($userId);
+                                        if(!empty($rows)){
+                                            foreach($rows as $thePosts) { 
+                                                $titleOption = $thePosts['title'];
+                                                $idOption = $thePosts['id'];
+                                                echo ("
+                                                    <option value='$idOption'>$titleOption</option>
+                                                ");
+                                            }
+                                        }
+                                    }
+                                ?>
+                            </select>
+                            <input class="button-admin" type="submit" value="Visa inlägget" name="selectPost" id="select-post">
+                        </div>
+                    </form>
+                    <form action="handle_admin_data.php" method="post" class="" id="user-edit-post" >
+                        <input type="hidden" id="postId" name="postId" value="<?=$selectedValue?>" />
+                        <div class="form-container-add-post">
+                            <div class="form-container__row">
+                                <input class="full-width" maxlength="60" type="text" name="postTitle" id="postTitle" value="<?=$title?>">
+                            </div>
+                            <div class="form-container__row">
+                            <textarea class="full-width" 
+                                id="content" 
+                                name="content" 
+                                rows="10"><?php echo $content; ?>
+                            </textarea>
+                            </div>
+                            <div class="form-container__row">
+                                <input class="button-admin" type="submit" value="Redigera inlägget" name="editUserPost" id="edit-user-post">
+                            </div>
+                        </div> 
+                    </form>
+                    <form action="handle_admin_data.php" method="post" class="" id="delet-form" >
+                        <div class="form-container__row">
+                            <input type="hidden" id="postIdDelete" name="postIdDelete" value="<?=$selectedValue?>" />
+                            <input class="button-admin" type="submit" value="Ta bort inlägget" name="deletePost" id="delete-post">
+                        </div>
+                    </form>
+                </div>
             </div>
 		</main>
 		<footer>
 			<?php require_once '../../layout/footer.php'; ?>
+		</footer>
+    </body>
+</html>

@@ -6,17 +6,21 @@
 		exit();
 	}
     require_once('../db.php');
-    
-    if (isset($_POST['updateProfile'])) { // update/add profile
-        
 
+    // update/add profile
+    
+    if (isset($_POST['updateProfile'])) { 
+        
         $user = get_user($_SESSION['userName']);
         $id = $user['0']['id'];
         $title = $_POST['profile'];
         $presentation = $_POST['presentation'];
-        // if (!empty($title or $_POST['presentation'])) {
-        //     header('Location: ./user_admin.php?adminInfo="Din profil är uppdaterad."');
-        // }
+        $update = true;
+
+        if (empty($title) && empty($presentation)) {
+            $update = false; 
+            header('Location: ./user_admin.php');
+        }
 
         if (empty($title)) {
             $title = $user['0']['title'];
@@ -25,44 +29,91 @@
         if (empty($presentation)) {
             $presentation = $user['0']['presentation'];
         }
-        
-        if (handle_user_profil($title, $presentation, $id)) {
-            header('Location: ./user_admin.php?adminInfo=Din profil är uppdaterad!');
 
-        } else {
-            header('Location: ./user_admin.php?error=Något har går fel! Försök ingen.');
+        if ($update) {
+            if (handle_user_profil($title, $presentation, $id)) {
+                header('Location: ./user_admin.php?adminInfo=Din profil är uppdaterad!');
+
+            } else {
+                header('Location: ./user_admin.php?error=Något har går fel! Försök ingen.');
+            }
         }
-
     }
 
+    // add a post
+
     if (isset($_POST['addUserPost'])) { //
-        //echo "addUserPost";
 
-        $user = get_user($_SESSION['userName']);
-        $userId = $user['0']['id'];
-        //echo "<br>";
-        $title = $_POST['postTitle'];
-        //echo "<br>";
-        $content = $_POST['content'];
-        //echo $sanitized_text = htmlspecialchars($_POST['content'], ENT_QUOTES, 'UTF-8');
+        if(empty(!$_POST['postTitle']) || empty(!$_POST['content'])) {
+            echo "Post tilllagd!"; 
+            echo "<br>";
+            print_r($_POST['postTitle']);
+            echo "<br>";
+            print_r($_POST['content']);
+        
 
-        add_post($title, $content, $userId);
+            $user = get_user($_SESSION['userName']);
+            $userId = $user['0']['id'];
+            //echo "<br>";
+            //$title = $_POST['postTitle'];
+            //echo "<br>";
+            //$content = $_POST['content'];
+            $title = htmlspecialchars($_POST['postTitle'], ENT_QUOTES, 'UTF-8');
+            $content = htmlspecialchars($_POST['content'], ENT_QUOTES, 'UTF-8');
 
-        if (add_post($title, $content, $userId)) {
-            header('Location: ./user_admin.php?adminInfoPost=Ditt blogginlägg skapat!');
+            //add_post($title, $content, $userId);
 
-        } else {
-            header('Location: ./user_admin.php?error=Något har går fel! Försök ingen.');
+            if (add_post($title, $content, $userId)) {
+                // $thePost = get_posts(39);
+                // echo "<pre>";
+                // // print_r($thePost);
+                // var_dump($thePost);
+                // echo "</pre>";
+                header('Location: ./user_admin.php?adminInfoPost=Ditt blogginlägg skapat!');
+                
+
+            } else {
+                header('Location: ./user_admin.php?error=Något har går fel! Försök ingen.');
+            }
+        }  else {
+            header('Location: ./user_admin.php?error=Både Titel och artikletext bör finnas.');
         }
     }    
-	include '../../includes/show_errors.php'; // inkludera vid utveckling för att få feedback på eventuella fel i koden
-	// include 'includes/handel_login.php'; // funktion för att hantera login
-	// include 'includes/handel_newUser.php'; // funktion för att hantera ny anvävdare
-	// require_once('../db.php');
 
-	// if (isset($_POST['login'])){ // Användare loggar in
-	// 	handelLogIn($_POST['logInNamn'], $_POST['logInPassword']);
-	// } elseif (isset($_POST['saveNewUser'])){ //Sparar nytt lösen till användare
-	// 	handelNewUser($_POST['saveNewUserNamn'], $_POST['saveNewUserPassword']);
-	//}
+    // edit post
+
+    if (isset($_POST['editUserPost'])) { //
+
+        if(!empty($_POST['postTitle']) && !empty($_POST['content'])) {
+
+            $id = (int)$_POST['postId'];
+            $title = htmlspecialchars($_POST['postTitle'], ENT_QUOTES, 'UTF-8');
+            $content = htmlspecialchars($_POST['content'], ENT_QUOTES, 'UTF-8');
+
+            if (update_post($title, $content, $id)) {
+                header('Location: ./user_admin.php?adminInfoPostUpdate=Ditt blogginlägg har uppdaterats!');
+            } else {
+                header('Location: ./user_admin.php?errorUpdate=Något har går fel! Försök ingen.');
+            }
+        }  else {
+            header('Location: ./user_admin.php?errorUpdate=Både Titel och artikletext bör finnas!');
+        }
+    } 
+
+    // delete post
+
+    if (isset($_POST['deletePost'])) { //
+        // echo "Post deleted!<br>"; 
+        // echo $id = (int)$_POST['postIdDelete'];
+            $id = (int)$_POST['postIdDelete'];
+
+            if (delete_post($id)) {
+                header('Location: ./user_admin.php?adminInfoPostUpdate=Ditt blogginlägg är borttaget!');
+            } else {
+                header('Location: ./user_admin.php?errorUpdate=Något har går fel! Försök ingen.');
+            }
+
+    } 
+
+	include '../../includes/show_errors.php'; 
 ?>

@@ -49,15 +49,56 @@ function add_post($title, $content, $userId)
     mysqli_stmt_close($statment);
     return $result;
 }
-
-function get_post($userid)
+function get_post($id)
 {
     global $connection;
-    $sql = 'SELECT * FROM post WHERE userid=?';
+    $sql = 'SELECT * FROM post WHERE id=?';
+    $statment = mysqli_prepare($connection, $sql);
+    mysqli_stmt_bind_param($statment, "i", $id);
+    mysqli_stmt_execute($statment);
+    $result = get_result($statment);
+    mysqli_stmt_close($statment);
+    return $result;
+}
+function get_posts($userid)
+{
+    global $connection;
+    $sql = 'SELECT * FROM post WHERE userid=? ORDER BY created DESC';
     $statment = mysqli_prepare($connection, $sql);
     mysqli_stmt_bind_param($statment, "i", $userid);
     mysqli_stmt_execute($statment);
     $result = get_result($statment);
+    mysqli_stmt_close($statment);
+    return $result;
+}
+function get_all_posts()
+{
+    global $connection;
+    //$sql = 'SELECT * FROM post ORDER BY created DESC';
+    $sql ='SELECT post.*, (SELECT user.username FROM user WHERE user.id = post.userId) AS username FROM post ORDER BY created DESC';
+    $statment = mysqli_prepare($connection, $sql);
+    mysqli_stmt_execute($statment);
+    $result = get_result($statment);
+    mysqli_stmt_close($statment);
+    return $result;
+}
+function update_post($title, $content, $id)
+{
+    global $connection;
+    $sql = 'UPDATE post SET title=?, content=? WHERE id=?';
+    $statment = mysqli_prepare($connection, $sql);
+    mysqli_stmt_bind_param($statment, "ssi", $title, $content, $id);
+    $result = mysqli_stmt_execute($statment);
+    mysqli_stmt_close($statment);
+    return $result;
+}
+function delete_post($id)
+{
+    global $connection;
+    $sql = 'DELETE FROM post WHERE id=?';
+    $statment = mysqli_prepare($connection, $sql);
+    mysqli_stmt_bind_param($statment, "i", $id);
+    $result = mysqli_stmt_execute($statment);
     mysqli_stmt_close($statment);
     return $result;
 }
@@ -137,17 +178,6 @@ function change_avatar($filename, $id)
     $sql = 'UPDATE user SET image=? WHERE id=?';
     $statment = mysqli_prepare($connection, $sql);
     mysqli_stmt_bind_param($statment, "si", $filename, $id);
-    $result = mysqli_stmt_execute($statment);
-    mysqli_stmt_close($statment);
-    return $result;
-}
-
-function delete_post($id)
-{
-    global $connection;
-    $sql = 'DELETE FROM post WHERE id=?';
-    $statment = mysqli_prepare($connection, $sql);
-    mysqli_stmt_bind_param($statment, "i", $id);
     $result = mysqli_stmt_execute($statment);
     mysqli_stmt_close($statment);
     return $result;

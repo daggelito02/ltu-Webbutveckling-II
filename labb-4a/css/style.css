@@ -33,6 +33,7 @@ aside {
 }
 main {
     flex: 1 1 50%;
+    padding-top: 0;
 }
 a {
     color: #444;
@@ -67,12 +68,13 @@ textarea {
 }
 .info-icon:hover + .presentation-info {
     display: block;
+    opacity: 1;
 }
 .presentation-info {
     display: none;
     position: absolute;
-    top: -125px;
     right: 0;
+    bottom: 2rem;
     left: 55px;
     z-index: 1;
     min-height: 100px;
@@ -82,6 +84,8 @@ textarea {
     border-radius: 3px;
     box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.55);
     padding: 1rem;
+    opacity: 0.4;
+    transition: 1s;
 }
 .presentation-info h2 {
     font-size: 1.2rem;
@@ -194,25 +198,25 @@ textarea {
     background: #f1f1f1;
     border-radius: 5px;
 }
-.menu-list {
+.striped-list {
     margin: 0;
     padding: 0;
     list-style-type: none;
     position: relative;
 }
-.menu-list-item {
+.striped-list-item {
     position: relative;
 
 }
-.menu-list-item {
+.striped-list-item {
     margin-top: .3rem;
     padding: .5rem .3rem 0;
 }
-.menu-list-item:nth-child(odd) {
-    background-color: #fff; /* Ljus grå färg för udda element */
+.striped-list-item:nth-child(odd) {
+    background-color: #fff; /* Ljusgrå färg för udda element */
 }
-.menu-list-item:nth-child(even) {
-background-color: #f1f1f1; /* Lite mörkare grå färg för jämna element */
+.striped-list-item:nth-child(even) {
+    background-color: #f1f1f1; /* Lite mörkare grå färg för jämna element */
 }
 .menu-link {
     display: inline-block;
@@ -270,6 +274,12 @@ background-color: #f1f1f1; /* Lite mörkare grå färg för jämna element */
     border: #333 1px solid;
     border-radius: 6px;
     padding: 1rem;
+    position: relative;
+}
+#delet-form {
+    position: absolute;
+    bottom: 16px;
+    right: 1rem;
 }
 .login-container h1 {
     width: 100%;
@@ -294,7 +304,7 @@ background-color: #f1f1f1; /* Lite mörkare grå färg för jämna element */
 input[type="text"], input[type="password"] {
     padding: .3rem;
     font-size: 1rem;
-    min-width: 180px;
+    min-width: 200px;
     box-sizing: border-box;
 }
 textarea {
@@ -310,9 +320,47 @@ aside .button-link {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 2rem;
+    gap: 1rem;
 }
 .user-admin-conatiner .admin-container {
     flex: 1;
     max-width: 40%;
+}
+.post-list h2 {
+    margin: 0 0 1rem;
+}
+.striped-list-item.posts {
+    margin: 0;
+    padding: 1rem;
+}
+.posts .row {
+    display: flex;
+    justify-content: space-between;
+}
+.posts h3 {
+    margin: 0;
+    padding: 0;
+}
+.posts time {
+    display: block;
+}
+.posts .blog-writer {
+    margin-bottom: 0;
+    text-align: right;
+    font-style: italic;
+}
+.choose-post__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.choose-post {
+    width: 100%;
+    max-width: 36%;
+    height: 2rem;
+    border-radius: 4px;
+    box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.55);
+    padding: 0 0.2rem;
+    font-size: 1rem;
+    font-family: Arial, Helvetica, sans-serif;
 }
