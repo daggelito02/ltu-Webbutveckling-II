@@ -6,9 +6,8 @@
 		exit();
 	}
     require_once('../db.php');
-
+    //echo "här";
     // update/add profile
-    
     if (isset($_POST['updateProfile'])) { 
         
         $user = get_user($_SESSION['userName']);
@@ -40,8 +39,15 @@
         }
     }
 
-    // add a post
+    // upload image
+    if (isset($_POST['reset-upload'])) {
+        echo "reset-upload";
+        header('Location: ./user_admin.php');
+    } else {
+        include 'includes/up_img.php';
+    }
 
+    // add a post
     if (isset($_POST['addUserPost'])) { //
 
         if(empty(!$_POST['postTitle']) || empty(!$_POST['content'])) {
@@ -64,24 +70,44 @@
             //add_post($title, $content, $userId);
 
             if (add_post($title, $content, $userId)) {
-                // $thePost = get_posts(39);
+                $thePost = get_posts($userId);
+                echo "Posts id: " . $thePost['0']['id'];
                 // echo "<pre>";
-                // // print_r($thePost);
-                // var_dump($thePost);
+                // print_r($thePost);
+                // //var_dump($thePost);
                 // echo "</pre>";
+
+                 //$filename = "test.jpg";
+                 
+                 //$postId = (int)$thePost['0']['id'];
+                //$description
+                if (isset($_POST['imageName'])) { 
+                    echo $filename = $_POST['imageName'];
+                    echo "<br>";
+                    $description = "";
+                    echo $postId = (int)$thePost['0']['id'];
+                    echo "<br>";
+                }
+
+                if (add_image($filename, $description, $postId)){
+                    // do nothing.
+                } else {
+                    header('Location: ./user_admin.php?error=Något har går fel! Försök ingen.');
+                }
+
                 header('Location: ./user_admin.php?adminInfoPost=Ditt blogginlägg skapat!');
                 
 
             } else {
                 header('Location: ./user_admin.php?error=Något har går fel! Försök ingen.');
             }
+
         }  else {
             header('Location: ./user_admin.php?error=Både Titel och artikletext bör finnas.');
         }
     }    
 
     // edit post
-
     if (isset($_POST['editUserPost'])) { //
 
         if(!empty($_POST['postTitle']) && !empty($_POST['content'])) {
@@ -101,7 +127,6 @@
     } 
 
     // delete post
-
     if (isset($_POST['deletePost'])) { //
         // echo "Post deleted!<br>"; 
         // echo $id = (int)$_POST['postIdDelete'];
@@ -114,6 +139,8 @@
             }
 
     } 
+
+
 
 	include '../../includes/show_errors.php'; 
 ?>

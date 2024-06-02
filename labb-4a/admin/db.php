@@ -37,7 +37,6 @@ function handle_user_profil($title, $presentation, $id)
     mysqli_stmt_close($statment);
     return $result;
 }
-
 function add_post($title, $content, $userId)
 {
     global $connection; // Så vi kommer åt den globala variabeln
@@ -45,6 +44,17 @@ function add_post($title, $content, $userId)
     $sql = 'INSERT INTO post (title, content, userId) VALUES (?,?,?)';
     $statment = mysqli_prepare($connection, $sql);
     mysqli_stmt_bind_param($statment, "ssi", $title, $content, $userId);
+    $result = mysqli_stmt_execute($statment);
+    mysqli_stmt_close($statment);
+    return $result;
+}
+function add_image($filename, $description, $postId)
+{
+    global $connection; // Så vi kommer åt den globala variabeln
+
+    $sql = 'INSERT INTO image (filename, description, postId) VALUES (?,?,?)';
+    $statment = mysqli_prepare($connection, $sql);
+    mysqli_stmt_bind_param($statment, "ssi", $filename, $description, $postId);
     $result = mysqli_stmt_execute($statment);
     mysqli_stmt_close($statment);
     return $result;
@@ -64,6 +74,16 @@ function get_posts($userid)
 {
     global $connection;
     $sql = 'SELECT * FROM post WHERE userid=? ORDER BY created DESC';
+    $sql ='SELECT 
+    post.id AS id,
+    post.title AS title, 
+    post.content AS content, 
+    post.created AS created, 
+    post.userId AS userId, 
+    image.filename AS filename
+    FROM post
+    LEFT JOIN image ON post.id = image.postId
+    WHERE post.userId=?';
     $statment = mysqli_prepare($connection, $sql);
     mysqli_stmt_bind_param($statment, "i", $userid);
     mysqli_stmt_execute($statment);
@@ -75,7 +95,17 @@ function get_all_posts()
 {
     global $connection;
     //$sql = 'SELECT * FROM post ORDER BY created DESC';
-    $sql ='SELECT post.*, (SELECT user.username FROM user WHERE user.id = post.userId) AS username FROM post ORDER BY created DESC';
+    //$sql ='SELECT post.*, (SELECT user.username FROM user WHERE user.id = post.userId) AS username FROM post ORDER BY created DESC';
+    $sql = 'SELECT 
+    post.title AS title, 
+    post.content AS content, 
+    post.created AS created, 
+    post.userId AS userId, 
+    user.username AS username,
+    image.filename as filename
+    FROM post 
+    LEFT JOIN image ON post.id = image.postId 
+    LEFT JOIN user ON post.userId = user.id';
     $statment = mysqli_prepare($connection, $sql);
     mysqli_stmt_execute($statment);
     $result = get_result($statment);
@@ -122,8 +152,6 @@ function get_result($statment)
     return $rows;
 }
 
-
-
 function get_users()
 {
     global $connection;
@@ -162,7 +190,7 @@ function get_password($id)
 function get_images($id)
 {
     global $connection;
-    $sql = 'SELECT image.filename, image.description FROM image JOIN post ON image.postId=post.id WHERE post.userId=?';
+    $sql = 'SELECT image.postId, image.filename, image.description FROM image JOIN post ON image.postId=post.id WHERE post.userId=?';
     $statment = mysqli_prepare($connection, $sql);
     mysqli_stmt_bind_param($statment, "i", $id);
     mysqli_stmt_execute($statment);
@@ -170,7 +198,6 @@ function get_images($id)
     mysqli_stmt_close($statment);
     return $result;
 }
-
 
 function change_avatar($filename, $id)
 {

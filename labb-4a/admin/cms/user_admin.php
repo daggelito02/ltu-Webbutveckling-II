@@ -12,29 +12,48 @@
     $title = "";
     $content = "";
     $Id = "";
+    $adminInfo = "";
+    $adminInfoPost = "";
+    $error = "";
+    $errorUpdate = "";
+    $adminInfoPostUpdate = "";
+    $imageName = "";
+    $showContent = "";
+    $hideContent = "";
+    $postTextTitel = "";
+    $postArticle = "";
 
     if (isset($_POST['selectPost'])) { 
-
+        echo "sug";
         if (isset($_POST['choose-post'])) { 
-            $selectedValue = (int)$_POST['choose-post'];
+            echo $selectedValue = (int)$_POST['choose-post'];
         }
         
         if (get_post($selectedValue)) {
-            // echo "<pre>";
-            // print_r(get_post($Id));
-            // // var_dump($thePost);
-            // echo "</pre>";
+            echo "<pre>";
+            print_r(get_post($Id));
+            // var_dump($thePost);
+            echo "</pre>";
             $thePost = get_post($selectedValue);
             $title = $thePost['0']['title'];
             $content = $thePost['0']['content'];
         }
     }
 
-    $adminInfo = "";
-    $adminInfoPost = "";
-    $error = "";
-    $errorUpdate = "";
-    $adminInfoPostUpdate = "";
+    if (isset($_POST['postTextTitel'])) {
+        echo $postTextTitel = $_POST['postTextTitel'];
+    }
+    if (isset($_POST['selectPost'])) {
+        echo $postArticle = $_POST['postArticle'];
+    }
+
+    if (isset($_GET['imageName'])) { 
+        $imageName = $_GET['imageName'];
+        $showContent = "show-content";
+        $hideContent = "hide-content";
+    } else {
+        $showContent = "hide-content";
+    }
 
     if (isset($_GET['adminInfo'])) { 
         $adminInfo = $_GET['adminInfo'];
@@ -87,6 +106,7 @@
             </div>
 		</header>
 		<main class=user-admin-conatiner>
+            <!-- User profile -->
             <div class="user-profile admin-container">
                 <form action="handle_admin_data.php" method="post" class="user-profile-form" id="user-profile" >
 					<h2>Hantera din profil</h2>
@@ -110,25 +130,41 @@
 					</div>
 				</form>
             </div>
+            <!-- Add posts -->
             <div class="user-posts admin-container">
-                <form action="handle_admin_data.php" method="post" class="user-profile-form" id="user-post" >
-                <h2>Skapa ett inlägg</h2>
-                <p class="admin-info"><?=$adminInfoPost?></p>
-                <p class="errorMessage"><?=$error?></p>
-                <div class="form-container-add-post">
-                    <div class="form-container__row">
-                        <input class="full-width" maxlength="60" type="text" name="postTitle" id="postTitle" placeholder="Title (max 60 tecken)">
-                    </div>
-                    <div class="form-container__row">
-                    <textarea class="full-width" id="content" name="content" rows="10" 
-                                  placeholder="Skriv en bra post"></textarea>
-                    </div>
-                    <div class="form-container__row">
-                        <input class="button-admin" type="submit" value="Spara inlägget" name="addUserPost" id="add-user-post">
-                    </div>
-                </div>
-                </form>
+                <div class="user-profile-form">         
+                    <form action="handle_admin_data.php" method="post" id="user-post" enctype="multipart/form-data">
+                    <input type="hidden" id="imageName" name="imageName" value="<?=$imageName?>" />
+                        <h2>Skapa ett inlägg</h2>
+                        <p class="admin-info"><?=$adminInfoPost?></p>
+                        <p class="errorMessage"><?=$error?></p>
+                        <p class="file-text-info">Obs! Ladda upp bild före du skiver inlägget.</p>
+                        <div class="form-container-add-post">
+                            <div class="form-container__row">
+                                <input class="full-width" maxlength="60" type="text" name="postTitle" id="postTitle" placeholder="Title (max 60 tecken)">
+                            </div>
+                            <div class="form-container__row">
+                                <textarea class="full-width" id="content" name="content" rows="10" 
+                                        placeholder="Skriv en bra post"></textarea>
+                            </div>
+                            <div class="form-container__row">
+                                <input class="button-admin" type="submit" value="Spara inlägget" name="addUserPost" id="add-user-post">
+                            </div>
+                        </div>
+                        <div class="upload-image-form">
+                            
+                            <div class="form-container__row choose-post__row">
+                                
+                                <input class="<?=$hideContent?>" type="file" name="uploadImage" id="uploadImage" accept="image/*">
+                                <p class="<?=$showContent?> file-text">Bilden "<?=$imageName?>"&nbsp;är nu redod!.</p>
+                                <input class="button-admin <?=$hideContent?>" type="submit" value="Ladda upp bild" name="upload-file">
+                                <input class="button-admin <?=$showContent?>" type="submit" value="Ångra" name="reset-upload">
+                            </div>
+                        </div>
+                    </form>
+                </div>    
             </div>
+            <!-- Edit posts -->
             <div class="user-edit-posts admin-container">
                 <div class="user-profile-form">
                     <form action="user_admin.php" method="post" class="" id="choose-form" >
