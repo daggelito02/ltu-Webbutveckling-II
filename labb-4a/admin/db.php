@@ -70,10 +70,10 @@ function get_post($id)
     mysqli_stmt_close($statment);
     return $result;
 }
-function get_posts($userid)
+function get_posts($userid) // Gets all posts from one user
 {
     global $connection;
-    $sql = 'SELECT * FROM post WHERE userid=? ORDER BY created DESC';
+    //$sql = 'SELECT * FROM post WHERE userid=? ORDER BY created DESC';
     $sql ='SELECT 
     post.id AS id,
     post.title AS title, 
@@ -83,7 +83,8 @@ function get_posts($userid)
     image.filename AS filename
     FROM post
     LEFT JOIN image ON post.id = image.postId
-    WHERE post.userId=?';
+    WHERE post.userId=?
+    ORDER BY created DESC';
     $statment = mysqli_prepare($connection, $sql);
     mysqli_stmt_bind_param($statment, "i", $userid);
     mysqli_stmt_execute($statment);
@@ -91,7 +92,7 @@ function get_posts($userid)
     mysqli_stmt_close($statment);
     return $result;
 }
-function get_all_posts()
+function get_all_posts() // Gets all posts from all user
 {
     global $connection;
     //$sql = 'SELECT * FROM post ORDER BY created DESC';
@@ -105,7 +106,8 @@ function get_all_posts()
     image.filename as filename
     FROM post 
     LEFT JOIN image ON post.id = image.postId 
-    LEFT JOIN user ON post.userId = user.id';
+    LEFT JOIN user ON post.userId = user.id 
+    ORDER BY created DESC' ;
     $statment = mysqli_prepare($connection, $sql);
     mysqli_stmt_execute($statment);
     $result = get_result($statment);

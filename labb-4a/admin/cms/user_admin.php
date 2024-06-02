@@ -24,28 +24,28 @@
     $postArticle = "";
 
     if (isset($_POST['selectPost'])) { 
-        echo "sug";
+        
         if (isset($_POST['choose-post'])) { 
-            echo $selectedValue = (int)$_POST['choose-post'];
+            $selectedValue = (int)$_POST['choose-post'];
         }
         
         if (get_post($selectedValue)) {
-            echo "<pre>";
-            print_r(get_post($Id));
-            // var_dump($thePost);
-            echo "</pre>";
+            // echo "<pre>";
+            // print_r(get_post($Id));
+            // // var_dump($thePost);
+            // echo "</pre>";
             $thePost = get_post($selectedValue);
             $title = $thePost['0']['title'];
             $content = $thePost['0']['content'];
         }
     }
 
-    if (isset($_POST['postTextTitel'])) {
-        echo $postTextTitel = $_POST['postTextTitel'];
-    }
-    if (isset($_POST['selectPost'])) {
-        echo $postArticle = $_POST['postArticle'];
-    }
+    // if (isset($_POST['postTextTitel'])) {
+    //     echo $postTextTitel = $_POST['postTextTitel'];
+    // }
+    // if (isset($_POST['selectPost'])) {
+    //     echo $postArticle = $_POST['postArticle'];
+    // }
 
     if (isset($_GET['imageName'])) { 
         $imageName = $_GET['imageName'];
@@ -138,7 +138,7 @@
                         <h2>Skapa ett inlägg</h2>
                         <p class="admin-info"><?=$adminInfoPost?></p>
                         <p class="errorMessage"><?=$error?></p>
-                        <p class="file-text-info">Obs! Ladda upp bild före du skiver inlägget.</p>
+                        <p class="file-text-info">Inlägg med bild? Börja med att ladda upp bilden först.</p>
                         <div class="form-container-add-post">
                             <div class="form-container__row">
                                 <input class="full-width" maxlength="60" type="text" name="postTitle" id="postTitle" placeholder="Title (max 60 tecken)">
