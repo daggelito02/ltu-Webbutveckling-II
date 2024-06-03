@@ -1,5 +1,6 @@
 <ul class="striped-list post-list">
 <?php
+    // Visa lista med inlägg för en användare
     if (isset($_GET['getUserPost'])) { 
         if (isset($_GET['userId'])) { 
             $userName = $_GET['getUserPost'];
@@ -16,15 +17,6 @@
                     $content = $thePosts['content'];
                     $created = $thePosts['created'];
                     $filename = $thePosts['filename'];
-                    //$thePostId = $thePosts['id'];
-                    //$userId = (int)$thePosts['userId'];
-    
-                    // $imgage = get_images($userId);
-                    // if(!empty($imgage['0']['postId'])){
-                    //     $postId = $imgage['0']['postId'];
-                    // } else {
-                    //     $postId = "";
-                    // }
     
                     echo ("
                         <li class='striped-list-item posts'>
@@ -40,8 +32,8 @@
                             $imgUrl =  "./uploads/" . $filename;
                             echo ("<div class='img-container'><img src='$imgUrl' alt='post picture' class='img-width'></div>");
                         }
-                        echo ("<div>");
-                        echo nl2br("<p>$content</p>"); // På en rad fär att bara få tu linebrakes i texten
+                        echo ("<div class='full-width'>");
+                        echo nl2br("<p>$content</p>"); // På en rad för få ut linebrakes i texten utan wrappade <br>
                         echo ("
                             <p class='blog-writer'>$userName</p>
                         </li>
@@ -60,15 +52,13 @@
                 );
             }
         }
-    } else {
+    } else { // Visa lista med inlägg för alla användare
         echo ("
             <h2>Alla bloggares inlägg</h2>
         ");
 
         $rows = get_all_posts();
-
         if(!empty($rows)){
-            
             foreach($rows as $thePosts) {
                 $title = $thePosts['title'];
                 $content = $thePosts['content'];
@@ -90,8 +80,8 @@
                             $imgUrl =  "./uploads/" . $filename;
                             echo ("<div class='img-container'><img src='$imgUrl' alt='post picture' class='img-width'></div>");
                         }
-                        echo ("<div>");
-                        echo nl2br("<p>$content</p>"); // På en rad fär att bara få tu linebrakes i texten
+                        echo ("<div class='full-width'>");
+                        echo nl2br("<p>$content</p>"); // På en rad för få ut linebrakes i texten utan wrappade <br>
                         echo ("
                             <p class='blog-writer'>$userName</p>
                         </li>

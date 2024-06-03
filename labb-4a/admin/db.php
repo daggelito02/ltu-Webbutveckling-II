@@ -62,7 +62,17 @@ function add_image($filename, $description, $postId)
 function get_post($id)
 {
     global $connection;
-    $sql = 'SELECT * FROM post WHERE id=?';
+    //$sql = 'SELECT * FROM post WHERE id=?';
+    $sql ='SELECT 
+    post.id AS id,
+    post.title AS title, 
+    post.content AS content, 
+    post.created AS created, 
+    post.userId AS userId, 
+    image.filename AS filename
+    FROM post
+    LEFT JOIN image ON post.id = image.postId
+    WHERE post.id=?';
     $statment = mysqli_prepare($connection, $sql);
     mysqli_stmt_bind_param($statment, "i", $id);
     mysqli_stmt_execute($statment);
@@ -130,6 +140,16 @@ function delete_post($id)
     $sql = 'DELETE FROM post WHERE id=?';
     $statment = mysqli_prepare($connection, $sql);
     mysqli_stmt_bind_param($statment, "i", $id);
+    $result = mysqli_stmt_execute($statment);
+    mysqli_stmt_close($statment);
+    return $result;
+}
+function delete_image_post($postId)
+{
+    global $connection;
+    $sql = 'DELETE FROM image WHERE postId=?';
+    $statment = mysqli_prepare($connection, $sql);
+    mysqli_stmt_bind_param($statment, "i", $postId);
     $result = mysqli_stmt_execute($statment);
     mysqli_stmt_close($statment);
     return $result;

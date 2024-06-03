@@ -18,34 +18,38 @@
     $errorUpdate = "";
     $adminInfoPostUpdate = "";
     $imageName = "";
+    $imageNameEdit = "";
     $showContent = "";
     $hideContent = "";
     $postTextTitel = "";
     $postArticle = "";
-
-    if (isset($_POST['selectPost'])) { 
-        
+    $ifImage = "false";
+    $selectedValue = "";
+    $open = "";
+    
+    
+    if (isset($_POST['selectPost']) or isset($_GET['imageNameEdit'])) { 
+        echo "inne: " . $_GET['imageNameEdit'];
         if (isset($_POST['choose-post'])) { 
-            $selectedValue = (int)$_POST['choose-post'];
+            echo $selectedValue = (int)$_POST['choose-post'];
+        }
+        if (isset($_GET['imageNameEdit'])) { 
+            echo $selectedValue = (int)$_GET['imageNameEdit'];
+        }
+        if (isset($_GET['open'])){
+            $open = $_GET['open'];
         }
         
         if (get_post($selectedValue)) {
-            // echo "<pre>";
-            // print_r(get_post($Id));
-            // // var_dump($thePost);
-            // echo "</pre>";
             $thePost = get_post($selectedValue);
             $title = $thePost['0']['title'];
             $content = $thePost['0']['content'];
+            $filename = $thePost['0']['filename'];
+            if (isset($filename)) {
+                $ifImage = "true";
+            }
         }
     }
-
-    // if (isset($_POST['postTextTitel'])) {
-    //     echo $postTextTitel = $_POST['postTextTitel'];
-    // }
-    // if (isset($_POST['selectPost'])) {
-    //     echo $postArticle = $_POST['postArticle'];
-    // }
 
     if (isset($_GET['imageName'])) { 
         $imageName = $_GET['imageName'];
@@ -53,6 +57,14 @@
         $hideContent = "hide-content";
     } else {
         $showContent = "hide-content";
+    }
+
+    if (isset($_GET['imageNameEdit'])) { 
+        $imageNameEdit = $_GET['theImageNameEdit'];
+        $showContentEdit = "show-content";
+        $hideContentEdit = "hide-content";
+    } else {
+        $showContentEdit = "hide-content";
     }
 
     if (isset($_GET['adminInfo'])) { 
@@ -64,7 +76,7 @@
     }
 
     if (isset($_GET['adminInfoPostUpdate'])) { 
-       echo $adminInfoPostUpdate = $_GET['adminInfoPostUpdate'];
+        $adminInfoPostUpdate = $_GET['adminInfoPostUpdate'];
     }
 
     if (isset($_GET['error'])) { 
@@ -121,8 +133,8 @@
 						</div>
                         <div class="form-container__row">
                             <input type="hidden" name="MAX_FILE_SIZE" value="1000000" />
-                            <label class="button-upload" for="upload">Ladda upp en avatar-bild</label>
-                            <input disabled id="upload" type="file" name="file_upload" value="test" accept="image/*" hidden/>
+                            <!-- <label class="button-upload" for="upload">Ladda upp en avatar-bild</label>
+                            <input disabled id="upload" type="file" name="file_upload" value="test" accept="image/*" hidden/> -->
                         </div>
 						<div class="form-container__row">
 							<input class="button-admin" type="submit" value="Spara profil" name="updateProfile" id="update-profile">
@@ -138,7 +150,7 @@
                         <h2>Skapa ett inlägg</h2>
                         <p class="admin-info"><?=$adminInfoPost?></p>
                         <p class="errorMessage"><?=$error?></p>
-                        <p class="file-text-info">Inlägg med bild? Börja med att ladda upp bilden först.</p>
+                        <p class="file-text-info">Inlägg med bild? Förbered med att ladda upp bilden.</p>
                         <div class="form-container-add-post">
                             <div class="form-container__row">
                                 <input class="full-width" maxlength="60" type="text" name="postTitle" id="postTitle" placeholder="Title (max 60 tecken)">
@@ -153,7 +165,7 @@
                         </div>
                         <div class="upload-image-form">
                             
-                            <div class="form-container__row choose-post__row">
+                            <div class="form-container__row buttons-row">
                                 
                                 <input class="<?=$hideContent?>" type="file" name="uploadImage" id="uploadImage" accept="image/*">
                                 <p class="<?=$showContent?> file-text">Bilden "<?=$imageName?>"&nbsp;är nu redod!.</p>
@@ -167,11 +179,12 @@
             <!-- Edit posts -->
             <div class="user-edit-posts admin-container">
                 <div class="user-profile-form">
+                    <!-- Select för att hämta ett inlägg -->
                     <form action="user_admin.php" method="post" class="" id="choose-form" >
                         <h2>Redigera ett inlägg</h2>
                         <p class="admin-info"><?=$adminInfoPostUpdate?></p>
                         <p class="errorMessage"><?=$errorUpdate?></p>
-                        <div class="form-container__row choose-post__row">
+                        <div class="form-container__row buttons-row">
                             <label class="form-label" for="choose-post">Välj ett inlägg:</label>
                             <select class="choose-post" name="choose-post" id="choose-post" form="choose-form">
                                 <option value='choosePost'>Välj inlägg</option>
@@ -193,12 +206,56 @@
                             <input class="button-admin" type="submit" value="Visa inlägget" name="selectPost" id="select-post">
                         </div>
                     </form>
-                    <form action="handle_admin_data.php" method="post" class="" id="user-edit-post" >
-                        <input type="hidden" id="postId" name="postId" value="<?=$selectedValue?>" />
+                    <!-- Redigera det valda inlägget -->
+                    <form action="handle_admin_data.php" method="post" class="" id="user-edit-post" enctype="multipart/form-data">
+                        <input type="hidden" id="postIdEdit" name="postIdEdit" value="<?=$selectedValue?>" />
+                        <input type="hidden" id="imageNameEdit" name="imageNameEdit" value="<?=$imageNameEdit?>" />
+                        <input type="hidden" id="changeImage" name="changeImage" value="true" />
                         <div class="form-container-add-post">
                             <div class="form-container__row">
                                 <input class="full-width" maxlength="60" type="text" name="postTitle" id="postTitle" value="<?=$title?>">
                             </div>
+                            <?php
+                                if (isset($filename)) { 
+                                    $imgUrl =  "../../uploads/" . $filename; 
+                            ?>
+                                <input type="checkbox" id="open-close" name="toggle" <?=$open?> >
+                                <div class="label-toggle">
+                                    <div id="open">
+                                        <div class="button-link">
+                                            <label for="open-close">Redigera bilden</label>
+                                            <span class="material-symbols-outlined double-arrow">
+                                                double_arrow
+                                            </span>
+                                        </div>
+                                        <span><?=$filename?></span>
+                                    </div>
+                                    <div id="close">
+                                        <div class="button-link">
+                                            <label for="open-close">Stäng bild dialog</label>
+                                            <span class="material-symbols-outlined double-arrow">
+                                                double_arrow
+                                            </span>
+                                        </div>
+                                        <span><?=$filename?></span>
+                                    </div>
+                                </div>
+                                <div class="img-in-post-container">
+                                    <div class="img-in-post">
+                                        <img src="<?=$imgUrl?>" alt="post picture" class="img-width">
+                                    </div>
+                                    <!--  -->
+                                    <div class="form-container__row buttons-row">
+                                        <input class="<?=$hideContentEdit?>" type="file" name="uploadImage" id="uploadImage" accept="image/*">
+                                        <p class="<?=$showContentEdit?> file-text">Bilden "<?=$imageNameEdit?>"&nbsp;kan nu bytas!.</p>
+                                        <input class="button-admin <?=$hideContentEdit?>" type="submit" value="Ladda upp ny bild" name="upload-file">
+                                        <input class="button-admin <?=$showContentEdit?>" type="submit" value="Ångra" name="reset-upload">
+                                    </div>
+                                </div>
+                            <?php
+                                }
+                            ?>
+
                             <div class="form-container__row">
                             <textarea class="full-width" 
                                 id="content" 
@@ -206,16 +263,13 @@
                                 rows="10"><?php echo $content; ?>
                             </textarea>
                             </div>
-                            <div class="form-container__row">
-                                <input class="button-admin" type="submit" value="Redigera inlägget" name="editUserPost" id="edit-user-post">
+                            <div class="form-container__row buttons-row">
+                                <input class="button-admin" type="submit" value="Uppdatera" name="editUserPost" id="edit-user-post">
+                                <input type="hidden" id="if-image" name="ifImage" value="<?=$ifImage?>" />
+                                <input type="hidden" id="post-id-delete" name="postIdDelete" value="<?=$selectedValue?>" />
+                                <input class="button-admin" id="delete-post" type="submit" value="Ta bort inlägget" name="deletePost">
                             </div>
                         </div> 
-                    </form>
-                    <form action="handle_admin_data.php" method="post" class="" id="delet-form" >
-                        <div class="form-container__row">
-                            <input type="hidden" id="postIdDelete" name="postIdDelete" value="<?=$selectedValue?>" />
-                            <input class="button-admin" type="submit" value="Ta bort inlägget" name="deletePost" id="delete-post">
-                        </div>
                     </form>
                 </div>
             </div>

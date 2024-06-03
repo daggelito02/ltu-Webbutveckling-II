@@ -89,7 +89,7 @@
 
     $title = 'Bloggare';
     $presentation = 'Jag är en student';
-    $id = (int)32;
+    $id = (int)83;
     var_dump($id);
 
     //handle_user_profil($title, $presentation, $id);
@@ -127,40 +127,46 @@
 
     // var_dump(get_images($id));
 
-    $rows = get_all_posts();
-    echo "<br>Test<br><br>";
-    $i = "0";
-    $x = 0;
-    foreach($rows as $thePosts) {
+    // $rows = get_all_posts();
+    // echo "<br>Test<br><br>";
+    // $i = "0";
+    // $x = 0;
+    // foreach($rows as $thePosts) {
         
-        // echo "userId: ". $userId = (int)$thePosts['userId'];
-        // echo "<br>"; 
+    //     // echo "userId: ". $userId = (int)$thePosts['userId'];
+    //     // echo "<br>"; 
             
-        // echo "<pre>";
-        // print_r(get_images($userId));
-        // echo "</pre>";
-        // echo "<br>";
-        // echo "<br>";
-        // echo "thePostsId: " . $thePostsId = (int)$thePosts['id'];
-        // echo "<br>"; 
-        // $imgage = get_images($userId);
-        // //echo "Bildnamn: " . $imgage[$i]['filename'];
-        // if(!empty($imgage[$x]['postId'])){
-        //     echo "postId: " . $postId = $imgage[$x]['postId'];
-        //     echo "<br>"; 
-        //     echo $x;
-        //     echo "<br>";
-        // }
-        // if($thePostsId  == $postId) {
-        //     echo "Bildnamn: " . $imgage[$x]['filename'];
-        //     echo "<br>"; 
-        // }
-        // //echo $postId = $imgage['0']['postId'];
-        // echo "Integer: " .$x++;
-        // echo "<br>";
-        // //echo "Nummer: " . $i+="1";
-        // echo "<br>";
-        // echo "<br>";
-        // echo "<br>";
+    //     // echo "<pre>";
+    //     // print_r(get_images($userId));
+    //     // echo "</pre>";
+    //     // echo "<br>";
+    //     // echo "<br>";
+    //     // echo "thePostsId: " . $thePostsId = (int)$thePosts['id'];
+    //     // echo "<br>"; 
+    //     // $imgage = get_images($userId);
+    //     // //echo "Bildnamn: " . $imgage[$i]['filename'];
+    //     // if(!empty($imgage[$x]['postId'])){
+    //     //     echo "postId: " . $postId = $imgage[$x]['postId'];
+    //     //     echo "<br>"; 
+    //     //     echo $x;
+    //     //     echo "<br>";
+    //     // }
+    //     // if($thePostsId  == $postId) {
+    //     //     echo "Bildnamn: " . $imgage[$x]['filename'];
+    //     //     echo "<br>"; 
+    //     // }
+    //     // //echo $postId = $imgage['0']['postId'];
+    //     // echo "Integer: " .$x++;
+    //     // echo "<br>";
+    //     // //echo "Nummer: " . $i+="1";
+    //     // echo "<br>";
+    //     // echo "<br>";
+    //     // echo "<br>";
+    // }
+    if (delete_image_post($id)) {
+        echo "<br>Borta";
+    }  else {
+        echo "<br>Fel";
     }
+    
 ?>

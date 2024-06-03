@@ -6,7 +6,7 @@
 		exit();
 	}
     require_once('../db.php');
-    //echo "här";
+    include '../../includes/show_errors.php';
     // update/add profile
     if (isset($_POST['updateProfile'])) { 
         
@@ -32,7 +32,7 @@
         if ($update) {
             if (handle_user_profil($title, $presentation, $id)) {
                 header('Location: ./user_admin.php?adminInfo=Din profil är uppdaterad!');
-
+                echo "här";
             } else {
                 header('Location: ./user_admin.php?error=Något har går fel! Försök ingen.');
             }
@@ -41,7 +41,7 @@
 
     // upload image
     if (isset($_POST['reset-upload'])) {
-        echo "reset-upload";
+        // echo "reset-upload";
         header('Location: ./user_admin.php');
     } else {
         include 'includes/up_img.php';
@@ -57,7 +57,6 @@
             echo "<br>";
             print_r($_POST['content']);
         
-
             $user = get_user($_SESSION['userName']);
             $userId = $user['0']['id'];
             //echo "<br>";
@@ -87,17 +86,16 @@
                     $description = "";
                     echo $postId = (int)$thePost['0']['id'];
                     echo "<br>";
-                }
 
-                if (add_image($filename, $description, $postId)){
-                    // do nothing.
-                } else {
-                    header('Location: ./user_admin.php?error=Något har går fel! Försök ingen.');
+                    if (add_image($filename, $description, $postId)){
+                        // do nothing.
+                    } else {
+                        header('Location: ./user_admin.php?error=Något har går fel! Försök ingen.');
+                    }
                 }
 
                 header('Location: ./user_admin.php?adminInfoPost=Ditt blogginlägg skapat!');
                 
-
             } else {
                 header('Location: ./user_admin.php?error=Något har går fel! Försök ingen.');
             }
@@ -125,22 +123,41 @@
             header('Location: ./user_admin.php?errorUpdate=Både Titel och artikletext bör finnas!');
         }
     } 
+    // delet post
+    if (isset($_POST['deletePost'])) { 
+        if (!empty($_POST['postIdDelete'])) {
+            echo "In tec deleted!<br>"; 
+            echo $ifImage = $_POST['ifImage'];
+            echo $id = (int)$_POST['postIdDelete'];
+            echo $postId = (int)$_POST['postIdDelete'];
 
-    // delete post
-    if (isset($_POST['deletePost'])) { //
-        // echo "Post deleted!<br>"; 
-        // echo $id = (int)$_POST['postIdDelete'];
-            $id = (int)$_POST['postIdDelete'];
-
-            if (delete_post($id)) {
-                header('Location: ./user_admin.php?adminInfoPostUpdate=Ditt blogginlägg är borttaget!');
-            } else {
-                header('Location: ./user_admin.php?errorUpdate=Något har går fel! Försök ingen.');
+            if ($ifImage == "true") {
+                echo "ifImage: " .$ifImage;
+                if (delete_image_post($postId)) { 
+                    if (delete_post($id)) {
+                        header('Location: ./user_admin.php?adminInfoPostUpdate=Ditt blogginlägg är borttaget!');
+                        echo "<br>Post deleted!<br>";
+                    } else {
+                        header('Location: ./user_admin.php?errorUpdate=Något har går fel! Försök ingen.');
+                        echo "<br>Post not deleted!<br>";
+                    }
+                    echo "<br>Image deleted!<br>";
+                } else {
+                    echo "<br>Image not deleted!<br>";
+                    header('Location: ./user_admin.php?errorUpdate=Något har går fel! Försök ingen.');
+                }
+            } else if ($ifImage == "false") {
+                echo "<br>ifImage: " .$ifImage;
+                if (delete_post($id)) {
+                    header('Location: ./user_admin.php?adminInfoPostUpdate=Ditt blogginlägg är borttaget!');
+                } else {
+                    header('Location: ./user_admin.php?errorUpdate=Något har går fel! Försök ingen.');
+                }
             }
-
+        } else {
+            header('Location: ./user_admin.php?errorUpdate=Välj ett inlägg!');
+        }
     } 
 
-
-
-	include '../../includes/show_errors.php'; 
+    // 
 ?>

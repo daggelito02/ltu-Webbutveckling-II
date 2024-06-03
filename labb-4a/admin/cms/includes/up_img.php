@@ -1,6 +1,12 @@
 <?php
 if (isset($_POST["upload-file"])) {
-    if (isset($_FILES["uploadImage"])) {
+    echo "här";
+    //var_dump($_FILES["uploadImage"]);
+    echo "<pre>";
+        print_r($_FILES["uploadImage"]['name']);
+    echo "</pre>";
+
+    if ($_FILES["uploadImage"]['name']) {
         $target_dir = "../../uploads/"; // Mapp där bild sparas
         $target_file = $target_dir . basename($_FILES["uploadImage"]["name"]);
         $uploadOk = true;
@@ -42,7 +48,14 @@ if (isset($_POST["upload-file"])) {
             if (move_uploaded_file($_FILES["uploadImage"]["tmp_name"], $target_file)) {
                 echo "Bilden ". htmlspecialchars(basename($_FILES["uploadImage"]["name"])) . " har laddats upp.";
                 //htmlspecialchars(basename($_FILES["uploadImage"]["name"]));
-                header('Location: ./user_admin.php?imageName=' . htmlspecialchars(basename($_FILES["uploadImage"]["name"])));
+                if(isset($_POST['postIdEdit'])){
+                    $postIdNumber = $_POST['postIdEdit'];
+                }
+                if(isset($_POST['imageNameEdit'])){
+                    header('Location: ./user_admin.php?imageNameEdit=' . $postIdNumber . '&open=checked&theImageNameEdit='. htmlspecialchars(basename($_FILES["uploadImage"]["name"])));
+                } else {
+                    header('Location: ./user_admin.php?imageName=' . htmlspecialchars(basename($_FILES["uploadImage"]["name"])));
+                }
             } else {
                 echo "Ett fel inträffade vid uppladdningen av Bilden.";
             }
@@ -52,21 +65,3 @@ if (isset($_POST["upload-file"])) {
     }
 }
 ?>
-
-<!-- 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ladda upp en bildfil</title>
-</head>
-<body>
-    <h2>Ladda upp en bild</h2>
-    <form action="up_img.php" method="post" enctype="multipart/form-data">
-        <label for="uploadImage">Välj en bild att ladda upp:</label>
-        <input type="file" name="uploadImage" id="uploadImage" accept="image/*">
-        <input type="submit" value="Ladda upp bild" name="submit">
-    </form>
-</body>
-</html> -->
