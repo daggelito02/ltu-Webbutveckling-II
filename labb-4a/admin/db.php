@@ -154,6 +154,16 @@ function delete_image_post($postId)
     mysqli_stmt_close($statment);
     return $result;
 }
+function update_image_post($filename, $postId)
+{
+    global $connection;
+    $sql = 'UPDATE image SET filename=? WHERE postId=?';
+    $statment = mysqli_prepare($connection, $sql);
+    mysqli_stmt_bind_param($statment, "si", $filename, $postId);
+    $result = mysqli_stmt_execute($statment);
+    mysqli_stmt_close($statment);
+    return $result;
+}
 
 /**
  * Tar in ett statement som har körts, hämtar resultatet och lägger

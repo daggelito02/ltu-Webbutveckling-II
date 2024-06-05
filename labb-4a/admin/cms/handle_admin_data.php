@@ -41,9 +41,14 @@
 
     // upload image
     if (isset($_POST['reset-upload'])) {
-        // echo "reset-upload";
         header('Location: ./user_admin.php');
-    } else {
+    } else if (isset($_POST['undo-upload'])) {
+        if(isset($_POST['postIdEdit'])){
+            $postIdNumber = $_POST['postIdEdit'];
+        }
+        header('Location: ./user_admin.php?imageNameEdit=' . $postIdNumber . '&open=checked&undo=true&theImageNameEdit='. htmlspecialchars(basename($_FILES["uploadImage"]["name"])));
+    }
+    else {
         include 'includes/up_img.php';
     }
 
@@ -59,27 +64,12 @@
         
             $user = get_user($_SESSION['userName']);
             $userId = $user['0']['id'];
-            //echo "<br>";
-            //$title = $_POST['postTitle'];
-            //echo "<br>";
-            //$content = $_POST['content'];
             $title = htmlspecialchars($_POST['postTitle'], ENT_QUOTES, 'UTF-8');
             $content = htmlspecialchars($_POST['content'], ENT_QUOTES, 'UTF-8');
-
-            //add_post($title, $content, $userId);
 
             if (add_post($title, $content, $userId)) {
                 $thePost = get_posts($userId);
                 echo "Posts id: " . $thePost['0']['id'];
-                // echo "<pre>";
-                // print_r($thePost);
-                // //var_dump($thePost);
-                // echo "</pre>";
-
-                 //$filename = "test.jpg";
-                 
-                 //$postId = (int)$thePost['0']['id'];
-                //$description
                 if (isset($_POST['imageName'])) { 
                     echo $filename = $_POST['imageName'];
                     echo "<br>";
@@ -105,17 +95,27 @@
         }
     }    
 
-    // edit post
+    // Edit and update post
     if (isset($_POST['editUserPost'])) { //
 
         if(!empty($_POST['postTitle']) && !empty($_POST['content'])) {
-
-            $id = (int)$_POST['postId'];
+            echo $id = (int)$_POST['postIdEdit'];
+            echo $postId = $id; 
             $title = htmlspecialchars($_POST['postTitle'], ENT_QUOTES, 'UTF-8');
             $content = htmlspecialchars($_POST['content'], ENT_QUOTES, 'UTF-8');
 
+            if(!empty($_POST['imageNameEdit'])) {
+                echo 'imageNameEdit: ' . ($_POST['imageNameEdit']);
+
+                $filename =$_POST['imageNameEdit'];
+                if(update_image_post($filename, $postId)) {
+                    // do nothing
+                } else {
+                    header('Location: ./user_admin.php?errorUpdate=Något har går fel! Försök ingen.');
+                }
+            } 
             if (update_post($title, $content, $id)) {
-                header('Location: ./user_admin.php?adminInfoPostUpdate=Ditt blogginlägg har uppdaterats!');
+                header('Location: ./user_admin.php?imageNameEdit=' . $id . '&adminInfoPostUpdate=Ditt blogginlägg har uppdaterats!&open=checked&undo=true&theImageNameEdit='. htmlspecialchars(basename($_FILES["uploadImage"]["name"])));
             } else {
                 header('Location: ./user_admin.php?errorUpdate=Något har går fel! Försök ingen.');
             }

@@ -52,7 +52,7 @@ if (isset($_POST["upload-file"])) {
                     $postIdNumber = $_POST['postIdEdit'];
                 }
                 if(isset($_POST['imageNameEdit'])){
-                    header('Location: ./user_admin.php?imageNameEdit=' . $postIdNumber . '&open=checked&theImageNameEdit='. htmlspecialchars(basename($_FILES["uploadImage"]["name"])));
+                    header('Location: ./user_admin.php?imageNameEdit=' . $postIdNumber . '&open=checked&undo=false&theImageNameEdit='. htmlspecialchars(basename($_FILES["uploadImage"]["name"])));
                 } else {
                     header('Location: ./user_admin.php?imageName=' . htmlspecialchars(basename($_FILES["uploadImage"]["name"])));
                 }

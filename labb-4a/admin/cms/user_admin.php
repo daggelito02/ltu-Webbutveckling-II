@@ -21,11 +21,13 @@
     $imageNameEdit = "";
     $showContent = "";
     $hideContent = "";
+    $hideContentEdit = "";
     $postTextTitel = "";
     $postArticle = "";
     $ifImage = "false";
     $selectedValue = "";
     $open = "";
+    $imagePath = "../../uploads/";
     
     
     if (isset($_POST['selectPost']) or isset($_GET['imageNameEdit'])) { 
@@ -35,6 +37,7 @@
         }
         if (isset($_GET['imageNameEdit'])) { 
             echo $selectedValue = (int)$_GET['imageNameEdit'];
+            $imageNameEdit = $_GET['theImageNameEdit'];
         }
         if (isset($_GET['open'])){
             $open = $_GET['open'];
@@ -58,11 +61,16 @@
     } else {
         $showContent = "hide-content";
     }
-
-    if (isset($_GET['imageNameEdit'])) { 
-        $imageNameEdit = $_GET['theImageNameEdit'];
-        $showContentEdit = "show-content";
-        $hideContentEdit = "hide-content";
+    if (isset($_GET['undo'])) {
+        if (($_GET['undo']) == "false") {
+            $showContentEdit = "show-content";
+            $hideContentEdit = "hide-content";
+            echo ('undo = false');
+        } else if (($_GET['undo']) == "true") {
+            $showContentEdit = "hide-content";
+            $hideContentEdit = "show-content";
+            echo ('undo = true');
+        } 
     } else {
         $showContentEdit = "hide-content";
     }
@@ -217,45 +225,51 @@
                             </div>
                             <?php
                                 if (isset($filename)) { 
-                                    $imgUrl =  "../../uploads/" . $filename; 
+                                    $imgUrl =  $imagePath . $filename; 
                             ?>
                                 <input type="checkbox" id="open-close" name="toggle" <?=$open?> >
                                 <div class="label-toggle">
                                     <div id="open">
                                         <div class="button-link">
-                                            <label for="open-close">Redigera bilden</label>
+                                            <label for="open-close">Visa och byt/ta bort bild</label>
                                             <span class="material-symbols-outlined double-arrow">
                                                 double_arrow
                                             </span>
                                         </div>
-                                        <span><?=$filename?></span>
                                     </div>
                                     <div id="close">
                                         <div class="button-link">
-                                            <label for="open-close">Stäng bild dialog</label>
+                                            <label for="open-close">Stäng bilddialog</label>
                                             <span class="material-symbols-outlined double-arrow">
                                                 double_arrow
                                             </span>
                                         </div>
-                                        <span><?=$filename?></span>
                                     </div>
                                 </div>
-                                <div class="img-in-post-container">
-                                    <div class="img-in-post">
-                                        <img src="<?=$imgUrl?>" alt="post picture" class="img-width">
+                                <div class="img-in-post-container-wrapper">
+                                    <div class="img-in-post-container">
+                                        <div class="img-in-post">
+                                            <img src="<?=$imgUrl?>" alt="post picture" class="img-width">
+                                            <span class="edit-img-filename"><?=$filename?></span>
+                                        </div>
+                                        <?php if ($imageNameEdit) {?>
+                                            <div class="img-in-post">
+                                                <img src="<?=$imagePath . $imageNameEdit?>" alt="post picture" class="img-width">
+                                                <span class="edit-img-filename"><?=$imageNameEdit?></span>
+                                            </div>
+                                        <?php } ?>
                                     </div>
-                                    <!--  -->
+                                    <!-- Ladda upp ny bild -->
                                     <div class="form-container__row buttons-row">
                                         <input class="<?=$hideContentEdit?>" type="file" name="uploadImage" id="uploadImage" accept="image/*">
-                                        <p class="<?=$showContentEdit?> file-text">Bilden "<?=$imageNameEdit?>"&nbsp;kan nu bytas!.</p>
+                                        <p class="<?=$showContentEdit?> file-text">Uppdatera eller ångra valet.</p>
                                         <input class="button-admin <?=$hideContentEdit?>" type="submit" value="Ladda upp ny bild" name="upload-file">
-                                        <input class="button-admin <?=$showContentEdit?>" type="submit" value="Ångra" name="reset-upload">
+                                        <input class="button-admin <?=$showContentEdit?>" type="submit" value="Ångra" name="undo-upload">
                                     </div>
                                 </div>
                             <?php
                                 }
                             ?>
-
                             <div class="form-container__row">
                             <textarea class="full-width" 
                                 id="content" 
@@ -263,6 +277,7 @@
                                 rows="10"><?php echo $content; ?>
                             </textarea>
                             </div>
+                            <!-- Uppdatera ta bort -->
                             <div class="form-container__row buttons-row">
                                 <input class="button-admin" type="submit" value="Uppdatera" name="editUserPost" id="edit-user-post">
                                 <input type="hidden" id="if-image" name="ifImage" value="<?=$ifImage?>" />
