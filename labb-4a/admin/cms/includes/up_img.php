@@ -62,7 +62,7 @@ if (isset($_POST["upload-file"])) {
                 if(isset($_POST['postIdEdit'])){ // Hämtar rätt ID till inlägg 
                     $postIdNumber = $_POST['postIdEdit'];
                 }
-                // Retunerar bild namn beroende på om 'Redigera' eller 'Lägg till'
+                // Retunerar bildnamn beroende på om 'Redigera' eller 'Lägg till'
                 if(isset($_POST['imageNameEdit'])){ 
                     header('Location: ./user_admin.php?imageNameEdit=' . $postIdNumber . '&open=checked&undo=false&theImageNameEdit='. htmlspecialchars(basename($_FILES["uploadImage"]["name"])));
                 } else {

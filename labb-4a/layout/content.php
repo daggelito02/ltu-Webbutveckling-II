@@ -1,4 +1,3 @@
-<ul class="striped-list post-list">
 <?php
     // Visa lista med inlägg för en användare
     if (isset($_GET['getUserPost'])) { 
@@ -7,7 +6,8 @@
             $userId = (int)$_GET['userId'];
             $bloggare = $userName . "s";
             echo ("
-                <h2>Bloggare $bloggare inlägg</h2>
+                <h2 class='heading-post-list'>Bloggare $bloggare inlägg</h2>
+                <ul class='striped-list post-list'>
             ");
 
             $rows = get_posts($userId);
@@ -54,7 +54,8 @@
         }
     } else { // Visa lista med inlägg för alla användare
         echo ("
-            <h2>Alla bloggares inlägg</h2>
+            <h2 class='heading-post-list'>Alla bloggares inlägg</h2>
+            <ul class='striped-list post-list'>
         ");
 
         $rows = get_all_posts();

@@ -1,30 +1,15 @@
 <?php
-	// echo "Method:" .$_SERVER['REQUEST_METHOD']."<br>";
-	//print_r($_POST['login']); 
-	
-	// if($_SERVER['REQUEST_METHOD'] == 'POST') {
-	// 	echo "Post<br>";
-	// 	if(isset($_POST['login'])) {
-	// 		echo 'yes: ', $_POST['login'];
-	// 	} else {
-	// 		echo 'no';
-	// 	}
-	// }
 	session_start();
 	if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] != true){ // För att sätta ett värde till session-index(logedIn) om ej satt
 		$_SESSION['logedIn'] = false;
 	} elseif (isset($_SESSION['logedIn']) || $_SESSION['logedIn'] == true) { // Kollar om användaren är inlogged eller ej
 		if (isset($_POST['logout'])){  // När användare är utloggad
-			//$userName = 'Användaren "' . $_POST['userName'] . '" är nu utloggad!';
-			//$_SESSION['viewInfo'] = true;
 			session_destroy(); 
 			header("Location: ../../index.php");
 			exit();
-			//echo "När användare är utloggad" .$_SESSION['logedIn'];
 		} else  { // Inloggad användare
 			header("Location: ../../index.php");
 			exit();
-			//echo "Inloggad användare: " . $_SESSION['logedIn'];
 		}
 	} 
 	// include 'includes/show_errors.php'; // inkludera vid utveckling för att få feedback på eventuella fel i koden
@@ -71,7 +56,8 @@
 			<div class="login-container">
 				
 				<form action="login.php" method="post" class="login-form" id="userLogin" >
-					<span id="loginMessage" class="errorMessage"></span>
+					<span id="loginMessageError" class="errorMessage"></span>
+					<span id="loginMessage" class="infoMessage"></span>
 					<p>Logga in</p>
 					<div class="form-container">
 						<div>

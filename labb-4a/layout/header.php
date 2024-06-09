@@ -34,7 +34,7 @@
 		<input type="hidden" name="userName" value="<?=$userName?>">
 	<?php } ?>
 	<div class="button-link">
-		<input role="link" type="submit" value="<?=$loggedInStatus?>" name="<?=$loggedInStatusName?>">
+		<input type="submit" value="<?=$loggedInStatus?>" name="<?=$loggedInStatusName?>">
 		<span class="material-symbols-outlined double-arrow">
 			double_arrow
 		</span> 

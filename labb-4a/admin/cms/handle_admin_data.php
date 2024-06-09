@@ -6,7 +6,7 @@
 		exit();
 	}
     require_once('../db.php');
-    include '../../includes/show_errors.php'; //Visar felmedelanden
+    //include '../../includes/show_errors.php'; //Visar felmedelanden
 
     // Update/add profile
     if (isset($_POST['updateProfile'])) { 

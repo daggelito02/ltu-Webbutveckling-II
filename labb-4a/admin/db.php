@@ -60,7 +60,6 @@ function add_image($filename, $description, $postId)
 function get_post($id)
 {
     global $connection;
-    //$sql = 'SELECT * FROM post WHERE id=?';
     $sql ='SELECT 
     post.id AS id,
     post.title AS title, 
@@ -81,7 +80,6 @@ function get_post($id)
 function get_posts($userid) // Gets all posts from one user
 {
     global $connection;
-    //$sql = 'SELECT * FROM post WHERE userid=? ORDER BY created DESC';
     $sql ='SELECT 
     post.id AS id,
     post.title AS title, 
@@ -103,8 +101,6 @@ function get_posts($userid) // Gets all posts from one user
 function get_all_posts() // Gets all posts from all user
 {
     global $connection;
-    //$sql = 'SELECT * FROM post ORDER BY created DESC';
-    //$sql ='SELECT post.*, (SELECT user.username FROM user WHERE user.id = post.userId) AS username FROM post ORDER BY created DESC';
     $sql = 'SELECT 
     post.title AS title, 
     post.content AS content, 

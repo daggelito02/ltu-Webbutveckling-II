@@ -1,7 +1,5 @@
 <?php
-//echo "Inne i login";
     function handelLogIn ($logInName = '', $logInPassword = '') { // Hanterar ny login
-        //echo "handelLogIn körs";
         $user = '';
         $userExists = false;
         $password = '';
@@ -17,26 +15,20 @@
                 if ($validUser){    
                     $_SESSION['userName'] = $theUser;
                     $_SESSION['logedIn'] = $validUser;
-                    header("Location: ../../index.php");
+                    header("Location: ../../index.php"); // Användare skickas till startsidan
                     exit();
                 }
                 break;
             case $logInName != $theUser: // Om användarnamnet saknas
-                //$_SESSION['logInInfoName'] = "Användare saknas eller är användarnamnet fel!"; // sparar data i sessionen
-                //$_SESSION['viewInfo'] = true;
                 header("Location: ../login/login.php?logInInfoName=Namnet är fel! &userName=$logInName");
                 session_destroy();
                 break;
             case $isCorrectPassword == false: // Om lösenord är fel
-                // $_SESSION['logInInfoPassword'] = "lösenordet är fel!"; // sparar data i sessionen
-                // $_SESSION['viewInfo'] = true;
                 header("Location: ../login/login.php?logInInfoPass=Lösenordet är fel!&userName=$logInName");
                 session_destroy();
                 break;
             default: // Alla övriga fall
-                // $_SESSION['logInInfoElse'] = "Något fungerar inte! Kontakta admin admin@admin.se"; // sparar data i sessionen
-                // $_SESSION['viewInfo']  = true;
-                header("Location: ../login/login.php?logInInfoMessage=Något fungerar inte! Kontakta admin admin@admin.se&userName=$logInName");
+                header("Location: ../login/login.php?logInInfoMessageError=Något fungerar inte! Kontakta admin admin@admin.se&userName=$logInName");
                 session_destroy();
         endswitch;
 	}

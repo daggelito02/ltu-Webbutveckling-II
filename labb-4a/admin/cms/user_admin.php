@@ -42,7 +42,9 @@
         }
         if (isset($_GET['imageNameEdit'])) {  // State-variabler vid editering av bild
             $selectedValue = (int)$_GET['imageNameEdit'];
-            $imageNameEdit = $_GET['theImageNameEdit'];
+            if (!empty ($_GET['theImageNameEdit'])) {
+               $imageNameEdit = $_GET['theImageNameEdit'];
+            }
         }
         if (isset($_GET['open'])){ //Hantering av toggle-statet
             $open = $_GET['open'];
@@ -101,7 +103,7 @@
         $errorEdit = $_GET['errorEdit'];
     }
     
-	include '../../includes/show_errors.php'; 
+	//include '../../includes/show_errors.php'; 
 ?>
 <!doctype html>
 <html lang="sv">
@@ -143,11 +145,6 @@
                         <textarea maxlength="200" class="full-width" id="presentation" name="presentation" rows="4" 
                                   placeholder="Skriv en pressentation om dig själv (max 200 tecken)"></textarea>
 						</div>
-                        <div class="form-container__row">
-                            <input type="hidden" name="MAX_FILE_SIZE" value="1000000" />
-                            <!-- <label class="button-upload" for="upload">Ladda upp en avatar-bild</label>
-                            <input disabled id="upload" type="file" name="file_upload" value="test" accept="image/*" hidden/> -->
-                        </div>
 						<div class="form-container__row">
 							<input class="button-admin" type="submit" value="Spara profil" name="updateProfile" id="update-profile">
 						</div>
@@ -165,7 +162,7 @@
                         <p class="file-text-info">Inlägg med bild? Ladda upp bilden först!</p>
                         <div class="upload-image-form">
                             <div class="form-container__row buttons-row">
-                                <input class="<?=$hideContent?>" type="file" name="uploadImage" id="uploadImage" accept="image/*">
+                                <input class="<?=$hideContent?>" type="file" name="uploadImage" id="uploadImage-add" accept="image/*">
                                 <p class="<?=$showContent?> file-text">Bilden "<?=$imageName?>"&nbsp;är nu redod!.</p>
                                 <input class="button-admin <?=$hideContent?>" type="submit" value="Ladda upp bild" name="upload-file">
                                 <input class="button-admin <?=$showContent?>" type="submit" value="Ångra" name="reset-upload">
@@ -173,10 +170,10 @@
                         </div>
                         <div class="form-container-add-post">
                             <div class="form-container__row">
-                                <input class="full-width" maxlength="60" type="text" name="postTitle" id="postTitle" placeholder="Title (max 60 tecken)">
+                                <input class="full-width" maxlength="60" type="text" name="postTitle" id="postTitle-add" placeholder="Title (max 60 tecken)">
                             </div>
                             <div class="form-container__row">
-                                <textarea class="full-width" id="content" name="content" rows="10" 
+                                <textarea class="full-width" id="content-add" name="content" rows="10" 
                                         placeholder="Skriv en bra post"></textarea>
                             </div>
                             <div class="form-container__row">
@@ -224,7 +221,7 @@
                         <input type="hidden" id="changeImage" name="changeImage" value="true" />
                         <div class="form-container-add-post">
                             <div class="form-container__row">
-                                <input <?=$disabled?> class="full-width" maxlength="60" type="text" name="postTitle" id="postTitle" value="<?=$title?>">
+                                <input <?=$disabled?> class="full-width" maxlength="60" type="text" name="postTitle" id="postTitle-edit" value="<?=$title?>">
                             </div>
                             <?php
                                 if (isset($filename)) {  // Om bild-filnamn finns, visa bild-editering
@@ -267,7 +264,7 @@
                                     </div>
                                     <!-- Ladda upp ny bild -->
                                     <div class="form-container__row buttons-row">
-                                        <input class="<?=$hideContentEdit?>" type="file" name="uploadImage" id="uploadImage" accept="image/*">
+                                        <input class="<?=$hideContentEdit?>" type="file" name="uploadImage" id="uploadImage-upload" accept="image/*">
                                         <p class="<?=$showContentEdit?> file-text">Uppdatera eller ångra bildvalet <?=$imageNameEdit?>?</p>
                                         <input class="button-admin <?=$hideContentEdit?>" type="submit" value="Ladda upp ny bild" name="upload-file">
                                         <input class="button-admin <?=$showContentEdit?>" type="submit" value="Ångra" name="undo-upload">
@@ -282,7 +279,7 @@
                                 <p>Lägg till en bild till inlägget.</p>
                                 <div class="form-container__row buttons-row">
                                     <input type="hidden" id="add-image-edit" name="addImageEdit" value="true" />
-                                    <input class="<?=$hideContentEdit?>" type="file" name="uploadImage" id="uploadImage" accept="image/*">
+                                    <input class="<?=$hideContentEdit?>" type="file" name="uploadImage" id="uploadImage-edit" accept="image/*">
                                     <p class="<?=$showContentEdit?> file-text">Uppdatera eller ångra bildvalet <?=$imageNameEdit?>?</p>
                                     <input class="button-admin <?=$hideContentEdit?>" type="submit" value="Ladda upp ny bild" name="upload-file">
                                     <input class="button-admin <?=$showContentEdit?>" type="submit" value="Ångra" name="undo-upload">
@@ -293,7 +290,7 @@
                             ?>
                             <div class="form-container__row">
                             <textarea class="full-width" <?=$disabled?>
-                                id="content" 
+                                id="content-edit" 
                                 name="content" 
                                 rows="10"><?php echo $content; ?>
                             </textarea>

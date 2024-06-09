@@ -48,8 +48,6 @@ textarea {
 .show-content {
     display: block;
 }
-
-/* Google material styles start */
 .material-symbols-outlined {
   font-variation-settings:
   'FILL' 0,
@@ -121,8 +119,6 @@ textarea {
     font-size: 1rem;
     margin-top: 2px;
 }
-/* Google material styles end */
-
 .course-nav-link-to-menu, .nav-link-to-start-page {
     position: absolute;
     top: 0;
@@ -136,9 +132,6 @@ textarea {
     font-size: 1rem;
     
 }
-/* .button-link a:hover {
-    text-decoration: underline;
-} */
 .button-link a:visited {
     color: #444;
 }
@@ -291,7 +284,7 @@ textarea {
     display: block;
     color: #f00;
 }
-.admin-info {
+.admin-info, .infoMessage {
     display: block;
     color: #589e3c;
 }
@@ -369,8 +362,8 @@ aside .button-link {
     flex: 1;
     max-width: 40%;
 }
-.post-list h2 {
-    margin: 0 0 1rem;
+.heading-post-list {
+    margin: 0 1rem;
 }
 .striped-list-item.posts {
     margin: 0;

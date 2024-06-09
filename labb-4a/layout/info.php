@@ -1,13 +1,4 @@
 <?php
-	// session_start();
-	// if (!isset($_SESSION['logedIn']) || $_SESSION['logedIn'] != true){ // För att sätta ett värde till session-index(logedIn) om ej satt
-	// 	$_SESSION['logedIn'] = false;
-	// }
-	// if( isset( $_SESSION['userName'] ) ) { // Användare inloggad
-	// 	$userName = $_SESSION['userName'];
-	// 	$loggedInUser = 'Välkommen ' . $_SESSION['userName'];
-	// 	$userName = $_SESSION['userName'];
-	//  }
     if (isset($_SESSION['userName'])) {
         $userData = get_user($_SESSION['userName']); 
     }

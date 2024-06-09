@@ -3,12 +3,11 @@
 <ul class="striped-list">
 <?php
     $rows = get_users();
-    //$rows = "";
     if (!empty($rows)) {
         foreach($rows as $user)
         {
-            $name = $user['username']; // username är namnet på kolumnen i databastabellen
-            $presentation = $user['presentation']; // XXXXXXXXXXX
+            $name = $user['username']; 
+            $presentation = $user['presentation']; 
             $userID = $user['id'];
             
             $print_presentation = "";
@@ -23,9 +22,9 @@
                             $presentation 
                         <div>";
             }
-            
+            $urlenccodeName = urlencode($name);
             echo ("<li class='striped-list-item'>
-                        <a href='index.php?getUserPost=$name&userId=$userID' class='menu-link'>
+                        <a href='index.php?getUserPost=$urlenccodeName&userId=$userID' class='menu-link'>
                             $name
                             <span class='material-symbols-outlined read-more'>
                                 read_more
@@ -34,8 +33,6 @@
                         $print_presentation
                     </li>");
         }
-    } else {
-        echo "VISA EN BILD "; // todo!
     }
 ?>
 </ul>

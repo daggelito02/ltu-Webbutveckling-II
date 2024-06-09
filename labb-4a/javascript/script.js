@@ -5,9 +5,11 @@ if(loginParams.has('userName')){
     const newUserNamn = loginParams.get('newUserNamn');
     const logInInfoPass = loginParams.get('logInInfoPass');
     const logInInfoMessage = loginParams.get('logInInfoMessage');
+    const logInInfoMessageError = loginParams.get('logInInfoMessageError');
     const userName = loginParams.get('userName');
     nameError.innerHTML = logInInfoName;
     passwordError.innerHTML = logInInfoPass;
+    loginMessageError.innerHTML = logInInfoMessageError;
     loginMessage.innerHTML = logInInfoMessage;
 
     newUserNamnError.innerHTML = newUserNamnExists;
@@ -20,17 +22,15 @@ var loginButton = document.getElementById("submit-login");
 loginButton.addEventListener("click", function() {
     var form = document.getElementById("userLogin");
     form.addEventListener("submit", function(event) { //lyssnar på submit
-        //console.log('test: ', event.target.elements )
-        event.preventDefault(); // förhindrar inbygda html submit för att javascript ska validera koden innan
+        event.preventDefault(); // förhindrar inbygda html submit så att javascript ska kunna validera koden innan
 
-        
-        // Hämtar de värdena från forumäret och sätter till variabler
+        // Hämtar värdena från forumäret och sätter till variabler
         const logInNamn = this.elements.logInNamn.value;
         const logInPassword = this.elements.logInPassword.value;
         isValid = true;
     
-        validateRegisterForm(logInNamn, logInPassword); // skickar med all formulär-data
-                                                        // till funktionen validateRegisterForm()
+        validateRegisterForm(logInNamn, logInPassword); // skickar med all formulär-data till funktionen validateRegisterForm()
+
         function validateRegisterForm(logInNamn, logInPassword){  // Validerar alla formulär inputs för sig
             if (logInNamn == "") {                        // med olika regler och ger feedback om behövs
                 nameError.innerHTML = "Namnet saknas.";
@@ -52,14 +52,9 @@ loginButton.addEventListener("click", function() {
                 newUserPasswordError.innerHTML = "";
             }
         }
-        //console.log('isValid: ', isValid);
         if (isValid == true) { // om formuläret fyller alla kriterier så submittas det
-            passwordError.innerHTML = "<input type='hidden' name='login'>";
+            passwordError.innerHTML = "<input type='hidden' name='login'>"; // Skickar med för att veta vilket av scope (login eller saveNewUser)
             event.target.submit();
-            //console.log(event.target);
-        
-            // console.log(document.getElementById("userLogin"));
-            // console.log("test");
         }
     });
 });
@@ -70,9 +65,7 @@ var saveNewUser = document.getElementById("save-new-user");
 saveNewUser.addEventListener("click", function() {
     var form = document.getElementById("userLogin");
     form.addEventListener("submit", function(event) { //lyssnar på submit
-        event.preventDefault(); // förhindrar inbygda html submit för att javascript ska validera koden innan
-
-        //console.log("new user i form");
+        event.preventDefault(); // förhindrar inbygda html submit så att javascript ska kunna validera koden innan
         
         // Hämtar de värdena från forumäret och sätter till variabler
         const saveNewUserNamn = this.elements.saveNewUserNamn.value;
@@ -102,14 +95,9 @@ saveNewUser.addEventListener("click", function() {
                 passwordError.innerHTML = "";
             }
         }
-        //console.log('isValid: ', isValid);
         if (isValid == true) { // om formuläret fyller alla kriterier så submittas det
-            passwordError.innerHTML = "<input type='hidden' name='saveNewUser'>";
+            passwordError.innerHTML = "<input type='hidden' name='saveNewUser'>"; // Skickar med för att veta vilket av scope (login eller saveNewUser)
             event.target.submit();
-            //console.log(event.target);
-        
-            // console.log(document.getElementById("userLogin"));
-            // console.log("test");
         }
     });
 });

@@ -1,6 +1,5 @@
 <?php
     function handelNewUser ($NewUserName = '', $NewPassword = '') { // Hanterar ny användare
-        //echo "handelNewUser";
         $user = '';
         $userExists = false;
         $logInName = $NewUserName;
@@ -9,8 +8,6 @@
 
         switch (true):
             case $userExists; // Ny användare finns redan
-                // $_SESSION['logInInfo'] = "Användarnamnet finns redan, pröva med ett annat."; // sparar data i sessionen
-                // $_SESSION['viewInfo']  = true;
                 header("Location: ../login/login.php?newUserNamnExists=Namnet är upptaget! &userName=&newUserNamn=$NewUserName");
                 session_destroy();
                 break;

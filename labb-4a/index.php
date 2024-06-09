@@ -9,7 +9,7 @@
 		$userName = $_SESSION['userName'];
 	 } 
 
-	include 'includes/show_errors.php'; // inkludera vid utveckling för att få feedback på eventuella fel i koden
+	//include 'includes/show_errors.php'; // inkludera vid utveckling för att få feedback på eventuella fel i koden
 	require_once('admin/db.php');
 ?>
 <!doctype html>
