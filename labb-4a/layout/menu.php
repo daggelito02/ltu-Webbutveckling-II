@@ -25,13 +25,12 @@
             }
             
             echo ("<li class='striped-list-item'>
-                        <span class='material-symbols-outlined list-bulleted'>
-                            format_list_bulleted
-                        </span>
-                        <a href='index.php?getUserPost=$name&userId=$userID' class='menu-link'>$name</a>
-                        <span class='material-symbols-outlined read-more'>
-                            read_more
-                        </span>
+                        <a href='index.php?getUserPost=$name&userId=$userID' class='menu-link'>
+                            $name
+                            <span class='material-symbols-outlined read-more'>
+                                read_more
+                            </span>
+                        </a>
                         $print_presentation
                     </li>");
         }

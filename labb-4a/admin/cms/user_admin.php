@@ -7,6 +7,7 @@
 	} 
     require_once('../db.php');
 
+    // Default variables
     $user = get_user($_SESSION['userName']);
     $userId = $user['0']['id'];
     $title = "";
@@ -15,35 +16,40 @@
     $adminInfo = "";
     $adminInfoPost = "";
     $error = "";
-    $errorUpdate = "";
+    $errorEdit = "";
     $adminInfoPostUpdate = "";
     $imageName = "";
     $imageNameEdit = "";
     $showContent = "";
+    $showContentEdit = "hide-content";
     $hideContent = "";
-    $hideContentEdit = "";
+    $hideContentEdit = "show-content";
     $postTextTitel = "";
     $postArticle = "";
     $ifImage = "false";
     $selectedValue = "";
     $open = "";
     $imagePath = "../../uploads/";
+    $disabled = "disabled";
     
-    
+    // Sätter olika state beroende på vad bloggaren har valt att administrera
     if (isset($_POST['selectPost']) or isset($_GET['imageNameEdit'])) { 
-        echo "inne: " . $_GET['imageNameEdit'];
-        if (isset($_POST['choose-post'])) { 
-            echo $selectedValue = (int)$_POST['choose-post'];
+        if (!empty($_POST['choose-post']) and $_POST['choose-post'] != "choosePost") { // Sätter editeringsfälten till disabled
+            $disabled = "";
         }
-        if (isset($_GET['imageNameEdit'])) { 
-            echo $selectedValue = (int)$_GET['imageNameEdit'];
+        if (isset($_POST['choose-post'])) {  // Variable för det valda inlägget
+             $selectedValue = (int)$_POST['choose-post'];
+        }
+        if (isset($_GET['imageNameEdit'])) {  // State-variabler vid editering av bild
+            $selectedValue = (int)$_GET['imageNameEdit'];
             $imageNameEdit = $_GET['theImageNameEdit'];
         }
-        if (isset($_GET['open'])){
+        if (isset($_GET['open'])){ //Hantering av toggle-statet
             $open = $_GET['open'];
+            $disabled = "";
         }
         
-        if (get_post($selectedValue)) {
+        if (get_post($selectedValue)) { // Hämtar valt inläggs-data 
             $thePost = get_post($selectedValue);
             $title = $thePost['0']['title'];
             $content = $thePost['0']['content'];
@@ -54,49 +60,47 @@
         }
     }
 
-    if (isset($_GET['imageName'])) { 
+    if (isset($_GET['imageName'])) { // Sätter state för att visa/gömma vissa editeringsval
         $imageName = $_GET['imageName'];
         $showContent = "show-content";
         $hideContent = "hide-content";
     } else {
         $showContent = "hide-content";
     }
-    if (isset($_GET['undo'])) {
+
+    if (isset($_GET['undo'])) { // Sätter state för att visa/gömma vissa editeringsval vid ångra valet
         if (($_GET['undo']) == "false") {
             $showContentEdit = "show-content";
             $hideContentEdit = "hide-content";
-            echo ('undo = false');
         } else if (($_GET['undo']) == "true") {
             $showContentEdit = "hide-content";
             $hideContentEdit = "show-content";
-            echo ('undo = true');
         } 
     } else {
         $showContentEdit = "hide-content";
     }
 
-    if (isset($_GET['adminInfo'])) { 
+    // Hämtar olika medelandetexter beroende på händelse
+    if (isset($_GET['adminInfo'])) { // Hämtar medelandetext
         $adminInfo = $_GET['adminInfo'];
     }
 
-    if (isset($_GET['adminInfoPost'])) { 
+    if (isset($_GET['adminInfoPost'])) { // Hämtar medelandetext
         $adminInfoPost = $_GET['adminInfoPost'];
     }
 
-    if (isset($_GET['adminInfoPostUpdate'])) { 
+    if (isset($_GET['adminInfoPostUpdate'])) { // Hämtar medelandetext
         $adminInfoPostUpdate = $_GET['adminInfoPostUpdate'];
     }
 
-    if (isset($_GET['error'])) { 
+    if (isset($_GET['error'])) {  // Hämtar medelandetext
         $error = $_GET['error'];
     }
 
-    if (isset($_GET['errorUpdate'])) { 
-        $errorUpdate = $_GET['errorUpdate'];
+    if (isset($_GET['errorEdit'])) {  // Hämtar medelandetext
+        $errorEdit = $_GET['errorEdit'];
     }
     
-
-
 	include '../../includes/show_errors.php'; 
 ?>
 <!doctype html>
@@ -158,7 +162,15 @@
                         <h2>Skapa ett inlägg</h2>
                         <p class="admin-info"><?=$adminInfoPost?></p>
                         <p class="errorMessage"><?=$error?></p>
-                        <p class="file-text-info">Inlägg med bild? Förbered med att ladda upp bilden.</p>
+                        <p class="file-text-info">Inlägg med bild? Ladda upp bilden först!</p>
+                        <div class="upload-image-form">
+                            <div class="form-container__row buttons-row">
+                                <input class="<?=$hideContent?>" type="file" name="uploadImage" id="uploadImage" accept="image/*">
+                                <p class="<?=$showContent?> file-text">Bilden "<?=$imageName?>"&nbsp;är nu redod!.</p>
+                                <input class="button-admin <?=$hideContent?>" type="submit" value="Ladda upp bild" name="upload-file">
+                                <input class="button-admin <?=$showContent?>" type="submit" value="Ångra" name="reset-upload">
+                            </div>
+                        </div>
                         <div class="form-container-add-post">
                             <div class="form-container__row">
                                 <input class="full-width" maxlength="60" type="text" name="postTitle" id="postTitle" placeholder="Title (max 60 tecken)">
@@ -171,32 +183,23 @@
                                 <input class="button-admin" type="submit" value="Spara inlägget" name="addUserPost" id="add-user-post">
                             </div>
                         </div>
-                        <div class="upload-image-form">
-                            
-                            <div class="form-container__row buttons-row">
-                                
-                                <input class="<?=$hideContent?>" type="file" name="uploadImage" id="uploadImage" accept="image/*">
-                                <p class="<?=$showContent?> file-text">Bilden "<?=$imageName?>"&nbsp;är nu redod!.</p>
-                                <input class="button-admin <?=$hideContent?>" type="submit" value="Ladda upp bild" name="upload-file">
-                                <input class="button-admin <?=$showContent?>" type="submit" value="Ångra" name="reset-upload">
-                            </div>
-                        </div>
                     </form>
                 </div>    
             </div>
             <!-- Edit posts -->
+            <div id="anchor-edit-post"></div>
             <div class="user-edit-posts admin-container">
                 <div class="user-profile-form">
-                    <!-- Select för att hämta ett inlägg -->
-                    <form action="user_admin.php" method="post" class="" id="choose-form" >
+                    <!-- Select för att hämta inlägg -->
+                    <form action="user_admin.php#anchor-edit-post" method="post" class="" id="choose-form" >
                         <h2>Redigera ett inlägg</h2>
                         <p class="admin-info"><?=$adminInfoPostUpdate?></p>
-                        <p class="errorMessage"><?=$errorUpdate?></p>
+                        <p class="errorMessage"><?=$errorEdit?></p>
                         <div class="form-container__row buttons-row">
                             <label class="form-label" for="choose-post">Välj ett inlägg:</label>
                             <select class="choose-post" name="choose-post" id="choose-post" form="choose-form">
                                 <option value='choosePost'>Välj inlägg</option>
-                                <?php
+                                <?php // Hämta alla poster för inloggad användare och visa i en dropdown
                                     if (get_posts($userId)) {
                                         $rows = get_posts($userId);
                                         if(!empty($rows)){
@@ -221,17 +224,18 @@
                         <input type="hidden" id="changeImage" name="changeImage" value="true" />
                         <div class="form-container-add-post">
                             <div class="form-container__row">
-                                <input class="full-width" maxlength="60" type="text" name="postTitle" id="postTitle" value="<?=$title?>">
+                                <input <?=$disabled?> class="full-width" maxlength="60" type="text" name="postTitle" id="postTitle" value="<?=$title?>">
                             </div>
                             <?php
-                                if (isset($filename)) { 
+                                if (isset($filename)) {  // Om bild-filnamn finns, visa bild-editering
                                     $imgUrl =  $imagePath . $filename; 
                             ?>
+                                <!-- Toggla bild-editering utan javascript -->
                                 <input type="checkbox" id="open-close" name="toggle" <?=$open?> >
                                 <div class="label-toggle">
                                     <div id="open">
                                         <div class="button-link">
-                                            <label for="open-close">Visa och byt/ta bort bild</label>
+                                            <label for="open-close">Visa och hantera bild</label>
                                             <span class="material-symbols-outlined double-arrow">
                                                 double_arrow
                                             </span>
@@ -244,6 +248,8 @@
                                                 double_arrow
                                             </span>
                                         </div>
+                                        <!-- Ta bort upplagd bild -->
+                                        <input class="button-admin" type="submit" value="Ta bort bild" name="delete-image">
                                     </div>
                                 </div>
                                 <div class="img-in-post-container-wrapper">
@@ -262,16 +268,31 @@
                                     <!-- Ladda upp ny bild -->
                                     <div class="form-container__row buttons-row">
                                         <input class="<?=$hideContentEdit?>" type="file" name="uploadImage" id="uploadImage" accept="image/*">
-                                        <p class="<?=$showContentEdit?> file-text">Uppdatera eller ångra valet.</p>
+                                        <p class="<?=$showContentEdit?> file-text">Uppdatera eller ångra bildvalet <?=$imageNameEdit?>?</p>
                                         <input class="button-admin <?=$hideContentEdit?>" type="submit" value="Ladda upp ny bild" name="upload-file">
                                         <input class="button-admin <?=$showContentEdit?>" type="submit" value="Ångra" name="undo-upload">
                                     </div>
                                 </div>
                             <?php
-                                }
+                                } else { // Om inlägg saknbar bild kan man lägga till
+                                
+                                    if ($disabled == "") {
+                            ?>
+                                    <!-- Lägg till bild till post -->
+                                <p>Lägg till en bild till inlägget.</p>
+                                <div class="form-container__row buttons-row">
+                                    <input type="hidden" id="add-image-edit" name="addImageEdit" value="true" />
+                                    <input class="<?=$hideContentEdit?>" type="file" name="uploadImage" id="uploadImage" accept="image/*">
+                                    <p class="<?=$showContentEdit?> file-text">Uppdatera eller ångra bildvalet <?=$imageNameEdit?>?</p>
+                                    <input class="button-admin <?=$hideContentEdit?>" type="submit" value="Ladda upp ny bild" name="upload-file">
+                                    <input class="button-admin <?=$showContentEdit?>" type="submit" value="Ångra" name="undo-upload">
+                                </div>
+                            <?php 
+                                    }
+                                } 
                             ?>
                             <div class="form-container__row">
-                            <textarea class="full-width" 
+                            <textarea class="full-width" <?=$disabled?>
                                 id="content" 
                                 name="content" 
                                 rows="10"><?php echo $content; ?>

@@ -1,8 +1,6 @@
 <?php
 require_once('db_credentials.php');
 
-//include './login/includes/show_errors.php';
-
 // Koppla upp mot databasen, detta gör vi en gång när skriptet startar (sidan laddas in)
 $connection = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
 

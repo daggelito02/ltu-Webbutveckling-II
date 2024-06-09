@@ -1,11 +1,17 @@
 <?php
 if (isset($_POST["upload-file"])) {
-    echo "här";
-    //var_dump($_FILES["uploadImage"]);
-    echo "<pre>";
-        print_r($_FILES["uploadImage"]['name']);
-    echo "</pre>";
 
+    // Hämtar filens namn
+    if(!empty($_FILES["uploadImage"]['name'])) {
+        $uploadImageName = $_FILES["uploadImage"]['name'];
+    }
+
+    // Kollar villket innlägg som postats
+    if(!empty($_POST['postIdEdit'])) {
+        $postIdEdit = "?imageNameEdit=" . $_POST['postIdEdit'];
+    }
+
+    // Hanterar uppladdning av bild
     if ($_FILES["uploadImage"]['name']) {
         $target_dir = "../../uploads/"; // Mapp där bild sparas
         $target_file = $target_dir . basename($_FILES["uploadImage"]["name"]);
@@ -15,53 +21,69 @@ if (isset($_POST["upload-file"])) {
         // Kollar om det är en bild
         $check = getimagesize($_FILES["uploadImage"]["tmp_name"]);
         if ($check !== false) {
-            echo "Filen är en bild - " . $check["mime"] . ".";
             $uploadOk = true;
         } else {
-            echo "Filen är inte en bild.";
+            if(isset($_POST['imageNameEdit'])){ 
+                // Retunerar Felmedelanden beroende på om 'Redigera' eller 'Lägg till'
+                header('Location: ./user_admin.php' . $postIdEdit . '&errorEdit=Filen är inte en bild.&open=checked&undo=false');
+            } else {
+                header('Location: ./user_admin.php?error=Filen är inte en bild.');
+            }
             $uploadOk = false;
         }
 
-        // Kollar om bilden redan finns
-        // if (file_exists($target_file)) {
-        //     echo "Bilden finns redan.";
-        //     $uploadOk = false;
-        // }
-
         // Kollar filstorlek (max 4MB)
         if ($_FILES["uploadImage"]["size"] > 4000000) {
-            echo "Bilden är för stor.";
             $uploadOk = false;
+            // Retunerar Felmedelanden beroende på om 'Redigera' eller 'Lägg till'
+            if(isset($_POST['imageNameEdit'])){ 
+                header('Location: ./user_admin.php' . $postIdEdit . '&errorEdit=Bilden ' . $uploadImageName . ' är för stor. Max 4MB&open=checked&undo=false');
+            } else {
+                header('Location: ./user_admin.php?error=Bilden ' . $uploadImageName . ' är för stor. Max 4MB');
+            }
         }
 
         // Tillåt vissa mime-typer
         if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
-            echo "Endast JPG, JPEG, PNG & GIF filer är tillåtna.";
             $uploadOk = false;
+            // Retunerar Felmedelanden beroende på om 'Redigera' eller 'Lägg till'
+            if(isset($_POST['imageNameEdit'])){ 
+                header('Location: ./user_admin.php' . $postIdEdit . '&errorEdit=Endast JPG, JPEG, PNG & GIF filer är tillåtna.&open=checked&undo=false');
+            } else {
+                header('Location: ./user_admin.php?error=Endast JPG, JPEG, PNG & GIF filer är tillåtna.');
+            }
         }
 
         // Kollar om $uploadOk är satt till false av ett fel
         if ($uploadOk == false) {
-            echo "Bilden kunde inte laddas upp.";
-        // Försök ladda upp Bilden
+        // Om inte $uploadOk == false, försök ladda upp Bilden
         } else {
             if (move_uploaded_file($_FILES["uploadImage"]["tmp_name"], $target_file)) {
-                echo "Bilden ". htmlspecialchars(basename($_FILES["uploadImage"]["name"])) . " har laddats upp.";
-                //htmlspecialchars(basename($_FILES["uploadImage"]["name"]));
-                if(isset($_POST['postIdEdit'])){
+                if(isset($_POST['postIdEdit'])){ // Hämtar rätt ID till inlägg 
                     $postIdNumber = $_POST['postIdEdit'];
                 }
-                if(isset($_POST['imageNameEdit'])){
+                // Retunerar bild namn beroende på om 'Redigera' eller 'Lägg till'
+                if(isset($_POST['imageNameEdit'])){ 
                     header('Location: ./user_admin.php?imageNameEdit=' . $postIdNumber . '&open=checked&undo=false&theImageNameEdit='. htmlspecialchars(basename($_FILES["uploadImage"]["name"])));
                 } else {
                     header('Location: ./user_admin.php?imageName=' . htmlspecialchars(basename($_FILES["uploadImage"]["name"])));
                 }
             } else {
-                echo "Ett fel inträffade vid uppladdningen av Bilden.";
+                // Retunerar Felmedelanden beroende på om 'Redigera' eller 'Lägg till'
+                if(isset($_POST['imageNameEdit'])){ 
+                    header('Location: ./user_admin.php' . $postIdEdit . '&errorEdit=Ett fel inträffade vid uppladdningen av Bilden.&open=checked&undo=false');
+                } else {
+                    header('Location: ./user_admin.php?error=Ett fel inträffade vid uppladdningen av Bilden.');
+                }
             }
         }
     } else {
-        echo "Ingen fil valdes för uppladdning.";
+        // Retunerar Felmedelanden beroende på om 'Redigera' eller 'Lägg till'
+        if(isset($_POST['imageNameEdit'])){ 
+            header('Location: ./user_admin.php' . $postIdEdit . '&errorEdit=Ingen fil valdes för uppladdning.&open=checked&undo=true');
+        } else {
+            header('Location: ./user_admin.php?error=Ingen fil valdes för uppladdning.');
+        }
     }
 }
 ?>

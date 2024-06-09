@@ -48,7 +48,7 @@
 </p>
 Se alla Dag Fredrikssons inlägg klicka 
 <a class="info-link" href="index.php?getUserPost=Dag%20Fredriksson&userId=32">här
-<span class='material-symbols-outlined read-more'>
+<span class='material-symbols-outlined read-more-info'>
     read_more
 </span> 
 </a>

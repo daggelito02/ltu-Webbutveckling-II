@@ -62,8 +62,20 @@ textarea {
     font-size: 1rem;
     margin-top: 1px;
 }
-.read-more{
+.read-more,
+.read-more-info {
     font-size: 1.3rem;
+    display: block;
+    position: absolute;
+    
+}
+.read-more {
+    top: -1px;
+    right: -1rem;
+}
+.read-more-info {
+    top: 0;
+    left: 1.5rem;
 }
 .info-icon {
     position: absolute;
@@ -89,7 +101,7 @@ textarea {
     width: 250px;
     border: solid 1px #333;
     border-radius: 3px;
-    box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.55);
+    box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.3);
     padding: 1rem;
     opacity: 0.4;
     transition: 1s;
@@ -124,9 +136,9 @@ textarea {
     font-size: 1rem;
     
 }
-.button-link a:hover {
+/* .button-link a:hover {
     text-decoration: underline;
-}
+} */
 .button-link a:visited {
     color: #444;
 }
@@ -146,6 +158,9 @@ textarea {
     display: inline-block;
     height: unset;
 }
+.button-link a:hover {
+    text-decoration: none;
+}
 .button-link,
 .button-login,
 .button-admin,
@@ -155,6 +170,7 @@ textarea {
     background-color: #f1f1f1;
     color: #444;
     border-radius: 2px;
+    box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.3)
 }
 .button-login,
 .button-admin,
@@ -162,8 +178,8 @@ textarea {
     min-width: 100px;
     height: 31px;
     cursor: pointer;
-    box-shadow: 1px 1px 1px 0px rgba(0,0,0,0.55);
 }
+.button-link:hover,
 .button-login:hover,
 .button-admin:hover,
 .button-upload:hover {
@@ -231,10 +247,11 @@ textarea {
     text-decoration: none;
     color: #444;
     font-size: 1rem;
-    padding-left: 1.2rem;
     padding-right: .4rem;
     cursor: pointer;
+    position: relative;
 }
+
 .menu-link:hover, .info-link:hover {
     text-decoration: underline;
 }
@@ -245,11 +262,13 @@ textarea {
     display: inline-block;
     cursor: pointer;
     text-decoration: none;
+    position: relative;
 }
 .logout {
     position: absolute;
     top: 0;
     right: 0rem;
+    
 }
 .logout input, 
 .login-form .button-login,
@@ -257,9 +276,10 @@ textarea {
     border: none;
     color: #444;
     font-size: 1rem;
+    background: #f1f1f1;
 }
-.logout input:hover {  
-    text-decoration: underline;
+.logout input:hover, .logout .button-link:hover input {  
+    background-color: #ddd;
 }
 .logout .button-link {
     display: flex;
@@ -324,9 +344,14 @@ input[type="text"], input[type="password"] {
     font-size: 1rem;
     min-width: 200px;
     box-sizing: border-box;
+    border: 1px solid #999;
+    line-height: 1.5;
+    border-radius: 3px;
 }
 textarea {
     box-sizing: border-box;
+    border: 1px solid #999;
+    line-height: 1.5;
 }
 aside .button-link {
     background-color: #fff;
@@ -399,6 +424,7 @@ input::file-selector-button {
 }
 input#uploadImage {
     max-width: 221px;
+    
 }
 input:hover::file-selector-button {
     background-color: #ddd;
@@ -421,7 +447,7 @@ input:hover::file-selector-button {
 }
 .img-width {
     width: 100%;
-    height: 100%;
+    height: auto;
     display: inline-block;
 }
 .edit-img-filename {
@@ -460,18 +486,26 @@ input:hover::file-selector-button {
 .label-toggle .button-link label:hover {
     cursor: pointer;
 }
+.label-toggle .button-link {
+    padding: 0;
+    position: relative;
+}
 #open .double-arrow {
     transform: rotate(90deg);
     display: block;
-    position: relative;
-    top: -1px;
-    right: -7px;
+    position: absolute;
+    top: 6px;
+    right: .5rem;
 }
 #open {
     display: flex;
     align-items: center;
 }
-
+.label-toggle label {
+    padding: .5rem 1.9rem .5rem 1rem;
+    box-sizing: border-box;
+    z-index: 10;
+}
 #open-close:checked + .label-toggle + .img-in-post-container-wrapper {
     display: block;
 }
@@ -481,15 +515,12 @@ input:hover::file-selector-button {
 #open-close:checked + .label-toggle  #close {
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 #close .double-arrow {
     transform: rotate(-90deg);
     display: block;
-    position: relative;
-    top: -1px;
-    right: -7px;
+    position: absolute;
+    top: 6px;
+    right: .5rem;
 }
-
-
-
-
