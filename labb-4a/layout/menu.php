@@ -1,5 +1,13 @@
 
-<h2 class="secondary-heading">Bloggare</h2>
+<div class="row">
+    <h2 class="secondary-heading">Bloggare</h2>
+    <a href="index.php" class="menu-link">
+        Alla inlägg
+        <span class='material-symbols-outlined read-more'>
+            read_more
+        </span>
+    </a>
+</div>
 <ul class="striped-list">
 <?php
     $rows = get_users();

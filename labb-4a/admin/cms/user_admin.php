@@ -44,6 +44,7 @@
             $selectedValue = (int)$_GET['imageNameEdit'];
             if (!empty ($_GET['theImageNameEdit'])) {
                $imageNameEdit = $_GET['theImageNameEdit'];
+               $imageHref = $imagePath . $imageNameEdit;
             }
         }
         if (isset($_GET['open'])){ //Hantering av toggle-statet
@@ -66,6 +67,8 @@
         $imageName = $_GET['imageName'];
         $showContent = "show-content";
         $hideContent = "hide-content";
+        $imageHref = $imagePath . $imageName;
+
     } else {
         $showContent = "hide-content";
     }
@@ -161,9 +164,21 @@
                         <p class="errorMessage"><?=$error?></p>
                         <p class="file-text-info">Inlägg med bild? Ladda upp bilden först!</p>
                         <div class="upload-image-form">
+                            <?php 
+                                if (!empty($imageName)) {
+                                    echo ("
+                                        <div class='showImageWrapper'>
+                                        <div class='img-in-post'>
+                                            <img src='$imageHref' alt='post picture' class='img-width'>
+                                            <span class='edit-img-filename'>$imageName</span>
+                                        </div>
+                                        </div>
+                                    ");
+                                }
+                            ?>
                             <div class="form-container__row buttons-row">
                                 <input class="<?=$hideContent?>" type="file" name="uploadImage" id="uploadImage-add" accept="image/*">
-                                <p class="<?=$showContent?> file-text">Bilden "<?=$imageName?>"&nbsp;är nu redod!.</p>
+                                <p class="<?=$showContent?> file-text">Bilden "<?=$imageName?>"&nbsp;är nu upladdad!.</p>
                                 <input class="button-admin <?=$hideContent?>" type="submit" value="Ladda upp bild" name="upload-file">
                                 <input class="button-admin <?=$showContent?>" type="submit" value="Ångra" name="reset-upload">
                             </div>
@@ -277,7 +292,19 @@
                             ?>
                                     <!-- Lägg till bild till post -->
                                 <p>Lägg till en bild till inlägget.</p>
-                                <div class="form-container__row buttons-row">
+                                <?php 
+                                if (!empty($imageNameEdit)) {
+                                    echo ("
+                                        <div class='showImageWrapper'>
+                                        <div class='img-in-post'>
+                                            <img src='$imageHref' alt='post picture' class='img-width'>
+                                            <span class='edit-img-filename'>$imageNameEdit</span>
+                                        </div>
+                                        </div>
+                                    ");
+                                }
+                            ?>
+                                <div class="form-container__row buttons-row upload-image-form">
                                     <input type="hidden" id="add-image-edit" name="addImageEdit" value="true" />
                                     <input class="<?=$hideContentEdit?>" type="file" name="uploadImage" id="uploadImage-edit" accept="image/*">
                                     <p class="<?=$showContentEdit?> file-text">Uppdatera eller ångra bildvalet <?=$imageNameEdit?>?</p>

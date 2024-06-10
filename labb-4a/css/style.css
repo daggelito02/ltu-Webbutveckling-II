@@ -369,9 +369,13 @@ aside .button-link {
     margin: 0;
     padding: 1rem;
 }
-.posts .row {
+.posts .row, .menu .row {
     display: flex;
     justify-content: space-between;
+}
+.menu .row {
+    align-items: center;
+    padding-right: 1rem;
 }
 .posts h3 {
     margin: 0;
@@ -516,4 +520,8 @@ input:hover::file-selector-button {
     position: absolute;
     top: 6px;
     right: .5rem;
+}
+.showImageWrapper {
+    display: flex;
+    justify-content: center;
 }
