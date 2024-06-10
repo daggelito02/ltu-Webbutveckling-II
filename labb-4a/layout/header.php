@@ -20,12 +20,12 @@
 	<div class="blogg-info">
 		<?php 
 			if($_SESSION['logedIn'] != true) { ?>
-			<P>Här kan du vara med att blogga och skriva in lite kul inlägg om som du vill dela med dig av.</p>
+			<P>Här kan du vara med att blogga och skriva in lite kul inlägg som du kan dela med dig av.</p>
 			<p>Nedan följer ett urval av blogginlägg från olika bloggare med senaste inlägget överst.</p>
-			<p>Du kan välja valfri bloggare från vänstermenyn och läsa specifika innlägg</p>
+			<p>Du kan välja valfri bloggare från vänstermenyn och läsa bloggarens innlägg-tråd</p>
 		<?php } else {  ?>
 			<P>Som inloggad har du möjlighet att skapa egna inlägg.</p>
-			<p>Följ på länken administrera som du hittar till höger i informations delen.</p>
+			<p>Klicka på knappen "Mitt admin" som du hittar till höger i profil delen.</p>
 		<?php } ?>
 	</div>
 </div>

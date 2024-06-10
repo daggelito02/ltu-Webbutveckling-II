@@ -59,7 +59,6 @@ loginButton.addEventListener("click", function() {
     });
 });
 
-
 // Ny användare
 var saveNewUser = document.getElementById("save-new-user");
 saveNewUser.addEventListener("click", function() {

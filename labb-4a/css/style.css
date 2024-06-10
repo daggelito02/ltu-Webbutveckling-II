@@ -525,3 +525,38 @@ input:hover::file-selector-button {
     display: flex;
     justify-content: center;
 }
+
+.cookie-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    text-align: center;
+    padding: 15px;
+    display: none;
+    z-index: 1000;
+}
+
+.cookie-container p {
+    margin: 0;
+    display: inline;
+}
+
+.button-accept {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-left: 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.button-accept:hover {
+    background-color: #0056b3;
+}
+.accept-cookie-link {
+    color: #fff;
+}

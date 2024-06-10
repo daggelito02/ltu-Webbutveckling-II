@@ -93,6 +93,6 @@
 		<footer>
 			<?php require_once '../../layout/footer.php'; ?>
 		</footer>
-		 <script src="../../javascript/script.js"></script>
+		 <script src="../../javascript/login.js"></script>
 	</body>
 </html>
