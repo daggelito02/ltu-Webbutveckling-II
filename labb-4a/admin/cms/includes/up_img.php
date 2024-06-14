@@ -25,9 +25,9 @@ if (isset($_POST["upload-file"])) {
         } else {
             if(isset($_POST['imageNameEdit'])){ 
                 // Retunerar Felmedelanden beroende på om 'Redigera' eller 'Lägg till'
-                header('Location: ./user_admin.php' . $postIdEdit . '&errorEdit=Filen är inte en bild.&open=checked&undo=false');
+                header('Location: ./user_admin.php' . $postIdEdit . '&errorEdit=Filen är inte en bild eller för stor.&open=checked&undo=false');
             } else {
-                header('Location: ./user_admin.php?error=Filen är inte en bild.');
+                header('Location: ./user_admin.php?error=Filen är inte en bild eller för stor.');
             }
             $uploadOk = false;
         }

@@ -17,7 +17,9 @@
         
 <?php } else { ?>
     <p>Användarnamn: <?php echo $_SESSION['userName'];?></p>
-    <p>Titel: <?=$userData['0']['title']?></p>
+    <?php if (!empty($userData['0']['title'])) { ?>
+        <p>Titel: <?=$userData['0']['title']?></p>
+    <?php } ?>
     <?php if (!empty($presentation)) { ?>
         <p>Om mig: <?=$userData['0']['presentation']?></p>
     <?php } ?>
